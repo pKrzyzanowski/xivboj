@@ -16,4 +16,19 @@
         <put-attribute name="tagline" value="odkryj swoje granice"/>
         <put-attribute name="content" value="/WEB-INF/views/welcome.jsp"/>
     </definition>
+
+    <definition name="persons" extends="baseLayout">
+        <put-attribute name="title" value="Uczestnicy"/>
+        <put-attribute name="heading" value="Uczestnicy"/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="content" value="/WEB-INF/views/persons.jsp"/>
+    </definition>
+
+    <definition name="person" extends="baseLayout">
+        <put-attribute name="title" value="Uczestnik"/>
+        <put-attribute name="heading" value="Uczestnik"/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="content" value="/WEB-INF/views/person.jsp"/>
+    </definition>
+
 </tiles-definitions>
