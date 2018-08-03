@@ -26,5 +26,13 @@
         </property>
     </bean>
 
+    <bean id="personService" class="com.packt.xivboj.service.impl.PersonServiceImpl"/>
+    <bean id="competitionController" class="com.packt.xivboj.controller.CompetitionController"/>
+    <bean id="competitionService" class="com.packt.xivboj.service.impl.CompetitionServiceImpl">
+
+    </bean>
+
+
+
 
 </beans>

@@ -7,10 +7,7 @@ import org.junit.Test;
 public class PersonTest {
 
 
-    @Before
-    public void setup() {
 
-    }
 
     @Test
     public void method_getPersonId_should_return_not_null_is_such_id_exists() {

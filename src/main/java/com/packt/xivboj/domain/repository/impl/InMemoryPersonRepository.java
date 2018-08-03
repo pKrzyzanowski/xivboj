@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public class InMemoryPersonRepository implements PersonRepository {
 
-    List<Person> listOfPersons = new ArrayList<>();
+   private  List<Person> listOfPersons = new ArrayList<>();
 
     public InMemoryPersonRepository() {
         Person jedrzej = new Person("J1", "Jedrzej", "Menkina");
