@@ -3,6 +3,7 @@ package com.packt.xivboj.domain.repository.impl;
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.CompetitionRepository;
+import com.packt.xivboj.exception.CompetitionNotFoundException;
 import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,15 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 
     public InMemoryCompetitionRepository() {
         Competition szachy = new Competition("SZA", "Szachy");
-        szachy.setAuthor(new Person("P1","Patryk","Krzyzanowski"));
+//        szachy.setAuthor(new Person("P1","Patryk","Krzyzanowski"));
         szachy.setRules("Kazdy gra z kazdym.");
 
         Competition rzutki = new Competition("RZU", "Rzutki");
-        rzutki.setAuthor(new Person("P1","Patryk","Krzyzanowski"));
+//        rzutki.setAuthor(new Person("P1","Patryk","Krzyzanowski"));
         rzutki.setRules("Gramy od 301 w dol.");
 
         Competition pingPing = new Competition("PIN", "PingPong");
-        pingPing.setAuthor(new Person("M1","Marcin","Skalkowski"));
+//        pingPing.setAuthor(new Person("M1","Marcin","Skalkowski"));
         pingPing.setRules("Kazdy z kazdym jednen set do dwoch wygranych gemow.");
 
         competitionList.add(szachy);
@@ -42,8 +43,8 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-    public void addCompetition(String competitionId) {
-        competitionList.add(getCompetitionById(competitionId));
+    public void addCompetition(Competition competition) {
+        competitionList.add(competition);
     }
 
     @Override
@@ -57,7 +58,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     @Override
     public Competition getCompetitionById(String competitionId) {
 
-
         Competition competitionById = null;
 
         for (Competition competition : competitionList) {
@@ -66,7 +66,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
             }
         }
         if (competitionById == null) {
-            throw new PersonNotFoundException(competitionId);
+            throw new CompetitionNotFoundException(competitionId);
         }
         return competitionById;
 

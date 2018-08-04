@@ -38,4 +38,11 @@
         <put-attribute name="content" value="/WEB-INF/views/competitions.jsp"/>
     </definition>
 
+    <definition name="addCompetition" extends="baseLayout">
+        <put-attribute name="title" value="Konkurencje"/>
+        <put-attribute name="heading" value="Konkurencje"/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="content" value="/WEB-INF/views/addCompetition.jsp"/>
+    </definition>
+
 </tiles-definitions>

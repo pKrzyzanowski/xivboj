@@ -22,8 +22,8 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public void addCompetition(String competitionId) {
-        competitionRepository.addCompetition(competitionId);
+    public void addCompetition(Competition competition) {
+        competitionRepository.addCompetition(competition);
     }
 
     @Override

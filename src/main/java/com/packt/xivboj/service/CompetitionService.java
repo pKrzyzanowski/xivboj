@@ -8,7 +8,7 @@ public interface CompetitionService {
 
     public List<Competition> getAllCompetitions();
 
-    public void addCompetition(String competitionId);
+    public void addCompetition(Competition competition);
 
     public void removeCompetition(String competitionId);
 

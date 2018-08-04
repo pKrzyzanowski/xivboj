@@ -6,6 +6,12 @@ public class Competition {
     private String name;
     private String rules;
     private Person author;
+ 
+
+
+    public Competition() {
+
+    }
 
     public Competition(String competitionId, String name) {
         this.competitionId = competitionId;
@@ -36,13 +42,13 @@ public class Competition {
         this.rules = rules;
     }
 
-    public Person getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Person author) {
-        this.author = author;
-    }
+//    public Person getAuthor() {
+//        return author;
+//    }
+//
+//    public void setAuthor(Person author) {
+//        this.author = author;
+//    }
 
 
 

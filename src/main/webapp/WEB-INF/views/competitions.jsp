@@ -10,7 +10,7 @@
 konkurencje
 <c:forEach items="${competitions}" var="competition">
     <h2>${competition.name}</h2>
-    <p>${competition.author.name}</p>
+    <%--<p>${competition.author.name}</p>--%>
     <%--<p>--%>
         <%--<a href="<spring:url value="/people/person?personId=${person.nameId}"/>">--%>
             <%--Opis--%>
