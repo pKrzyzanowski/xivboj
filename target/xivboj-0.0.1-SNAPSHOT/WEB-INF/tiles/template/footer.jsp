@@ -1,1 +1,0 @@
-<p>&copy; JP Corporation</p>
