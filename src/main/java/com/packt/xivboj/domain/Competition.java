@@ -5,7 +5,7 @@ public class Competition {
     private String competitionId;
     private String name;
     private String rules;
-    private Person author;
+//    private Person author;
  
 
 

@@ -39,7 +39,6 @@ public class Cart {
         if (cartItems.containsKey(competitionId)) {
 
             // tutaj bedzie raczej, ze jezeli istnieje juz taki produkt to pojawia sie okienko ze taki juz istnieje
-
         }
         else{
             cartItems.put(competitionId, cartItemCompe);

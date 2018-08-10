@@ -18,21 +18,22 @@ public class InMemoryCartRepository implements CartRepository {
         listOfCarts = new HashMap<String, Cart>();
     }
 
-    @Override
+
     public Cart create(Cart cart) {
-        if (listOfCarts.keySet().contains(cart.getCartId())) {
-            throw new IllegalArgumentException("koszyk o podanym id juz istnieje");
+        if(listOfCarts.keySet().contains(cart.getCartId())) {
+            throw new IllegalArgumentException(String.format("Nie mo¿na utworzyæ koszyka. Koszyk o wskazanym  id (%) ju¿ istnieje.",cart.getCartId()));
         }
+
         listOfCarts.put(cart.getCartId(), cart);
         return cart;
     }
 
-    @Override
+
     public Cart read(String cartId) {
         return listOfCarts.get(cartId);
     }
 
-    @Override
+
     public void update(String cartId, Cart cart) {
 
         if (!listOfCarts.keySet().contains(cartId)) {
@@ -41,7 +42,7 @@ public class InMemoryCartRepository implements CartRepository {
         listOfCarts.put(cartId, cart);
     }
 
-    @Override
+
     public void delete(String cartId) {
         if (!listOfCarts.keySet().contains(cartId)) {
             throw new IllegalArgumentException("nie mozna usunac takigo koszyka bo on nie istnieje");

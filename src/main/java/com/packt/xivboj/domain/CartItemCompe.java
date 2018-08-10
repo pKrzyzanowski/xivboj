@@ -7,6 +7,11 @@ public class CartItemCompe {
     public CartItemCompe() {
     }
 
+    public CartItemCompe(Competition competition) {
+        super();
+        this.competition = competition;
+    }
+
     public Competition getCompetition() {
         return competition;
     }
