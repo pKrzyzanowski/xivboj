@@ -32,9 +32,14 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 //        pingPing.setAuthor(new Person("M1","Marcin","Skalkowski"));
         pingPing.setRules("Kazdy z kazdym jednen set do dwoch wygranych gemow.");
 
+        Competition grid = new Competition("PIN", "Grid");
+//        pingPing.setAuthor(new Person("M1","Marcin","Skalkowski"));
+        pingPing.setRules("Jeden wyscig, kazdy z kazdym.");
+
         competitionList.add(szachy);
         competitionList.add(rzutki);
         competitionList.add(pingPing);
+        competitionList.add(grid);
     }
 
     @Override
