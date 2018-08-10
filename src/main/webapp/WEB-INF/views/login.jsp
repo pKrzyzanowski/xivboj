@@ -17,7 +17,7 @@
         <input class="btn btn-success"   type="submit" value="zaloguj">
     </fieldset>
 </form>
-s
+
 
 </body>
 </html>
