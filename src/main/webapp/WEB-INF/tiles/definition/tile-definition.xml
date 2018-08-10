@@ -45,11 +45,11 @@
         <put-attribute name="content" value="/WEB-INF/views/addCompetition.jsp"/>
     </definition>
 
-    <definition name="addCompetition" extends="baseLayout">
+    <definition name="login" extends="baseLayout">
         <put-attribute name="title" value="Konkurencje"/>
         <put-attribute name="heading" value="Konkurencje"/>
         <put-attribute name="tagline" value=""/>
-        <put-attribute name="content" value="/WEB-INF/views/addCompetition.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/views/login.jsp"/>
     </definition>
 
 </tiles-definitions>
