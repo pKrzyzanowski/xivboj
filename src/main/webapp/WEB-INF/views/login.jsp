@@ -14,10 +14,10 @@
     <fieldset>
         <input class="form-control" placeholder="nazwa uzytkownika" name="j_username" type="text">
         <input class="form-control" placeholder="haslo" name="j_password" type="password" value="">
-        <input class="btn btn-success"   type="submit" value="zaloguj sie">
+        <input class="btn btn-success"   type="submit" value="zaloguj">
     </fieldset>
 </form>
-
+s
 
 </body>
 </html>
