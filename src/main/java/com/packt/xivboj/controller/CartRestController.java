@@ -12,16 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
 @RequestMapping(value = "/rest/cart")
 public class CartRestController {
 
@@ -31,14 +25,12 @@ public class CartRestController {
     @Autowired
     private CompetitionService competitionService;
 
-    @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody Cart create(@RequestBody Cart cart) {
         return  cartService.create(cart);
     }
 
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.GET,headers = "Accept=*/*",consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public @ResponseBody Cart read(@PathVariable(value = "cartId") String cartId) {
         Cart cart = new Cart("123");
         cart.addCartItem(new CartItemCompe(new Competition("comp1","basen")));
