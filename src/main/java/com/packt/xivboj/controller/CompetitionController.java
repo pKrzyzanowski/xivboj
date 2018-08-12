@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,5 +42,11 @@ public class CompetitionController {
     public String processAddNewCompetition(@ModelAttribute("newCompetition") Competition competitionToBeAdded) {
         competitionService.addCompetition(competitionToBeAdded);
         return "redirect:/competitions";
+    }
+
+    @RequestMapping(value = "/competition")
+    public String getCompetitionById(@RequestParam(value = "id") String competitionId, Model model) {
+        model.addAttribute("competition", competitionService.getCompetitionById(competitionId));
+        return "competition";
     }
 }
