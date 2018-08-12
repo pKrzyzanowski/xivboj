@@ -1,15 +1,17 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
-    <script src="/resources/js/controllers.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+    <script src="/resource/js/controllers.js"></script>
 </head>
 <body>
 
-<section class="container" ng-app="cartApp">
-    <div ng-controller="cartCtrl" nginit="initCartId('${cartId}')">
-        <a class="btn btn-danger" ng-click="cleanCart()">
+<section class="container" data-ng-app="cartApp">
+    <div data-ng-controller="cartCtrl" data-ng-init="initCartId('${cartId}')">
+        <a class="btn btn-danger" data-ng-click="cleanCart()">
             wyczysc koszyk
         </a>
         <a href="#">
@@ -23,10 +25,10 @@
         <tr>
             <th>konkurencja</th>
         </tr>
-        <tr ng-repeat="item in cart.cartItems">
+        <tr data-ng-repeat="item in cart.cartItems">
             <td>{{item.competition.name}}</td>
             <td>
-                <a href="#" ng-click="removeFromCart(item.competition.competitionId)">usun</a>
+                <a href="#" data-ng-click="removeFromCart(item.competition.competitionId)">usun</a>
             </td>
         </tr>
     </table>
