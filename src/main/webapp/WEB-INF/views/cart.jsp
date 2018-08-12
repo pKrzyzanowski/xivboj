@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
@@ -11,7 +12,7 @@
         <a class="btn btn-danger" ng-click="cleanCart()">
             wyczysc koszyk
         </a>
-        <a href="#" ng-click="cleanCart()">
+        <a href="#">
             kupuje
         </a>
     </div>
