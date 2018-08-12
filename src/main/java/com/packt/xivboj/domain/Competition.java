@@ -1,16 +1,20 @@
 package com.packt.xivboj.domain;
 
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Competition {
 
     private String competitionId;
     private String name;
-    private String rules;
+//    private String rules;
 //    private Person author;
  
 
 
     public Competition() {
-
+        super();
     }
 
     public Competition(String competitionId, String name) {
@@ -34,13 +38,13 @@ public class Competition {
         this.name = name;
     }
 
-    public String getRules() {
-        return rules;
-    }
-
-    public void setRules(String rules) {
-        this.rules = rules;
-    }
+//    public String getRules() {
+//        return rules;
+//    }
+//
+//    public void setRules(String rules) {
+//        this.rules = rules;
+//    }
 
 //    public Person getAuthor() {
 //        return author;
@@ -50,7 +54,36 @@ public class Competition {
 //        this.author = author;
 //    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Competition other = (Competition) obj;
+        if (competitionId == null) {
+            if (other.competitionId != null)
+                return false;
+        } else if (!competitionId.equals(other.competitionId))
+            return false;
+        return true;
+    }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((competitionId == null) ? 0 : competitionId.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Produkt [productId=" + competitionId + ", nazwa=" + name + "]";
+    }
 
 
 

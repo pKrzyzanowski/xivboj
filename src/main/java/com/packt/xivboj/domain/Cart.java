@@ -1,11 +1,14 @@
 package com.packt.xivboj.domain;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
 
     private String cartId;
+
+
     private Map<String, CartItemCompe> cartItems;
 
     public Cart() {
@@ -33,20 +36,45 @@ public class Cart {
         this.cartItems = cartItems;
     }
 
-    public void addCartItem(CartItemCompe cartItemCompe) {
-        String competitionId = cartItemCompe.getCompetition().getCompetitionId();
+    public void addCartItem(CartItemCompe item) {
+        String productId = item.getCompetition().getCompetitionId();
 
-        if (cartItems.containsKey(competitionId)) {
+        if(cartItems.containsKey(productId)) {
+            CartItemCompe existingCartItem = cartItems.get(productId);
+            cartItems.put(productId, existingCartItem);
+        } else {
+            cartItems.put(productId, item);
+        }
 
-            // tutaj bedzie raczej, ze jezeli istnieje juz taki produkt to pojawia sie okienko ze taki juz istnieje
-        }
-        else{
-            cartItems.put(competitionId, cartItemCompe);
-        }
     }
 
     public void removeCartItem(CartItemCompe cartItemCompe) {
         String competitionId = cartItemCompe.getCompetition().getCompetitionId();
         cartItems.remove(competitionId);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 71;
+        int result = 1;
+        result = prime * result + ((cartId == null) ? 0 : cartId.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cart other = (Cart) obj;
+        if (cartId == null) {
+            if (other.cartId != null)
+                return false;
+        } else if (!cartId.equals(other.cartId))
+            return false;
+        return true;
     }
 }
