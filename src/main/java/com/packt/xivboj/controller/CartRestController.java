@@ -32,9 +32,7 @@ public class CartRestController {
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public @ResponseBody Cart read(@PathVariable(value = "cartId") String cartId) {
-        Cart cart = new Cart("123");
-        cart.addCartItem(new CartItemCompe(new Competition("comp1","basen")));
-        return cart;
+        return cartService.read(cartId);
     }
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
