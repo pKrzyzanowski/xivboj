@@ -11,37 +11,39 @@
 </head>
 <body>
 
-<section class="container" data-ng-app="cartApp">
-    <div ng-controller="cartCtrl" ng-init="initCartId('${cartId})">
+<section class="container" ng-app="cartApp">
+    <div ng-controller="cartCtrl" ng-init="initCartId('${cartId}')">
 
+        <div>
+            <a class="btn btn-danger pull-left"
+               ng-click="clearCart()"> <span
+                    class="glyphicon glyphicon-remove-sign"></span> Wyczyść koszyk
+            </a> <a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
+                class="glyphicon-shopping-cart glyphicon"></span> Kupuję
+        </a>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <th>Produkt</th>
+                <th>Cena za sztukę</th>
+                <th>Liczba sztuk</th>
+                <th>Cena</th>
+                <th>Akcja</th>
 
-    <div>
-    <a class="btn btn-danger pull-left"
-       ng-click="clearCart()"> <span
-            class="glyphicon glyphicon-remove-sign"></span> Wyczyść koszyk
-    </a> <a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
-        class="glyphicon-shopping-cart glyphicon"></span> Kupuję
-</a>
-</div>
+            </tr>
+            <tr ng-repeat="item in cart.cartItems">
+                <td>{{item.competition.name}}</td>
 
+                <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.productId)"> <span
+                        class="glyphicon glyphicon-remove"></span> Usuń
+                </a></td>
+            </tr>
 
-    <table class="table table-hover">
+        </table>
 
-        <tr>
-            <th>konkurencja</th>
-        </tr>
-        <tr ng-repeat="item in cart.cartItems">
-            <td>{{item.competition.competitionId}}</td>
-
-            <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.competition.competitionId)"> <span
-                    class="glyphicon glyphicon-remove"></span> Usuń
-            </a></td>
-        </tr>
-    </table>
-    <a href="<spring:url value="/competitions" />" class="btn btndefault">
-        <span class="glyphicon-hand-left glyphicon"></span> Wróć do konkurencji
-    </a>
-
+        <a href="<spring:url value="/competitions" />" class="btn btn-default">
+            <span class="glyphicon-hand-left glyphicon"></span> Wróć do zakupów
+        </a>
     </div>
 </section>
 </body>
