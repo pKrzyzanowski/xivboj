@@ -1,8 +1,11 @@
 package com.packt.xivboj.domain;
 
 
+import java.io.Serializable;
 
-public class Order {
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = -3560539622417210365L;
 
     private Long orderId;
     private Cart cart;

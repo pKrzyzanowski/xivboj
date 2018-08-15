@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<section class="container" ng-app="cartApp">
+<section class="container" data-ng-app="cartApp">
     <div ng-controller="cartCtrl" ng-init="initCartId('${cartId}')">
 
         <div>
@@ -34,7 +34,7 @@
             <tr ng-repeat="item in cart.cartItems">
                 <td>{{item.competition.name}}</td>
 
-                <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.productId)"> <span
+                <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.competition.competitionId)"> <span
                         class="glyphicon glyphicon-remove"></span> Usuń
                 </a></td>
             </tr>
