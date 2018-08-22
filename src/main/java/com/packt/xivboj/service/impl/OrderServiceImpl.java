@@ -5,7 +5,10 @@ import com.packt.xivboj.domain.repository.OrderRepository;
 import com.packt.xivboj.service.CartService;
 import com.packt.xivboj.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired

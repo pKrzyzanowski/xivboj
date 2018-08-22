@@ -1,10 +1,14 @@
 package com.packt.xivboj.domain;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cart {
+public class Cart implements Serializable{
+
+
+    private static final long serialVersionUID = -53008677344258065L;
 
     private String cartId;
 

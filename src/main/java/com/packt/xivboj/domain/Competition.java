@@ -2,10 +2,11 @@ package com.packt.xivboj.domain;
 
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @XmlRootElement
-public class Competition {
-
+public class Competition implements Serializable {
+    private static final long serialVersionUID = -538766763684258062L;
     private String competitionId;
     private String name;
 //    private String rules;

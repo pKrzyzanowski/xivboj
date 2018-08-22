@@ -1,6 +1,11 @@
 package com.packt.xivboj.domain;
 
-public class CartItemCompe {
+import java.io.Serializable;
+
+public class CartItemCompe implements Serializable{
+
+    private static final long serialVersionUID = -538766768334258062L;
+
     private Competition competition;
 
 

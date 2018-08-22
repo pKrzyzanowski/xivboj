@@ -2,6 +2,8 @@ package com.packt.xivboj.service.impl;
 
 import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.repository.CartRepository;
+import com.packt.xivboj.exception.InvalidCartException;
+import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,5 +32,15 @@ public class CartServiceImpl implements CartService {
 
     public void delete(String cartId) {
         cartRepository.delete(cartId);
+    }
+
+    @Override
+    public Cart validate(String cartId) {
+        Cart cart = cartRepository.read(cartId);
+        if (cart == null || cart.getCartItems().size() == 0) {
+            throw new InvalidCartException(cartId);
+
+        }
+        return cart;
     }
 }

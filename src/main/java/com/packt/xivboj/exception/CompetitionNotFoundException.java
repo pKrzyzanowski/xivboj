@@ -6,4 +6,5 @@ public class CompetitionNotFoundException extends RuntimeException {
     public CompetitionNotFoundException(String competitionId) {
         this.competitionId = competitionId;
     }
+
 }

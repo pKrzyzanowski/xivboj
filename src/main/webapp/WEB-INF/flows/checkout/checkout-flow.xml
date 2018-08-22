@@ -2,19 +2,40 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
-							http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+    <var name="order" class="com.packt.xivboj.domain.Order"></var>
+    <action-state id="addCartToOrder">
+        <evaluate expression="cartServiceImpl.validate(requestParameters.cartId)" result="order.cart"/>
+        <transition to="InvalidCartWarning" on-exception="com.packt.xivboj.exception.InvalidCartException"/>
+        <transition to="collectCustomerInfo"/>
+    </action-state>
 
-    <var name="order" class="com.packt.xivboj.domain.Order" />
-
-
-    <view-state id="competitionRules">
-        <transition on="backToCollectShippingDetail" to="endState"/>
+    <view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order">
+        <transition on="customerInfoCollected" to="collectShippingDetail"/>
+        <transition on="backToCollectCustomerInfo" to="collectCustomerInfo"/>
     </view-state>
 
+    <view-state id="collectShippingDetail" model="order">
+        <transition on="shippingDetailCollected" to="thankCustomer"/>
+        <transition on="backToCollectCustomerInfo" to="collectCustomerInfo"/>
+    </view-state>
+
+
+
+    <view-state id="InvalidCartWarning">
+        <transition to="thankCustomer"/>
+    </view-state>
+
+    <view-state id="thankCustomer" model="order">
+        <transition to="endState"/>
+    </view-state>
+
+
     <end-state id="endState"/>
-    <end-state id="cancelCheckout" view="competitionRules.jsp"/>
+
+    <end-state id="cancelCheckout" view="checkOutCancelled.jsp"/>
     <global-transitions>
-        <transition on = "cancel" to="cancelCheckout" />
+        <transition on="cancel" to="endState"></transition>
     </global-transitions>
 
 </flow>
