@@ -6,27 +6,28 @@ http://www.springframework.org/schema/webflow/spring-webflow.xsd">
     <var name="order" class="com.packt.xivboj.domain.Order"></var>
     <action-state id="addCartToOrder">
         <evaluate expression="cartServiceImpl.validate(requestParameters.cartId)" result="order.cart"/>
-        <transition to="InvalidCartWarning" on-exception="com.packt.xivboj.exception.InvalidCartException"/>
-        <transition to="collectCustomerInfo"/>
+        <transition to="notVotedYet" on-exception="com.packt.xivboj.exception.InvalidCartException"/>
+        <transition to="acceptRegulations"/>
     </action-state>
 
-    <view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order">
-        <transition on="customerInfoCollected" to="collectShippingDetail"/>
-        <transition on="backToCollectCustomerInfo" to="collectCustomerInfo"/>
+    <view-state id="acceptRegulations" view="acceptRegulations.jsp" model="order">
+        <transition on="regulationsAccepted" to="votingInfo"/>
+        <transition on="backToAcceptRegulations" to="cancelCheckout"/>
     </view-state>
 
-    <view-state id="collectShippingDetail" model="order">
-        <transition on="shippingDetailCollected" to="thankCustomer"/>
-        <transition on="backToCollectCustomerInfo" to="collectCustomerInfo"/>
+    <view-state id="votingInfo" model="order">
+        <transition on="next" to="InformCompetitor"/>
+        <transition on="back" to="acceptRegulations"/>
+        <transition on="cancel" to="cancelCheckout"/>
+
     </view-state>
 
 
-
-    <view-state id="InvalidCartWarning">
-        <transition to="thankCustomer"/>
+    <view-state id="notVotedYet">
+        <transition to="endState"/>
     </view-state>
 
-    <view-state id="thankCustomer" model="order">
+    <view-state id="InformCompetitor" model="order">
         <transition to="endState"/>
     </view-state>
 

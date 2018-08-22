@@ -26,11 +26,11 @@
 
 			<div class="form-group">
 				<div class="col-lg-offset-2 col-lg-10">
-					<button id="back" class="btn btn-default" name="_eventId_backToCollectCustomerInfo">back</button>
+					<button id="back" class="btn btn-default" name="_eventId_cancel">cancel</button>
 
 					<input type="submit" id="btnAdd" class="btn btn-primary"
-						   value="Add"  name="_eventId_shippingDetailCollected"/>
-					<button id="btnCancel" class="btn btn-default" name="_eventId_cancel">Cancel</button>
+						   value="Add"  name="_eventId_next"/>
+					<button id="btnCancel" class="btn btn-default" name="_eventId_back">back</button>
 				</div>
 			</div>
 

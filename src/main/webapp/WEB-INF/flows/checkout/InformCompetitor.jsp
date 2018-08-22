@@ -10,6 +10,6 @@
 <title>Invalid cart </title>
 </head>
 <body>
-	dzieki
+	dzieki za glosy
 </body>
 </html>
