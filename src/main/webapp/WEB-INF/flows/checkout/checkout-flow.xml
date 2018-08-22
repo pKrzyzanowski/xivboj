@@ -6,6 +6,9 @@ http://www.springframework.org/schema/webflow/spring-webflow.xsd">
     <var name="vote" class="com.packt.xivboj.domain.Order"/>
 
 
+    <view-state id="competitionRules" view="competitionRules.jsp">
+
+    </view-state>
 
 
 
