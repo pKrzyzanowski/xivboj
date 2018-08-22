@@ -2,20 +2,19 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
-http://www.springframework.org/schema/webflow/spring-webflow.xsd">
-    <var name="vote" class="com.packt.xivboj.domain.Order"/>
+							http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <var name="order" class="com.packt.xivboj.domain.Order" />
 
 
-    <view-state id="competitionRules" view="competitionRules.jsp">
-
+    <view-state id="competitionRules">
+        <transition on="backToCollectShippingDetail" to="endState"/>
     </view-state>
 
-
-
-
-
-
-
+    <end-state id="endState"/>
+    <end-state id="cancelCheckout" view="competitionRules.jsp"/>
+    <global-transitions>
+        <transition on = "cancel" to="cancelCheckout" />
+    </global-transitions>
 
 </flow>
-
