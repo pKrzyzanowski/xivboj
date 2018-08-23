@@ -1,7 +1,11 @@
 package com.packt.xivboj.domain;
 
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 @XmlRootElement
@@ -10,7 +14,12 @@ public class Competition implements Serializable {
     private String competitionId;
     private String name;
     private String rules;
-//    private Person author;
+
+
+
+    //    private Person author;
+    @JsonIgnore
+    private MultipartFile competitionImage;
  
 
 
@@ -46,6 +55,17 @@ public class Competition implements Serializable {
     public void setRules(String rules) {
         this.rules = rules;
     }
+
+    @XmlTransient
+    public MultipartFile getCompetitionImage() {
+        return competitionImage;
+    }
+    @XmlTransient
+    public void setCompetitionImage(MultipartFile competitionImage) {
+        this.competitionImage = competitionImage;
+    }
+
+
 
 //    public Person getAuthor() {
 //        return author;

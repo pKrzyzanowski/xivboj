@@ -11,6 +11,8 @@
 
 konkurencje
 <c:forEach items="${competitions}" var="competition">
+    <p></p>
+    <img src="<c:url value="/resource/images/${competition.competitionId}.jpg"></c:url> " alt="image" style="width: 100px"/>
     <h2>${competition.name}</h2>
     <%--<p>${competition.author.name}</p>--%>
     <%--<p>--%>

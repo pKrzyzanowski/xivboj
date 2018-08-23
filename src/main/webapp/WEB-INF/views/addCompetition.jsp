@@ -9,6 +9,7 @@
     <fieldset>
         <form:input id="competitionId" path="competitionId" type="text"/>
         <form:input id="name" path="name" type="text"/>
+        <form:input id="competitionImage" path="competitionImage" type="file" class="form:input-large"/>
         <%--<form:input id="authorName" path="authorName" type="text"/>--%>
         <%--<form:input id="rules" path="rules" type="text"/>--%>
 

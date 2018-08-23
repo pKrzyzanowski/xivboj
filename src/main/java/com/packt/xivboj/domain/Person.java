@@ -1,5 +1,9 @@
 package com.packt.xivboj.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 public class Person implements Serializable{
@@ -9,6 +13,10 @@ public class Person implements Serializable{
     private String surname;
     private int age;
     private String description;
+
+
+
+
 
     public Person(String nameId, String name, String surname) {
         this.nameId = nameId;
