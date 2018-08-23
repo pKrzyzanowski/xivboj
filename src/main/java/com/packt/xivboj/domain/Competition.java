@@ -9,7 +9,7 @@ public class Competition implements Serializable {
     private static final long serialVersionUID = -538766763684258062L;
     private String competitionId;
     private String name;
-//    private String rules;
+    private String rules;
 //    private Person author;
  
 
@@ -39,13 +39,13 @@ public class Competition implements Serializable {
         this.name = name;
     }
 
-//    public String getRules() {
-//        return rules;
-//    }
-//
-//    public void setRules(String rules) {
-//        this.rules = rules;
-//    }
+    public String getRules() {
+        return rules;
+    }
+
+    public void setRules(String rules) {
+        this.rules = rules;
+    }
 
 //    public Person getAuthor() {
 //        return author;

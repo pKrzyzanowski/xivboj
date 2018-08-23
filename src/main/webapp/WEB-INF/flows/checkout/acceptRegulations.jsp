@@ -4,8 +4,7 @@
 
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=" utf-8
-    ">
+    <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
     <link rel="stylesheet"
           href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <title>Customer</title>
@@ -25,9 +24,10 @@
             <legend>Regulamin</legend>
 
             <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
-
+<p>zgodznie z zasada honoru, oraz uscisku dloni zgadam sie na ponizsze zasady konkurencji</p>
             <c:forEach items="${order.cart.allCartItems}" var="CartItemCompe">
-                <p>${CartItemCompe.competition.name}</p>
+                <%--tutaj bedzie kafelek identyczny jak ten ktory jest w zakladce competitions tyle ze bez przycisku glosow i szczegoly--%>
+                <p>*${CartItemCompe.competition.rules}</p>
             </c:forEach>
 
 
