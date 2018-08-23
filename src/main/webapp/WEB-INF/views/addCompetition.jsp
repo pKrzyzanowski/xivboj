@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form:form modelAttribute="newCompetition">
+<form:form modelAttribute="newCompetition" enctype="multipart/form-data">
     <fieldset>
         <form:input id="competitionId" path="competitionId" type="text"/>
         <form:input id="name" path="name" type="text"/>

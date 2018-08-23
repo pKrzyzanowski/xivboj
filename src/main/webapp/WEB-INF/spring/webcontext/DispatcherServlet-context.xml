@@ -11,31 +11,20 @@
         http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
 
 
-
     <mvc:annotation-driven enable-matrix-variables="true"/>
     <mvc:resources location="/resources/" mapping="/resource/**"/>
     <context:component-scan base-package="com.packt.xivboj"/>
 
-    <webflow-config:flow-executor id="flowExecutor" flow-registry="flowRegistry" />
+    <webflow-config:flow-executor id="flowExecutor" flow-registry="flowRegistry"/>
     <webflow-config:flow-registry id="flowRegistry" base-path="/WEB-INF/flows">
         <webflow-config:flow-location path="/checkout/checkout-flow.xml" id="checkout"/>
     </webflow-config:flow-registry>
-
-
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
-
-
-
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="10240000"/>
-    </bean>
-
 
 
 
@@ -58,15 +47,16 @@
     </bean>
 
 
-
     <bean id="flowHandlerMapping" class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
         <property name="flowRegistry" ref="flowRegistry"/>
     </bean>
+
     <bean id="flowHandlerAdapter" class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
         <property name="flowExecutor" ref="flowExecutor"/>
-
     </bean>
 
-
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10240000"/>
+    </bean>
 
 </beans>

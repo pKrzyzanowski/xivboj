@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 
 @Controller
@@ -39,8 +41,20 @@ public class CompetitionController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewCompetition(@ModelAttribute("newCompetition") Competition competitionToBeAdded) {
+    public String processAddNewCompetition(@ModelAttribute("newCompetition") Competition competitionToBeAdded, HttpServletRequest request) {
+
         competitionService.addCompetition(competitionToBeAdded);
+
+        MultipartFile competitionImage = competitionToBeAdded.getCompetitionImage();
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+        if (competitionImage != null && !competitionImage.isEmpty()) {
+            try {
+                competitionImage.transferTo(new File(rootDirectory + "resources\\images\\" + competitionToBeAdded.getCompetitionId() + ".jpg"));
+            } catch (Exception e) {
+                throw new RuntimeException("niepowodzenie podczas proby zapisu obrazka", e);
+            }
+        }
+
         return "redirect:/competitions";
     }
 

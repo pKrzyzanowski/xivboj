@@ -15,9 +15,9 @@ public class Competition implements Serializable {
     private String name;
     private String rules;
 
+    private int preferedTime;
 
-
-    //    private Person author;
+//    private Person author;
     @JsonIgnore
     private MultipartFile competitionImage;
  
@@ -65,7 +65,13 @@ public class Competition implements Serializable {
         this.competitionImage = competitionImage;
     }
 
+    public int getPreferedTime() {
+        return preferedTime;
+    }
 
+    public void setPreferedTime(int preferedTime) {
+        this.preferedTime = preferedTime;
+    }
 
 //    public Person getAuthor() {
 //        return author;
@@ -91,6 +97,7 @@ public class Competition implements Serializable {
             return false;
         return true;
     }
+
 
     @Override
     public int hashCode() {

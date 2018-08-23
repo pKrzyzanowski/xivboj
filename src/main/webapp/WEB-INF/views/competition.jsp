@@ -9,9 +9,15 @@
 <body>
 <section class="container" ng-app="cartApp">
 <p>${competition.name}</p>
-<p data-ng-controller="cartCtrl">
+
+
 
     <img src="<c:url value="/resource/images/${competition.competitionId}.jpg"></c:url> " alt="image" style="width: 300px"/>
+    <p>Zasady: ${competition.rules}</p>
+    <p>Preferowany czas: ${competition.preferedTime} min</p>
+
+
+    <p data-ng-controller="cartCtrl">
     <a href="#" ng-click="addToCart('${competition.competitionId}')"> zamow teraz</a>
     <a href="<spring:url value="/competitions"/>"> przejdz to konkurencji</a>
     <a href="<spring:url value="/cart"/>"> koszyk</a>
