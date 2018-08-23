@@ -4,6 +4,7 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
 http://www.springframework.org/schema/webflow/spring-webflow.xsd">
     <var name="order" class="com.packt.xivboj.domain.Order"></var>
+
     <action-state id="addCartToOrder">
         <evaluate expression="cartServiceImpl.validate(requestParameters.cartId)" result="order.cart"/>
         <transition to="notVotedYet" on-exception="com.packt.xivboj.exception.InvalidCartException"/>

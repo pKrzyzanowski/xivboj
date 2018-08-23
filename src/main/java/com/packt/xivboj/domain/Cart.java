@@ -2,16 +2,18 @@ package com.packt.xivboj.domain;
 
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class Cart implements Serializable{
+public class Cart implements Serializable {
 
 
     private static final long serialVersionUID = -53008677344258065L;
 
     private String cartId;
 
+
+
+    private Collection<CartItemCompe> allCartItems = new ArrayList<>();
 
     private Map<String, CartItemCompe> cartItems;
 
@@ -22,6 +24,10 @@ public class Cart implements Serializable{
     public Cart(String cartId) {
         this();
         this.cartId = cartId;
+    }
+
+    public Collection<CartItemCompe> getAllCartItems() {
+        return cartItems.values();
     }
 
     public String getCartId() {
@@ -43,7 +49,7 @@ public class Cart implements Serializable{
     public void addCartItem(CartItemCompe item) {
         String productId = item.getCompetition().getCompetitionId();
 
-        if(cartItems.containsKey(productId)) {
+        if (cartItems.containsKey(productId)) {
             CartItemCompe existingCartItem = cartItems.get(productId);
             cartItems.put(productId, existingCartItem);
         } else {
