@@ -6,6 +6,7 @@
 </head>
 <body>
 <c:forEach items="${people}" var="person">
+    <img src="<c:url value="/resource/images/${person.nameId}.jpg"></c:url> " alt="image" style="width: 100px"/>
     <h2>${person.name}</h2>
     <p>${person.surname}</p>
     <p>${person.description}</p>
