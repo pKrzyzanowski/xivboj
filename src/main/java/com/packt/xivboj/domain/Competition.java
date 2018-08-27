@@ -4,6 +4,8 @@ package com.packt.xivboj.domain;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
@@ -11,10 +13,17 @@ import java.io.Serializable;
 @XmlRootElement
 public class Competition implements Serializable {
     private static final long serialVersionUID = -538766763684258062L;
+
+
+    @NotNull(message = "cannot be null")
     private String competitionId;
+
+    @Pattern(regexp="P[1-9]+", message="Pattern.Product.productId.validation")
     private String name;
     private String rules;
 
+
+    @NotNull(message = "cannot be null")
     private int preferedTime;
 
 //    private Person author;

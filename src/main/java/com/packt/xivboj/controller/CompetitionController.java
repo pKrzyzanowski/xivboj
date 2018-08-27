@@ -8,14 +8,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.File;
 
 
@@ -41,7 +40,11 @@ public class CompetitionController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewCompetition(@ModelAttribute("newCompetition") Competition competitionToBeAdded, HttpServletRequest request) {
+    public String processAddNewCompetition(@ModelAttribute("newCompetition") @Valid Competition competitionToBeAdded, HttpServletRequest request,BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "addCompetition";
+        }
 
         competitionService.addCompetition(competitionToBeAdded);
 
@@ -57,6 +60,9 @@ public class CompetitionController {
 
         return "redirect:/competitions";
     }
+
+
+
 
     @RequestMapping(value = "/competition")
     public String getCompetitionById(@RequestParam(value = "id") String competitionId, Model model) {
