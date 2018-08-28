@@ -8,10 +8,14 @@
 
 </head>
 <body>
+<h1>1. Test CSS</h1>
 
+<h2>2. Test JS</h2>
+<div id="msg"></div>
 konkurencje
 <c:forEach items="${competitions}" var="competition">
     <p></p>
+
     <img src="<c:url value="/resource/images/${competition.competitionId}.jpg"></c:url> " alt="image" style="width: 100px"/>
     <h2>${competition.name}</h2>
     <%--<p>${competition.author.name}</p>--%>

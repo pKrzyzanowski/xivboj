@@ -1,4 +1,5 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <html>
@@ -6,7 +7,32 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+    <%--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">--%>
+
+    <style>
+        body {
+            background-color: linen;
+        }
+
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Corben', Georgia, Times, serif;
+        }
+        p, div {
+            font-family: 'Nobile', Helvetica, Arial, sans-serif;
+        }
+
+
+        h1 {
+            color: maroon;
+            margin-left: 40px;
+        }
+    </style>
+
+
+
     <title><tiles:insertAttribute name="title"/></title>
 </head>
 <body>
