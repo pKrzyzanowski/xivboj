@@ -24,7 +24,7 @@ cartApp.controller('cartCtrl',  function ($scope, $http) {
         $http.put('/rest/cart/add/'+competitionId)
             .success(function(data) {
                 $scope.refreshCart($http.get('/rest/cart/get/cartId'));
-                alert("Produkt pomyślnie dodany do koszyczka!");
+                alert("Oddano głos na konkurencję!");
             });
     };
     $scope.removeFromCart = function(productId) {

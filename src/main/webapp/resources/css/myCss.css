@@ -1,6 +1,6 @@
 
 body {
-    background-image: url("/resources/images/leaves-pattern.png") ;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -18,9 +18,9 @@ h1 {
 .thumbnail{
     width: 180px;
     height: 200px;
-    border-color: black;
-    background-color: azure;
-    box-shadow: 0 0 1em 1em #ccc;
+    border-color: burlywood;
+    background-color: white;
+    box-shadow: 0 0 1em 1em #f5f5f5;
 }
 
 .description{
@@ -37,3 +37,13 @@ h1 {
     text-align: center;
 }
 
+.container {
+    background-color: #ffffff;
+
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
