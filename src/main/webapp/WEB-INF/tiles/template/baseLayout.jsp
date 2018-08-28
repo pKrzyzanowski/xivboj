@@ -33,9 +33,12 @@
         <div class="row"><tiles:insertAttribute name="content"/></div>
 
 
-        <div class= "footer">
+        <div class= "footer" >
             <tiles:insertAttribute name="footer"/>
         </div>
+    </div>
+    <div class= "footer" style="bot">
+        <tiles:insertAttribute name="footer"/>
     </div>
     </body>
 </html>

@@ -12,7 +12,7 @@
 
 
     <mvc:annotation-driven enable-matrix-variables="true" validator="validator"/>
-    <mvc:resources location="/resources/" mapping="/resource/**"/>
+
     <context:component-scan base-package="com.packt.xivboj"/>
 
     <webflow-config:flow-executor id="flowExecutor" flow-registry="flowRegistry"/>
@@ -26,8 +26,11 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messagess"/>
+    </bean>
 
-
+    <mvc:resources location="/resources/" mapping="/resource/**"/>
 
     <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
@@ -56,7 +59,7 @@
     </bean>
 
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <!--<property name="validationMessageSource" ref="messageSource" />-->
+        <property name="validationMessageSource" ref="messageSource" />
     </bean>
 
 

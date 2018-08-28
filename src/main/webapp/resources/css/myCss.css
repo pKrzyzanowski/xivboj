@@ -10,26 +10,30 @@ p, div {
     font-family: 'Nobile', Helvetica, Arial, sans-serif;
 }
 
-
 h1 {
     color: maroon;
     margin-left: 40px;
 }
 
-h1 {
-    text-shadow: 1px 1px 1px #ccc;
-}
-.div-that-you want-to-stand-out {
-    box-shadow: 0 0 1em 1em #ccc;
-}
 .thumbnail{
     width: 180px;
     height: 200px;
     border-color: black;
     background-color: azure;
+    box-shadow: 0 0 1em 1em #ccc;
 }
 
 .description{
-
+    position: relative;
+    bottom: 10px;
     padding-bottom: 10px;
+    text-align: center;
 }
+
+.button{
+    position: relative;
+    bottom: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
