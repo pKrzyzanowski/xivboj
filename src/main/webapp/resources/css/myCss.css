@@ -1,0 +1,35 @@
+
+body {
+    background-image: url("/resources/images/leaves-pattern.png") ;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Corben', Georgia, Times, serif;
+}
+p, div {
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+}
+
+
+h1 {
+    color: maroon;
+    margin-left: 40px;
+}
+
+h1 {
+    text-shadow: 1px 1px 1px #ccc;
+}
+.div-that-you want-to-stand-out {
+    box-shadow: 0 0 1em 1em #ccc;
+}
+.thumbnail{
+    width: 180px;
+    height: 200px;
+    border-color: black;
+    background-color: azure;
+}
+
+.description{
+
+    padding-bottom: 10px;
+}

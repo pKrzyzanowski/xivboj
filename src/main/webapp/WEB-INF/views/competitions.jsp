@@ -8,27 +8,33 @@
 
 </head>
 <body>
-<h1>1. Test CSS</h1>
 
-<h2>2. Test JS</h2>
-<div id="msg"></div>
-konkurencje
-<c:forEach items="${competitions}" var="competition">
-    <p></p>
-
-    <img src="<c:url value="/resource/images/${competition.competitionId}.jpg"></c:url> " alt="image" style="width: 100px"/>
-    <h2>${competition.name}</h2>
-    <%--<p>${competition.author.name}</p>--%>
-    <%--<p>--%>
-        <%--<a href="<spring:url value="/people/person?personId=${person.nameId}"/>">--%>
-            <%--Opis--%>
-        <%--</a>--%>
-    <%--</p>--%>
-    <p>
-        <a href="<spring:url value="/competitions/competition?id=${competition.competitionId}"/>" class="btn btn-primary">
-            <span class="glyphicon-info-sing glyphicon"/></span> Szczegóły
-        </a>
-    </p>
-</c:forEach>
+<div class="container">
+    <div class="row">
+        <c:forEach items="${competitions}" var="competition">
+            <div class="col-sm-4 col-md-2" style="padding-bottom: 15px">
+                <div class="thumbnail">
+                    <img src="<c:url value="/resource/images/${competition.competitionId}.jpg"></c:url> " alt="image"
+                         style="width: 100px; padding-top: 15px"/>
+                    <div class="description">
+                        <p>${competition.name}</p>
+                            <%--<p>${competition.author.name}</p>--%>
+                            <%--<p>--%>
+                            <%--<a href="<spring:url value="/people/person?personId=${person.nameId}"/>">--%>
+                            <%--Opis--%>
+                            <%--</a>--%>
+                            <%--</p>--%>
+                        <p>
+                            <a href="<spring:url value="/competitions/competition?id=${competition.competitionId}"/>"
+                               class="btn btn-primary">
+                                <span class="glyphicon-info-sing glyphicon"/></span> Szczegóły
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
 </body>
 </html>
