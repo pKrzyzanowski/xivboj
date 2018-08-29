@@ -12,7 +12,7 @@
     <p>${person.description}</p>
     <p>
         <a href="<spring:url value="/people/person?personId=${person.nameId}"/>">
-            Opis
+            <spring:message code="persons.goToDescription"/>
         </a>
     </p>
 </c:forEach>

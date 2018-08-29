@@ -17,9 +17,9 @@
         <div>
             <a class="btn btn-danger pull-left"
                ng-click="clearCart()"> <span
-                    class="glyphicon glyphicon-remove-sign"></span> Wyczyść koszyk
+                    class="glyphicon glyphicon-remove-sign"></span> <spring:message code="cart.cleanCart"/>
             </a> <a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
-                class="glyphicon-shopping-cart glyphicon"></span> Kupuję
+                class="glyphicon-shopping-cart glyphicon"></span> <spring:message code="cart.vote"/>
         </a>
         </div>
         <table class="table table-hover">
@@ -35,14 +35,14 @@
                 <td>{{item.competition.name}}</td>
 
                 <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.competition.competitionId)"> <span
-                        class="glyphicon glyphicon-remove"></span> Usuń
+                        class="glyphicon glyphicon-remove"></span> <spring:message code="cart.backOffVote"/>
                 </a></td>
             </tr>
 
         </table>
 
         <a href="<spring:url value="/competitions" />" class="btn btn-default">
-            <span class="glyphicon-hand-left glyphicon"></span> Wróć do zakupów
+            <span class="glyphicon-hand-left glyphicon"></span> <spring:message code="cart.return"/>
         </a>
     </div>
 </section>

@@ -1,4 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <link rel="stylesheet" href="/resource/css/myCss.css">
 
 
-<p>&copy; JP Corporation</p>
+<p><spring:message code="footer.brandSign"/></p>

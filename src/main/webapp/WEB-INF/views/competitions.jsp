@@ -13,9 +13,6 @@
 
 <div class="container">
     <div class="row">
-
-            <springc:message code="addCompetition.form.competitionName.label"/>
-
         <c:forEach items="${competitions}" var="competition">
             <div class="col-sm-4 col-md-2" style="padding-bottom: 15px">
                 <div class="thumbnail">
@@ -24,17 +21,12 @@
                     <div class="description">
                         <p>${competition.name}</p>
                             <%--<p>${competition.author.name}</p>--%>
-                            <%--<p>--%>
-                            <%--<a href="<spring:url value="/people/person?personId=${person.nameId}"/>">--%>
-                            <%--Opis--%>
-                            <%--</a>--%>
-                            <%--</p>--%>
                     </div>
                     <div class="button">
                         <p>
                             <a href="<spring:url value="/competitions/competition?id=${competition.competitionId}"/>"
                                class="btn btn-primary">
-                                <span class="glyphicon-info-sing glyphicon"/></span> Szczegóły
+                                <span class="glyphicon-info-sing glyphicon"/></span> <springc:message code="competitions.button.details"/>
                             </a>
                         </p>
                     </div>

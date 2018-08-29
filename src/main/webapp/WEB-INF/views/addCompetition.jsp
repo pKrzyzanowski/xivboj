@@ -21,7 +21,7 @@
             <%--<form:input id="rules" path="rules" type="text"/>--%>
 
 
-        <input type="submit" value="Dodaj">
+        <input type="submit" value=<spring:message code="addCompetition.addCompetition"/>>
 
     </fieldset>
 </form:form>
