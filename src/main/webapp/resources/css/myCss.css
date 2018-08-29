@@ -3,7 +3,6 @@ body {
 
 }
 
-
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Corben', Georgia, Times, serif;
 }
@@ -15,7 +14,7 @@ h1 {
     margin-left: 40px;
 }
 
-.thumbnail{
+.thumbnail {
     width: 180px;
     height: 200px;
     border-color: burlywood;
@@ -39,8 +38,6 @@ h1 {
 
 .container {
 
-
-    background-color: blue;
 }
 
 .footer {
