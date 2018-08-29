@@ -7,7 +7,7 @@
 <head>
 
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width,initial scale=1.0"/>
+    <%--<meta name="viewport" content="width=device-width,initial scale=1.0"/>--%>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
@@ -22,7 +22,7 @@
     <title><tiles:insertAttribute name="title"/></title>
 </head>
 <body>
-    <div class="container" style="height: 100%">
+    <div class="container"  >
 
         <div class="header">
             <ul class="nav nav-pills pull-right"><tiles:insertAttribute name="navigation"/></ul>
