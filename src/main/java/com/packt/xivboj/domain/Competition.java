@@ -26,9 +26,12 @@ public class Competition implements Serializable {
 
     private int preferedTime;
 
-//    private Person author;
+    //    private Person author;
     @JsonIgnore
     private MultipartFile competitionImage;
+
+
+
  
 
 
