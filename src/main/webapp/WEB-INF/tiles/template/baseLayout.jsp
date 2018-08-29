@@ -1,5 +1,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
 <!DOCTYPE html>
@@ -22,11 +23,23 @@
     <title><tiles:insertAttribute name="title"/></title>
 </head>
 <body>
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>Online Store</h1>
+        <p>Mission, Vission & Values</p>
+    </div>
+</div>
+
+
+<tiles:insertAttribute name="navigation"/>
+
+
+
     <div class="container"  >
 
-        <div class="header">
-            <ul class="nav nav-pills pull-right"><tiles:insertAttribute name="navigation"/></ul>
-        </div>
+        <%--<div class="header">--%>
+            <%--<ul class="nav nav-pills pull-right"><tiles:insertAttribute name="navigation"/></ul>--%>
+        <%--</div>--%>
 
         <div class="jumbotron">
             <h2><tiles:insertAttribute name="heading"/></h2>

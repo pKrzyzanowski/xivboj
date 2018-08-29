@@ -26,6 +26,7 @@ public class CompetitionController {
     CompetitionService competitionService;
 
 
+
     @RequestMapping
     public String list(Model model) {
         model.addAttribute("competitions", competitionService.getAllCompetitions());
@@ -62,7 +63,10 @@ public class CompetitionController {
     }
 
 
-
+    @InitBinder
+    public void initialiseBinder(WebDataBinder binder) {
+        binder.setAllowedFields("name","rules");
+    }
 
     @RequestMapping(value = "/competition")
     public String getCompetitionById(@RequestParam(value = "id") String competitionId, Model model) {

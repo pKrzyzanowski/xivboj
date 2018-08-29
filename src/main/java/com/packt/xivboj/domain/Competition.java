@@ -18,8 +18,9 @@ public class Competition implements Serializable {
 
     private String competitionId;
 
-//    @Pattern(regexp="P[1-9]+", message="Pattern.Product.productId.validation")
+//    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")
     private String name;
+
     private String rules;
 
 
