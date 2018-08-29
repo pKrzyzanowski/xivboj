@@ -11,7 +11,7 @@
     </definition>
 
     <definition name="welcome" extends="baseLayout">
-        <put-attribute name="title" value="Welcome"/>
+        <put-attribute name="title" value="Welcome!"/>
         <put-attribute name="heading" value="Czternastoboj Klasyczny"/>
         <put-attribute name="tagline" value="odkryj swoje granice"/>
         <put-attribute name="content" value="/WEB-INF/views/welcome.jsp"/>
@@ -20,49 +20,49 @@
     <definition name="persons" extends="baseLayout">
         <put-attribute name="title" value="Uczestnicy"/>
         <put-attribute name="heading" value="Uczestnicy"/>
-        <put-attribute name="tagline" value=""/>
+        <put-attribute name="tagline" value="Lista Uczestników"/>
         <put-attribute name="content" value="/WEB-INF/views/persons.jsp"/>
     </definition>
 
     <definition name="person" extends="baseLayout">
         <put-attribute name="title" value="Uczestnik"/>
         <put-attribute name="heading" value="Uczestnik"/>
-        <put-attribute name="tagline" value=""/>
+        <put-attribute name="tagline" value="Informacje o uczestniku"/>
         <put-attribute name="content" value="/WEB-INF/views/person.jsp"/>
     </definition>
 
     <definition name="competitions" extends="baseLayout">
         <put-attribute name="title" value="Konkurencje"/>
         <put-attribute name="heading" value="Konkurencje"/>
-        <put-attribute name="tagline" value=""/>
+        <put-attribute name="tagline" value="Lista wszystkich konkurencji"/>
         <put-attribute name="content" value="/WEB-INF/views/competitions.jsp"/>
     </definition>
 
     <definition name="addCompetition" extends="baseLayout">
-        <put-attribute name="title" value="Konkurencje"/>
-        <put-attribute name="heading" value="Konkurencje"/>
-        <put-attribute name="tagline" value=""/>
+        <put-attribute name="title" value="Dodaj konkurencje"/>
+        <put-attribute name="heading" value="Dodaj konkurencje"/>
+        <put-attribute name="tagline" value="Wymyśl i dodaj coś nowego"/>
         <put-attribute name="content" value="/WEB-INF/views/addCompetition.jsp"/>
     </definition>
 
     <definition name="login" extends="baseLayout">
-        <put-attribute name="title" value="Konkurencje"/>
-        <put-attribute name="heading" value="Konkurencje"/>
-        <put-attribute name="tagline" value=""/>
+        <put-attribute name="title" value="Zaloguj się"/>
+        <put-attribute name="heading" value="Zaloguj się"/>
+        <put-attribute name="tagline" value="By móc głosować musisz być zalogowanym"/>
         <put-attribute name="content" value="/WEB-INF/views/login.jsp"/>
     </definition>
 
     <definition name="competition" extends="baseLayout">
-        <put-attribute name="title" value="Konkurencje"/>
-        <put-attribute name="heading" value="Konkurencje"/>
-        <put-attribute name="tagline" value=""/>
+        <put-attribute name="title" value="Konkurencja"/>
+        <put-attribute name="heading" value="Konkurencja"/>
+        <put-attribute name="tagline" value="Szczegóły"/>
         <put-attribute name="content" value="/WEB-INF/views/competition.jsp"/>
     </definition>
 
     <definition name="cart" extends="baseLayout">
-        <put-attribute name="title" value="Konkurencje"/>
-        <put-attribute name="heading" value="Konkurencje"/>
-        <put-attribute name="tagline" value=""/>
+        <put-attribute name="title" value="Karta głosowania"/>
+        <put-attribute name="heading" value="Karta głosowania"/>
+        <put-attribute name="tagline" value="Głosuj mądrze"/>
         <put-attribute name="content" value="/WEB-INF/views/cart.jsp"/>
     </definition>
 
