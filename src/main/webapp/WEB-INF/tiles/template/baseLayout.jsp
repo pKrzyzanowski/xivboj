@@ -10,8 +10,8 @@
     <meta charset="UTF-8"/>
     <%--<meta name="viewport" content="width=device-width,initial scale=1.0"/>--%>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Tammudu|Lemon|Short+Stack" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lemon|Short+Stack" rel="stylesheet">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resource/css/myCss.css">
     <link href="http://getbootstrap.com/dist/css/bootstrap.css"	rel="stylesheet">

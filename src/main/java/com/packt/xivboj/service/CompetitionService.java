@@ -13,4 +13,6 @@ public interface CompetitionService {
     public void removeCompetition(String competitionId);
 
     public Competition getCompetitionById(String competitionId);
+
+    public void nowa();
 }

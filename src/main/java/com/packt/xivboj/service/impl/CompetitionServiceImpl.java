@@ -35,4 +35,11 @@ public class CompetitionServiceImpl implements CompetitionService {
     public Competition getCompetitionById(String competitionId) {
         return competitionRepository.getCompetitionById(competitionId);
     }
+
+    @Override
+    public void nowa() {
+         competitionRepository.nowa();
+    }
+
+
 }

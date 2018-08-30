@@ -5,6 +5,8 @@ import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +28,6 @@ public class CompetitionController {
     CompetitionService competitionService;
 
 
-
     @RequestMapping
     public String list(Model model) {
         model.addAttribute("competitions", competitionService.getAllCompetitions());
@@ -37,11 +38,13 @@ public class CompetitionController {
     public String getAddNewCompetition(Model model) {
         Competition newCompetition = new Competition();
         model.addAttribute("newCompetition", newCompetition);
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
         return "addCompetition";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewCompetition(@ModelAttribute("newCompetition") @Valid Competition competitionToBeAdded, HttpServletRequest request,BindingResult result) {
+    public String processAddNewCompetition(@ModelAttribute("newCompetition") @Valid Competition competitionToBeAdded, HttpServletRequest request, BindingResult result) {
 
         if (result.hasErrors()) {
             return "addCompetition";
@@ -63,9 +66,15 @@ public class CompetitionController {
     }
 
 
+    @RequestMapping(value = "/oku", method = RequestMethod.GET)
+    public String weelcome(Model model) {
+        competitionService.nowa();
+        return "competitions";
+    }
+
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
-        binder.setAllowedFields("name","rules");
+        binder.setAllowedFields("name", "rules");
     }
 
     @RequestMapping(value = "/competition")

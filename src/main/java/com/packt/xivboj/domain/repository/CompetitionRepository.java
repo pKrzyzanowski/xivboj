@@ -13,4 +13,7 @@ public interface CompetitionRepository {
     public void removeCompetition(String competitionId);
 
     public Competition getCompetitionById(String competitionId);
+
+    public void nowa();
+
 }

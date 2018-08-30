@@ -18,6 +18,8 @@
         <security:logout logout-success-url="/logout" />
     </security:http>
 
+
+
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
