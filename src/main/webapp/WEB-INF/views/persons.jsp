@@ -10,6 +10,7 @@
         <c:forEach items="${people}" var="person">
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                 <div class="thumbnail" style="width: 270px; height: 300px">
+                    <div class="panel-heading">${person.name}</div>
                     <img src="<c:url value="/resource/images/${person.nameId}.jpg"></c:url> " alt="image"
                          style="height: 150px; max-width: 250px;  padding-top: 15px"/>
                     <div class="description">

@@ -8,9 +8,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
+
+                <li><a href="<spring:url value="/"/>"><spring:message code="navigation.home"/></a></li>
                 <li><a href="<spring:url value="/competitions"/>"><spring:message code="navigation.competitions"/></a></li>
                 <li><a href="<spring:url value="/people"/> "><spring:message code="navigation.competitors"/></a></li>
                 <li><a href="#"><spring:message code="navigation.votingResults"/></a></li>
