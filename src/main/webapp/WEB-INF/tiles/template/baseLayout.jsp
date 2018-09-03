@@ -14,13 +14,31 @@
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resource/css/myCss.css">
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css"	rel="stylesheet">
-    <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css"	rel="stylesheet">
-
-
+    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans" rel="stylesheet">
 
 
     <title><tiles:insertAttribute name="title"/></title>
+    <style>
+        /* Remove the navbar's default rounded borders and increase the bottom margin */
+        .navbar {
+            margin-bottom: 50px;
+            border-radius: 0;
+        }
+
+        /* Remove the jumbotron's default bottom margin */
+        .jumbotron {
+            margin-bottom: 0;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #ffffff;
+            padding: 15px;
+        }
+    </style>
 </head>
 <body>
 <div class="jumbotron">
@@ -29,20 +47,13 @@
         <p>odkryj swoje granice</p>
     </div>
 </div>
-
-
 <tiles:insertAttribute name="navigation"/>
+<div class="container">
+    <div class="row"><tiles:insertAttribute name="content"/></div>
+    <footer class="container-fluid text-center">
+        <tiles:insertAttribute name="footer"/>
+    </footer>
+</div>
 
-    <div class="container"  >
-        <div class="row"><tiles:insertAttribute name="content"/></div>
-
-
-
-
-        <footer class="container-fluid text-center">
-            <tiles:insertAttribute name="footer"/>
-        </footer>
-    </div>
-
-    </body>
+</body>
 </html>

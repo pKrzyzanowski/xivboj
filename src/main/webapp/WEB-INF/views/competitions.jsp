@@ -11,11 +11,9 @@
     <script src="/resource/js/controllers.js"></script>
 </head>
 <body>
-
 <section class="container" ng-app="cartApp">
     <section class="row">
         <c:forEach items="${competitions}" var="competition">
-
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                 <div class="thumbnail" style="width: 270px; height: 300px">
                     <div class="panel-heading"><strong>${competition.name}</strong></div>
@@ -23,9 +21,9 @@
                          alt="image"
                          style="width: 200px; max-height: 180px;  padding-top: 15px"/>
 
-                    <div class="panel-footer" style="position: relative; text-align: center;     bottom: 10px;
-    padding-bottom: 10px;">
-                        <div class="row">
+
+
+                    <div class="button" style="position: absolute ;; bottom: 10px;text-align: center">
                             <p data-ng-controller="cartCtrl">
                                 <a href="#" class="btn btn-primary"
                                    ng-click="addToCart('${competition.competitionId}')"> <springc:message
@@ -39,7 +37,7 @@
                             </a>
 
                         </div>
-                    </div>
+
                 </div>
             </div>
 

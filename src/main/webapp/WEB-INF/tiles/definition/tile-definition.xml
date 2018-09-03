@@ -66,4 +66,5 @@
         <put-attribute name="content" value="/WEB-INF/views/cart.jsp"/>
     </definition>
 
+
 </tiles-definitions>

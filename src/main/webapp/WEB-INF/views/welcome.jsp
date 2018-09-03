@@ -22,25 +22,23 @@
 
         /* Add a gray background color and some padding to the footer */
         footer {
-            background-color: #f2f2f2;
-            padding: 25px;
+            background-color: #ffffff;
+            padding: 15px;
         }
     </style>
 </head>
 <body>
 <div class="container" style="position: relative;text-align: center">
-
-
-<img src="<c:url value="/resource/images/welcomePic.png"></c:url>  " alt="image"/>
-<br><br><br>
-<h1>O konkursie</h1>
-<br><br>
-<p>Czternastobój klasyczny sięga swoimi korzeniami do 2017 roku.</p>
-<p>Jest to kombinacja czternastu konkurencji wybranychprzez uczestników.</p>
-<p>Ideą konkursu jest zakończenie sporów o to, kto jest ogólnie najlepszy.</p>
-<p>Oprócz samych rozgrywek jest faza głosowania na konkurencje.</p>
-<p>Jest to nieodłącznyi i nie mniej ważny niż reszta etap konkursu.</p>
-<p>Niniejsza strona ma usprawnić proces głosowania i uczynić go bardzień oficjalnym.</p>
+    <img src="<c:url value="/resource/images/welcomePic.png"></c:url>  " alt="image"/>
+    <br><br><br>
+    <h1>O konkursie</h1>
+    <br><br>
+    <p>Czternastobój klasyczny sięga swoimi korzeniami do 2017 roku.</p>
+    <p>Jest to kombinacja czternastu konkurencji wybranychprzez uczestników.</p>
+    <p>Ideą konkursu jest zakończenie sporów o to, kto jest ogólnie najlepszy.</p>
+    <p>Oprócz samych rozgrywek jest faza głosowania na konkurencje.</p>
+    <p>Jest to nieodłącznyi i nie mniej ważny niż reszta etap konkursu.</p>
+    <p>Niniejsza strona ma usprawnić proces głosowania i uczynić go bardzień oficjalnym.</p>
 </div>
 <br><br>
 

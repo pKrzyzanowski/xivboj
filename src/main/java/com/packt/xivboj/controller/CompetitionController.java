@@ -65,7 +65,7 @@ public class CompetitionController {
 
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
-        binder.setAllowedFields("name","rules");
+        binder.setAllowedFields("competitionId","name","rules","preferedTime","competitionImage");
     }
 
     @RequestMapping(value = "/competition")
