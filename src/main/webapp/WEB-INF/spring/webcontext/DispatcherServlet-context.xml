@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:webflow-config="http://www.springframework.org/schema/webflow-config"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/webflow-config
-        http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
+        http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd
+http://www.springframework.org/schema/data/jpa
+
+http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd
+http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 
     <mvc:annotation-driven enable-matrix-variables="true" validator="validator"/>
@@ -65,5 +76,20 @@
 
 
 
+    <!--&lt;!&ndash; Entity Manager &ndash;&gt;-->
+    <!--<bean id="entityManagerFactory"-->
+          <!--class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
+        <!--<property name="dataSource" ref="datasource"/>-->
+        <!--<property name="persistenceUnitName" value="mybase"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; Transaction Manager &ndash;&gt;-->
+    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
+        <!--<property name="entityManagerFactory" ref="entityManagerFactory"/>-->
+    <!--</bean>-->
+
+    <!-- Jpa Repositories -->
+    <!--<jpa:repositories base-package="com.github.mustachejava.codes"></jpa:repositories>-->
+    <!--<jpa:repositories base-package="com.acme.repositories" ></jpa:repositories>-->
 
 </beans>

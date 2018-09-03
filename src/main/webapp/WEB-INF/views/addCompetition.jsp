@@ -17,13 +17,12 @@
         <form:errors path="*" cssClass="alert alert-danger" element="div"/>
 
 
+
+
         <div class="form-group">
-            <label class="control-label col-lg-2 col-lg-2" for="competitionId">
-                <spring:message code="addCompetition.form.competitionId.label"/>
-            </label>
+            <label class="control-label col-lg-2" for="description">Opis</label>
             <div class="col-lg-10">
-                <form:input id="competitionId" path="competitionId" type="text"/>
-                <form:errors path="competitionId" cssClass="text-danger"/>
+                <form:textarea id="description" path="competitionId" rows="2"/>
             </div>
         </div>
 

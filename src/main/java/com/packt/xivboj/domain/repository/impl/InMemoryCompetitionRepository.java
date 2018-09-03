@@ -7,6 +7,7 @@ import com.packt.xivboj.exception.CompetitionNotFoundException;
 import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Repository
 public class InMemoryCompetitionRepository implements CompetitionRepository {
+
 
 
     private List<Competition> competitionList = new ArrayList<>();
@@ -56,6 +58,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     public void addCompetition(Competition competition) {
         competitionList.add(competition);
     }
+
 
     @Override
     public void removeCompetition(String competitionId) {

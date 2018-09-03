@@ -1,6 +1,7 @@
 package com.packt.xivboj.domain;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.xml.bind.annotation.XmlTransient;
