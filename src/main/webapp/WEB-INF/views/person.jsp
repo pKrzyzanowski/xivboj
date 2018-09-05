@@ -7,12 +7,11 @@
 <body>
 
 
-
 <section class="container">
     <div class="row">
-<p></p>
-<p></p>
-<p></p>
+        <p></p>
+        <p></p>
+        <p></p>
         <div class="col-md-5">
             <h1>${person.name}</h1>
             <p></p>
@@ -25,8 +24,9 @@
 
 
             <p>
-
-                <a href="<spring:url value="/competitions"/>"> <spring:message
+                <br>
+                <br>
+                <a href="<spring:url value="/competitions"/>" class="btn btn-primary"> <spring:message
                         code="person.button.backToCompetitions"/></a>
 
         </div>

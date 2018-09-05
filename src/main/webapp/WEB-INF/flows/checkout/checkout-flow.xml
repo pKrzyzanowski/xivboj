@@ -8,21 +8,26 @@ http://www.springframework.org/schema/webflow/spring-webflow.xsd">
     <action-state id="addCartToOrder">
         <evaluate expression="cartServiceImpl.validate(requestParameters.cartId)" result="order.cart"/>
         <transition to="notVotedYet" on-exception="com.packt.xivboj.exception.InvalidCartException"/>
-        <transition to="acceptRegulations"/>
+        <transition to="votingInfo"/>
     </action-state>
 
-    <view-state id="acceptRegulations" view="acceptRegulations.jsp" model="order">
-        <transition on="regulationsAccepted" to="votingInfo"/>
-        <transition on="backToAcceptRegulations" to="cancelCheckout"/>
-    </view-state>
 
     <view-state id="votingInfo" model="order">
-        <transition on="next" to="InformCompetitor"/>
-        <transition on="back" to="acceptRegulations"/>
+        <transition on="next" to="acceptRegulations"/>
+        <transition on="back" to="cancelCheckout"/>
         <transition on="cancel" to="cancelCheckout"/>
-
     </view-state>
 
+
+    <view-state id="acceptRegulations" view="acceptRegulations.jsp" model="order">
+        <transition on="regulationsAccepted" to="processOrder"/>
+        <transition on="backToAcceptRegulations" to="votingInfo"/>
+    </view-state>
+
+    <action-state id="processOrder">
+        <evaluate expression="orderServiceImpl.saveOrder(order)" result="order.orderId"/>
+        <transition to="InformCompetitor"/>
+    </action-state>
 
     <view-state id="notVotedYet">
         <transition to="endState"/>
