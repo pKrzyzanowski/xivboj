@@ -4,18 +4,24 @@ package com.packt.xivboj.domain;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
+@Entity
 @XmlRootElement
 public class Competition implements Serializable {
     private static final long serialVersionUID = -538766763684258062L;
 
 
 
+
+    @Id
     private String competitionId;
 
 //    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")
@@ -28,6 +34,7 @@ public class Competition implements Serializable {
     private int preferedTime;
 
     //    private Person author;
+    @Transient
     @JsonIgnore
     private MultipartFile competitionImage;
 

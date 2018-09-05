@@ -8,8 +8,10 @@ import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,8 @@ import java.util.List;
 @Repository
 public class InMemoryCompetitionRepository implements CompetitionRepository {
 
-
+    @Autowired
+    EntityManagerFactory entityManagerFactory;
 
     private List<Competition> competitionList = new ArrayList<>();
 
@@ -42,6 +45,8 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 //        pingPing.setAuthor(new Person("M1","Marcin","Skalkowski"));
         grid.setRules("Jeden wyscig, kazdy z kazdym.");
         grid.setPreferedTime(50);
+
+
 
         competitionList.add(szachy);
         competitionList.add(rzutki);
