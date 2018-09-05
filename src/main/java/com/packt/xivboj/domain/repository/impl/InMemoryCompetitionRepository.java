@@ -76,9 +76,11 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
             PreparedStatement ps = conn.prepareStatement(sql);
             Competition competition = null;
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 competition = new Competition();
                 competition.setName("abc");
+
                 rs.close();
                 ps.close();
             }
@@ -87,7 +89,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         }
 
 
-        System.out.println("cok");
+        System.out.println(sql);
     }
 
 
