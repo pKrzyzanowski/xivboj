@@ -9,6 +9,7 @@ import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -75,7 +76,12 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     @Override
     public void nowa() {
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();         entityManager.getTransaction().begin();         entityManager.persist( new Competition( "Our very first competition!", "Nazwa") );         entityManager.getTransaction().commit();         entityManager.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(new Competition("Our very first competition!", "Nazwa"));
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
 
     }
 
