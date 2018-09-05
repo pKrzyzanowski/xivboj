@@ -7,11 +7,13 @@ import com.packt.xivboj.exception.CompetitionNotFoundException;
 import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManagerFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +48,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         grid.setRules("Jeden wyscig, kazdy z kazdym.");
         grid.setPreferedTime(50);
 
-
-
         competitionList.add(szachy);
         competitionList.add(rzutki);
         competitionList.add(pingPing);
@@ -64,13 +64,19 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         competitionList.add(competition);
     }
 
-
     @Override
     public void removeCompetition(String competitionId) {
         if (!competitionList.contains(getCompetitionById(competitionId))) {
             throw new IllegalArgumentException(String.format("Produkt o wskazanym id (%) nie istnieje", competitionId));
         }
         competitionList.remove(getCompetitionById(competitionId));
+    }
+
+    @Override
+    public void nowa() {
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();         entityManager.getTransaction().begin();         entityManager.persist( new Competition( "Our very first competition!", "Nazwa") );         entityManager.getTransaction().commit();         entityManager.close();
+
     }
 
     @Override

@@ -4,43 +4,43 @@ package com.packt.xivboj.domain;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
-@Entity
+@Entity(name = "competition")
+@Table(name = "competition")
 @XmlRootElement
 public class Competition implements Serializable {
     private static final long serialVersionUID = -538766763684258062L;
 
 
-
-
     @Id
+    @GeneratedValue
     private String competitionId;
 
-//    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")
+    //    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "rules")
     private String rules;
 
 
+    @Column(name = "preferedTime")
 
     private int preferedTime;
 
-    //    private Person author;
-    @Transient
+    @Column(name = "path")
+    private String path;
+
+    private Person author;
     @JsonIgnore
+    @Transient
     private MultipartFile competitionImage;
-
-
-
- 
 
 
     public Competition() {
@@ -80,6 +80,7 @@ public class Competition implements Serializable {
     public MultipartFile getCompetitionImage() {
         return competitionImage;
     }
+
     @XmlTransient
     public void setCompetitionImage(MultipartFile competitionImage) {
         this.competitionImage = competitionImage;
@@ -132,7 +133,6 @@ public class Competition implements Serializable {
     public String toString() {
         return "Produkt [productId=" + competitionId + ", nazwa=" + name + "]";
     }
-
 
 
 }

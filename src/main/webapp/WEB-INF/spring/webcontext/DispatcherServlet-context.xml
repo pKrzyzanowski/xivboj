@@ -70,9 +70,15 @@ http://www.springframework.org/schema/beans
     </bean>
 
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="validationMessageSource" ref="messageSource" />
+        <property name="validationMessageSource" ref="messageSource"/>
     </bean>
 
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/xivbojschema"/>
+        <property name="username" value="root"/>
+        <property name="password" value="patryk"/>
+    </bean>
 
 
 

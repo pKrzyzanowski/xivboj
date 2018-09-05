@@ -5,8 +5,6 @@ import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,9 +30,9 @@ public class CompetitionController {
     @RequestMapping
     public String list(Model model) {
         model.addAttribute("competitions", competitionService.getAllCompetitions());
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        String a = "asd";
+//                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+//        String a = "asd";
         return "competitions";
     }
 
@@ -67,6 +65,12 @@ public class CompetitionController {
         return "redirect:/competitions";
     }
 
+
+    @RequestMapping(value = "/oku", method = RequestMethod.GET)
+    public String weelcome(Model model) {
+        competitionService.nowa();
+        return "competitions";
+    }
 
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
