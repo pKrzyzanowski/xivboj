@@ -27,8 +27,8 @@ cartApp.controller('cartCtrl',  function ($scope, $http) {
                 alert("Oddano głos na konkurencję!");
             });
     };
-    $scope.removeFromCart = function(productId) {
-        $http.put('/rest/cart/remove/'+productId)
+    $scope.removeFromCart = function(competitionId) {
+        $http.put('/rest/cart/remove/'+competitionId)
             .success(function(data) {
                 $scope.refreshCart($http.get('/rest/cart/get/cartId'));
             });

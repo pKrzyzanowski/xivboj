@@ -15,26 +15,20 @@
     <div ng-controller="cartCtrl" ng-init="initCartId('${cartId}')">
 
         <div>
-            <a class="btn btn-danger pull-left"
-               ng-click="clearCart()"> <span
-                    class="glyphicon glyphicon-remove-sign"></span> <spring:message code="cart.cleanCart"/>
-            </a> <a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
-                class="glyphicon-shopping-cart glyphicon"></span> <spring:message code="cart.vote"/>
-        </a>
+            <a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
+                    class="btn btn-lg btn-success btn-block"></span> <spring:message code="cart.vote"/>
+            </a>
         </div>
         <table class="table table-hover">
             <tr>
-                <th>Produkt</th>
-                <th>Cena za sztukę</th>
-                <th>Liczba sztuk</th>
-                <th>Cena</th>
-                <th>Akcja</th>
+                <th>Nazwa</th>
 
             </tr>
             <tr ng-repeat="item in cart.cartItems">
                 <td>{{item.competition.name}}</td>
 
-                <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.competition.competitionId)"> <span
+                <td><a href="#" class="label label-danger"
+                       ng-click="removeFromCart(item.competition.competitionId)"> <span
                         class="glyphicon glyphicon-remove"></span> <spring:message code="cart.backOffVote"/>
                 </a></td>
             </tr>
