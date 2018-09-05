@@ -77,16 +77,16 @@ http://www.springframework.org/schema/beans
 
 
     <!--&lt;!&ndash; Entity Manager &ndash;&gt;-->
-    <!--<bean id="entityManagerFactory"-->
-          <!--class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-        <!--<property name="dataSource" ref="datasource"/>-->
-        <!--<property name="persistenceUnitName" value="mybase"/>-->
-    <!--</bean>-->
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="datasource"/>
+        <property name="persistenceUnitName" value="mybase"/>
+    </bean>
 
     <!--&lt;!&ndash; Transaction Manager &ndash;&gt;-->
-    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
-        <!--<property name="entityManagerFactory" ref="entityManagerFactory"/>-->
-    <!--</bean>-->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
 
     <!-- Jpa Repositories -->
     <!--<jpa:repositories base-package="com.github.mustachejava.codes"></jpa:repositories>-->
