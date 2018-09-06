@@ -7,6 +7,7 @@ import com.packt.xivboj.exception.CompetitionNotFoundException;
 import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -25,26 +26,37 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     @Autowired
     EntityManagerFactory entityManagerFactory;
 
+
+    @Bean
+    EntityManager myEntityManager() {
+        return entityManagerFactory.createEntityManager();
+    }
+
+    @Autowired
+    EntityManager myEntityManager;
     private List<Competition> competitionList = new ArrayList<>();
 
+
     public InMemoryCompetitionRepository() {
-        Competition szachy = new Competition("1", "Szachy");
+
+
+        Competition szachy = new Competition(1, "Szachy");
 //        szachy.setAuthor(new Person("P1","Patryk","Krzyzanowski"));
         szachy.setRules("Kazdy gra z kazdym.");
         szachy.setPreferedTime(60);
 //
-        Competition rzutki = new Competition("2", "Rzutki");
+        Competition rzutki = new Competition(2, "Rzutki");
 //        rzutki.setAuthor(new Person("P1","Patryk","Krzyzanowski"));
         rzutki.setRules("Gramy od 301 w dol.");
         rzutki.setPreferedTime(30);
 
-        Competition pingPing = new Competition("3", "PingPong");
+        Competition pingPing = new Competition(3, "PingPong");
 //        pingPing.setAuthor(new Person("M1","Marcin","Skalkowski"));
         pingPing.setRules("Kazdy z kazdym jednen set do dwoch wygranych gemow.");
         pingPing.setPreferedTime(70);
 
 
-        Competition grid = new Competition("4", "Grid");
+        Competition grid = new Competition(4, "Grid");
 //        pingPing.setAuthor(new Person("M1","Marcin","Skalkowski"));
         grid.setRules("Jeden wyscig, kazdy z kazdym.");
         grid.setPreferedTime(50);
@@ -62,11 +74,43 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 
     @Override
     public void addCompetition(Competition competition) {
-        competitionList.add(competition);
+//        competitionList.add(competition);
+
+
+        myEntityManager.getTransaction().begin();
+//        Competition competition1 = myEntityManager.persist();
+        myEntityManager.getTransaction().commit();
+
+//        Competition competition1 = entityManager.find(Competition.class,"Our very first competition!");
+//        entityManager.persist(new Competition("S23", "Nazxwa"));
+//
+//
+
+//        entityManager.getTransaction().begin();
+//        entityManager.persist(new Competition("S23", "Nazxwa"));
+//        entityManager.getTransaction().commit();
+
+        myEntityManager.getTransaction().begin();
+
+        Competition competition1 = myEntityManager.find(Competition.class, 7);
+        myEntityManager.getTransaction().commit();
+
+
+//        entityManager.close();
+//        entityManagerFactory.close();
+        try {
+            if (!competitionList.contains(getCompetitionById(7))) {
+                competitionList.add(competition1);
+            }
+
+        } catch (CompetitionNotFoundException e ) {
+            competitionList.add(competition1);
+        }
+
     }
 
     @Override
-    public void removeCompetition(String competitionId) {
+    public void removeCompetition(int competitionId) {
         if (!competitionList.contains(getCompetitionById(competitionId))) {
             throw new IllegalArgumentException(String.format("Produkt o wskazanym id (%) nie istnieje", competitionId));
         }
@@ -78,7 +122,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.persist(new Competition("Our very first competition!", "Nazwa"));
+        entityManager.persist(new Competition(6, "Nazwa"));
 
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -86,12 +130,12 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-    public Competition getCompetitionById(String competitionId) {
+    public Competition getCompetitionById(int competitionId) {
 
         Competition competitionById = null;
 
         for (Competition competition : competitionList) {
-            if (competition != null && competition.getCompetitionId() != null && competitionId.equals(competition.getCompetitionId())) {
+            if (competition != null && competitionId==(competition.getCompetitionId())) {
                 competitionById = competition;
             }
         }
@@ -101,4 +145,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         return competitionById;
 
     }
+
+
 }

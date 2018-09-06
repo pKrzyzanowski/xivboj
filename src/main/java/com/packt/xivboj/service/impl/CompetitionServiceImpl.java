@@ -27,12 +27,12 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public void removeCompetition(String competitionId) {
+    public void removeCompetition(int competitionId) {
         competitionRepository.removeCompetition(competitionId);
     }
 
     @Override
-    public Competition getCompetitionById(String competitionId) {
+    public Competition getCompetitionById(int competitionId) {
         return competitionRepository.getCompetitionById(competitionId);
     }
 

@@ -47,19 +47,19 @@ public class Cart implements Serializable {
     }
 
     public void addCartItem(CartItemCompe item) {
-        String productId = item.getCompetition().getCompetitionId();
+        int competitionId = item.getCompetition().getCompetitionId();
 
-        if (cartItems.containsKey(productId)) {
-            CartItemCompe existingCartItem = cartItems.get(productId);
-            cartItems.put(productId, existingCartItem);
+        if (cartItems.containsKey(competitionId)) {
+            CartItemCompe existingCartItem = cartItems.get(competitionId);
+            cartItems.put(""+competitionId, existingCartItem);
         } else {
-            cartItems.put(productId, item);
+            cartItems.put(""+competitionId, item);
         }
 
     }
 
     public void removeCartItem(CartItemCompe cartItemCompe) {
-        String competitionId = cartItemCompe.getCompetition().getCompetitionId();
+        int competitionId = cartItemCompe.getCompetition().getCompetitionId();
         cartItems.remove(competitionId);
     }
 

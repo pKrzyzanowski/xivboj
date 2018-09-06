@@ -80,23 +80,16 @@ http://www.springframework.org/schema/beans
         <property name="password" value="patryk"/>
     </bean>
 
-
-
-
-    <!--&lt;!&ndash; Entity Manager &ndash;&gt;-->
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceUnitName" value="mybase"/>
     </bean>
 
-    <!--&lt;!&ndash; Transaction Manager &ndash;&gt;-->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <!-- Jpa Repositories -->
-    <!--<jpa:repositories base-package="com.github.mustachejava.codes"></jpa:repositories>-->
-    <!--<jpa:repositories base-package="com.acme.repositories" ></jpa:repositories>-->
+    <bean id="entityManager" class="javax.persistence.EntityManager" abstract="true"/>
 
 </beans>

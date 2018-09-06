@@ -26,7 +26,7 @@
 </section>
 <div class="thumbnail" style="width:600px; height: auto; position: relative;text-align: center">
     <section class="container">
-        <img src="<c:url value="/resource/images/goodLuck.jpg"></c:url>  " alt="image" style="width: 300px"/>
+        <img src="<c:url value="/resource/images/siteStatic/goodLuck.jpg"></c:url>  " alt="image" style="width: 300px"/>
         <p><a href="<spring:url value="/competitions" />" class="btn btn-primary">
             <span class="glyphicon-hand-left glyphicon"></span> Competitions
         </a>

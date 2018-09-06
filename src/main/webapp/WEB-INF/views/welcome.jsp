@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class="container" style="position: relative;text-align: center">
-    <img src="<c:url value="/resource/images/welcomePic.png"></c:url>  " alt="image"/>
+    <img src="<c:url value="/resource/images/siteStatic/welcomePic.png"></c:url>  " alt="image"/>
     <br><br><br>
     <h1>O konkursie</h1>
     <br><br>

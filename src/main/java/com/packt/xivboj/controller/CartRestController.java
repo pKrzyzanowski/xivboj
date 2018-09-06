@@ -49,7 +49,7 @@ public class CartRestController {
 
     @RequestMapping(value = "/add/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void addItem(@PathVariable String competitionId, HttpServletRequest request) throws IllegalAccessException {
+    public void addItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
 
         String sessionId = request.getSession(true).getId();
         Cart cart = cartService.read(sessionId);
@@ -69,7 +69,7 @@ public class CartRestController {
 
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void removeItem(@PathVariable String competitionId, HttpServletRequest request) throws IllegalAccessException {
+    public void removeItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
 
         String sessionId = request.getSession(true).getId();
         Cart cart = cartService.read(sessionId);

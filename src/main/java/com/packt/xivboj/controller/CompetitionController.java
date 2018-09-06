@@ -33,6 +33,7 @@ public class CompetitionController {
 //                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String currentPrincipalName = authentication.getName();
 //        String a = "asd";
+        competitionService.addCompetition(new Competition(7,"hehe"));
         return "competitions";
     }
 
@@ -56,7 +57,7 @@ public class CompetitionController {
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
         if (competitionImage != null && !competitionImage.isEmpty()) {
             try {
-                competitionImage.transferTo(new File(rootDirectory + "resources\\images\\" + competitionToBeAdded.getCompetitionId() + ".jpg"));
+                competitionImage.transferTo(new File(rootDirectory + "resources\\images\\competitions\\" + competitionToBeAdded.getCompetitionId() + ".jpg"));
             } catch (Exception e) {
                 throw new RuntimeException("niepowodzenie podczas proby zapisu obrazka", e);
             }
@@ -78,7 +79,7 @@ public class CompetitionController {
     }
 
     @RequestMapping(value = "/competition")
-    public String getCompetitionById(@RequestParam(value = "id") String competitionId, Model model) {
+    public String getCompetitionById(@RequestParam(value = "id") int competitionId, Model model) {
         model.addAttribute("competition", competitionService.getCompetitionById(competitionId));
         return "competition";
     }

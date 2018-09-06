@@ -18,7 +18,7 @@
                 <div class="thumbnail" style="width: 270px; height: 300px">
                     <div class="panel-heading"><p style="font-size: 20px"><strong>${competition.name}</strong></div>
                     </p>
-                    <img src="<c:url value="/resource/images/${competition.competitionId}.jpg"></c:url>  "
+                    <img src="<c:url value="/resource/images/competitions/${competition.competitionId}.jpg"></c:url>  "
                          alt="image"
                          style="width: 150px; max-height: 140px;  padding-top: 5px"/>
 

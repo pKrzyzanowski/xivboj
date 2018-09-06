@@ -12,7 +12,7 @@
                 <div class="thumbnail" style="width: 270px; height: 300px">
                     <div class="panel-heading"><p style="font-size: 20px"><strong>${person.name}</strong></div></p>
                     <div style="position: relative;text-align: center">
-                    <img src="<c:url value="/resource/images/${person.nameId}.jpg"></c:url> " alt="image"
+                    <img src="<c:url value="/resource/images/persons/${person.nameId}.jpg"></c:url> " alt="image"
                          style="height: 150px; max-width: 250px;  padding-top: 15px"/>
                     </div>
                     <div class="button" style="position: absolute ;right:120px; bottom: 10px;text-align: center">

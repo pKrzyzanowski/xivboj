@@ -19,7 +19,7 @@ public class InMemoryCompetitionRepositoryTest {
     @Test
     public void method_getAllCompetitions_should_return_Competiotion_Object_If_exists_any() {
 
-        Competition szachy = new Competition("SZA", "Szachy");
+        Competition szachy = new Competition(1, "Szachy");
 
         competitionList.add(szachy);
 

@@ -18,9 +18,10 @@ public class Competition implements Serializable {
     private static final long serialVersionUID = -538766763684258062L;
 
 
+
     @Id
     @GeneratedValue
-    private String competitionId;
+    private int competitionId;
 
     //    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")
     @Column(name = "name")
@@ -31,7 +32,6 @@ public class Competition implements Serializable {
 
 
     @Column(name = "preferedTime")
-
     private int preferedTime;
 
     @Column(name = "path")
@@ -39,6 +39,7 @@ public class Competition implements Serializable {
 
     private Person author;
     @JsonIgnore
+
     @Transient
     private MultipartFile competitionImage;
 
@@ -47,16 +48,16 @@ public class Competition implements Serializable {
         super();
     }
 
-    public Competition(String competitionId, String name) {
+    public Competition( int competitionId, String name) {
         this.competitionId = competitionId;
         this.name = name;
     }
 
-    public String getCompetitionId() {
+    public int getCompetitionId() {
         return competitionId;
     }
 
-    public void setCompetitionId(String competitionId) {
+    public void setCompetitionId(int competitionId) {
         this.competitionId = competitionId;
     }
 
@@ -111,10 +112,7 @@ public class Competition implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Competition other = (Competition) obj;
-        if (competitionId == null) {
-            if (other.competitionId != null)
-                return false;
-        } else if (!competitionId.equals(other.competitionId))
+ if (competitionId != (other.competitionId))
             return false;
         return true;
     }
@@ -125,7 +123,7 @@ public class Competition implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result
-                + ((competitionId == null) ? 0 : competitionId.hashCode());
+                + ((competitionId == 0) ? 0 : competitionId);
         return result;
     }
 

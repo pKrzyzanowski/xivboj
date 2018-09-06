@@ -1,9 +1,9 @@
 package com.packt.xivboj.exception;
 
 public class CompetitionNotFoundException extends RuntimeException {
-    private String competitionId;
+    private int competitionId;
 
-    public CompetitionNotFoundException(String competitionId) {
+    public CompetitionNotFoundException(int competitionId) {
         this.competitionId = competitionId;
     }
 

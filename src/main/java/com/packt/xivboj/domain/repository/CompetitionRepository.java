@@ -10,9 +10,9 @@ public interface CompetitionRepository {
 
     public void addCompetition(Competition competition);
 
-    public void removeCompetition(String competitionId);
+    public void removeCompetition(int competitionId);
 
-    public Competition getCompetitionById(String competitionId);
+    public Competition getCompetitionById(int competitionId);
 
     public void nowa();
 
