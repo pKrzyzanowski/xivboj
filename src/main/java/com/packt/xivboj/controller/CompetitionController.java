@@ -26,7 +26,6 @@ public class CompetitionController {
     CompetitionService competitionService;
 
 
-
     @RequestMapping
     public String list(Model model) {
         model.addAttribute("competitions", competitionService.getAllCompetitions());
@@ -45,7 +44,7 @@ public class CompetitionController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewCompetition(@ModelAttribute("newCompetition") @Valid Competition competitionToBeAdded, HttpServletRequest request,BindingResult result) {
+    public String processAddNewCompetition(@ModelAttribute("newCompetition") @Valid Competition competitionToBeAdded, HttpServletRequest request, BindingResult result) {
 
         if (result.hasErrors()) {
             return "addCompetition";
@@ -75,7 +74,7 @@ public class CompetitionController {
 
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
-        binder.setAllowedFields("competitionId","name","rules","preferedTime","competitionImage");
+        binder.setAllowedFields("competitionId", "name", "rules", "preferedTime", "competitionImage");
     }
 
     @RequestMapping(value = "/competition")

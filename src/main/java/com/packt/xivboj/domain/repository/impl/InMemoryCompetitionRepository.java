@@ -8,10 +8,12 @@ import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,21 +29,30 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     EntityManagerFactory entityManagerFactory;
     @Autowired
     EntityManager myEntityManager;
-    private List<Competition> competitionList = new ArrayList<>();
-    public InMemoryCompetitionRepository() {
-
-
-
-    }
 
     @Bean
     EntityManager myEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
 
+    private List<Competition> competitionList = new ArrayList<>();
+
+
+    public InMemoryCompetitionRepository() {
+
+
+    }
+
+
+
     @Override
     public List<Competition> getAllCompetitions() {
-        return competitionList;
+        myEntityManager.getTransaction().begin();
+//        Competition competition1 = myEntityManager.persist();
+        Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM competition",Competition.class);
+        List<Competition> resultList = nativeQuery.getResultList();
+        myEntityManager.getTransaction().commit();
+        return resultList;
     }
 
     public void initializeBasicCompetitions() {
@@ -78,7 +89,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 //
 
 
-
 //        myEntityManager.getTransaction().begin();
 //
 //        Competition szachyBase  = myEntityManager.find(Competition.class,1);
@@ -98,7 +108,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     public void addCompetition(Competition competition) {
 
 
-
         myEntityManager.getTransaction().begin();
 //        Competition competition1 = myEntityManager.persist();
         myEntityManager.persist(competition);
@@ -114,9 +123,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 //        entityManager.persist(new Competition("S23", "Nazxwa"));
 //        entityManager.getTransaction().commit();
 //
-
-
-
 
 
 //        myEntityManager.getTransaction().begin();
@@ -161,11 +167,11 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 
         Competition competitionById = null;
 
-        for (Competition competition : competitionList) {
-            if (competition != null && competitionId == (competition.getCompetitionId())) {
-                competitionById = competition;
-            }
-        }
+        myEntityManager.getTransaction().begin();
+        competitionById= myEntityManager.find(Competition.class, competitionId);
+        myEntityManager.getTransaction().commit();
+
+
         if (competitionById == null) {
             throw new CompetitionNotFoundException(competitionId);
         }
