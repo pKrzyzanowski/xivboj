@@ -33,7 +33,7 @@ public class CompetitionController {
 //                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String currentPrincipalName = authentication.getName();
 //        String a = "asd";
-        competitionService.addCompetition(new Competition(7,"hehe"));
+        competitionService.initializeBasicCompetitions();
         return "competitions";
     }
 

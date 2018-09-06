@@ -42,7 +42,7 @@
                             <div class="panel-heading"><p>
                                 <strong>{{item.competition.name}}</strong></div>
                             </p>
-                            <img src="<c:url value="/resource/images/{{item.competition.competitionId}}.jpg" ></c:url>  "
+                            <img src="<c:url value="/resource/images/competitions/{{item.competition.competitionId}}.jpg" ></c:url>  "
                                  alt="image"
                                  style=" max-height: 80px;  padding-bottom: 30px"/>
                             <div class="button" style="position: absolute ;; bottom: 10px;text-align: center">

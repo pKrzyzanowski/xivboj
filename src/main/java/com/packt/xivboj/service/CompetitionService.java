@@ -16,4 +16,6 @@ public interface CompetitionService {
 
 
     public void nowa();
+
+    public void initializeBasicCompetitions();
 }

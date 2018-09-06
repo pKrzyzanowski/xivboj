@@ -20,7 +20,7 @@ public class Competition implements Serializable {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int competitionId;
 
     //    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")

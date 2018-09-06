@@ -16,4 +16,6 @@ public interface CompetitionRepository {
 
     public void nowa();
 
+    public void initializeBasicCompetitions();
+
 }
