@@ -9,8 +9,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-    <security:http auto-config="true">
-        <security:intercept-url pattern="/competitions/add" access="ROLE_ADMIN" />
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/competitions/add" access="hasRole('ROLE_USER')" />
 
         <security:form-login login-page="/login"
                              default-target-url="/competitions/add"
@@ -19,12 +19,22 @@
     </security:http>
 
 
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/xivbojschema"/>
+        <property name="username" value="root"/>
+        <property name="password" value="patryk"/>
+    </bean>
 
     <security:authentication-manager>
         <security:authentication-provider>
-            <security:user-service>
-                <security:user name="Admin" password="Admin123" authorities="ROLE_ADMIN" />
-            </security:user-service>
+
+            <security:jdbc-user-service data-source-ref="dataSource"
+                                        users-by-username-query=
+                                                "select username,password, enabled from users where username=?"
+                                        authorities-by-username-query=
+                                                "select username, role from user_roles where username =?  " />
         </security:authentication-provider>
     </security:authentication-manager>
 </beans>

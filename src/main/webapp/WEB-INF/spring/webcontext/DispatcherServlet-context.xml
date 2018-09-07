@@ -73,7 +73,8 @@ http://www.springframework.org/schema/beans
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/xivbojschema"/>
         <property name="username" value="root"/>
@@ -90,6 +91,6 @@ http://www.springframework.org/schema/beans
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <bean id="entityManager" class="javax.persistence.EntityManager" abstract="true"/>
+    <!--<bean id="entityManager" class="javax.persistence.EntityManager" abstract="true"/>-->
 
 </beans>
