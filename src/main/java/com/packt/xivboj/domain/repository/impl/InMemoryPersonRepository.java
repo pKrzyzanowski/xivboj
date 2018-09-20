@@ -1,16 +1,36 @@
 package com.packt.xivboj.domain.repository.impl;
 
+import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.PersonRepository;
 import com.packt.xivboj.exception.PersonNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Repository
 public class InMemoryPersonRepository implements PersonRepository {
+
+//    @Autowired
+//    EntityManagerFactory entityManagerFactory;
+//    @Autowired
+//    EntityManager myEntityManager;
+//
+//    @Bean
+//    EntityManager myEntityManager() {
+//        return entityManagerFactory.createEntityManager();
+//    }
+
+    @PersistenceContext(unitName = "mybase")
+    EntityManager myEntityManager;
 
    private  List<Person> listOfPersons = new ArrayList<>();
 
@@ -33,14 +53,13 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
+    @Transactional
     public Person getPersonById(String personId) {
         Person personById = null;
 
-        for (Person person : listOfPersons) {
-            if (person != null && person.getNameId()!= null && personId.equals(person.getNameId())) {
-                personById = person;
-            }
-        }
+//        myEntityManager.getTransaction().begin();
+        personById= myEntityManager.find(Person.class, personId);
+//        myEntityManager.getTransaction().commit();
 
         if (personById == null) {
             throw new PersonNotFoundException(personId);

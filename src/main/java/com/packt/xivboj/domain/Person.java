@@ -4,11 +4,16 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
+@Entity
 public class Person implements Serializable{
     private static final long serialVersionUID = 2284040482222162898L;
+
+    @Id
     private String nameId;
     private String name;
     private String surname;
@@ -23,6 +28,9 @@ public class Person implements Serializable{
         this.nameId = nameId;
         this.name = name;
         this.surname = surname;
+    }
+
+    public Person() {
     }
 
     public String getNameId() {

@@ -85,3 +85,4 @@ public class CompetitionController {
         return "competition";
     }
 }
+// sprawdzic czy bez tego persistence zapisuje normalnie do bazy

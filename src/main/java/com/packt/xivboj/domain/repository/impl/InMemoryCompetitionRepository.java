@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +34,10 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         return entityManagerFactory.createEntityManager();
     }
 
+
+//    @PersistenceContext(unitName = "mybase")
+//    EntityManager myEntityManager;
+
     private List<Competition> competitionList = new ArrayList<>();
 
 
@@ -46,12 +49,13 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 
 
     @Override
+    @Transactional
     public List<Competition> getAllCompetitions() {
-        myEntityManager.getTransaction().begin();
+//        myEntityManager.getTransaction().begin();
 //        Competition competition1 = myEntityManager.persist();
         Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM competition",Competition.class);
         List<Competition> resultList = nativeQuery.getResultList();
-        myEntityManager.getTransaction().commit();
+//        myEntityManager.getTransaction().commit();
         return resultList;
     }
 
@@ -105,12 +109,14 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
+    @Transactional
     public void addCompetition(Competition competition) {
 
 
         myEntityManager.getTransaction().begin();
 //        Competition competition1 = myEntityManager.persist();
         myEntityManager.persist(competition);
+
         myEntityManager.getTransaction().commit();
 
         competitionList.add(competition);
@@ -118,7 +124,9 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 //        entityManager.persist(new Competition("S23", "Nazxwa"));
 //
 //
-
+        myEntityManager.close();
+//        myEntityManager.getTransaction().commit();
+//        myEntityManager.refresh(competition);
 //        entityManager.getTransaction().begin();
 //        entityManager.persist(new Competition("S23", "Nazxwa"));
 //        entityManager.getTransaction().commit();
@@ -153,23 +161,17 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     @Override
     public void nowa() {
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(new Competition(6, "Nazwa"));
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-
     }
 
     @Override
+    @Transactional
     public Competition getCompetitionById(int competitionId) {
 
         Competition competitionById = null;
 
-        myEntityManager.getTransaction().begin();
+//        myEntityManager.getTransaction().begin();
         competitionById= myEntityManager.find(Competition.class, competitionId);
-        myEntityManager.getTransaction().commit();
+//        myEntityManager.getTransaction().commit();
 
 
         if (competitionById == null) {
