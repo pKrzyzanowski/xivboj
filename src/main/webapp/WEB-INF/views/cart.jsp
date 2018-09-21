@@ -34,15 +34,15 @@
                 <th>Twoje głosy</th>
 
             </tr>
-            <tr ng-repeat="item in cart.cartItems">
+            <tr ng-repeat="competition in cart.allCartCompe">
 
                 <td>
                     <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                         <div class="thumbnail" style="width: 170px; height: 160px">
                             <div class="panel-heading"><p>
-                                <strong>{{item.competition.name}}</strong></div>
+                                <strong>{{competition.name}}</strong></div>
                             </p>
-                            <img src="<c:url value="/resource/images/competitions/{{item.competition.competitionId}}.jpg" ></c:url>  "
+                            <img src="<c:url value="/resource/images/competitions/{{competition.competitionId}}.jpg" ></c:url>  "
                                  alt="image"
                                  style=" max-height: 80px;  padding-bottom: 30px"/>
                             <div class="button" style="position: absolute ;; bottom: 10px;text-align: center">

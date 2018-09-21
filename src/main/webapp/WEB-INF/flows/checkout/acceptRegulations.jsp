@@ -32,10 +32,9 @@
 
                 <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
                 <p>zgodznie z zasada honoru, oraz uscisku dloni zgadam sie na ponizsze zasady konkurencji</p>
-                <c:forEach items="${order.cart.allCartItems}" var="CartItemCompe">
+                <c:forEach items="${order.cart.allCartCompe}" var="CartCompe">
                     <%--tutaj bedzie kafelek identyczny jak ten ktory jest w zakladce competitions tyle ze bez przycisku glosow i szczegoly--%>
-
-                    <p><strong>${CartItemCompe.competition.name}: </strong>${CartItemCompe.competition.rules}</p>
+                    <p><strong>${CartCompe.name}: </strong>${CartCompe.rules}</p>
                 </c:forEach>
 
 

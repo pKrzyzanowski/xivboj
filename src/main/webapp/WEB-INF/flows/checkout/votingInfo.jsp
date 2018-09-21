@@ -31,12 +31,12 @@
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
         <p>konkurencje na ktore zaglosowales to</p>
 
-        <c:forEach items="${order.cart.allCartItems}" var="CartItemCompe">
+        <c:forEach items="${order.cart.allCartCompe}" var="CartCompe">
 
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                 <div class="thumbnail" style="width: 170px; height: 160px">
-                    <div class="panel-heading"><strong>${CartItemCompe.competition.name}</strong></div>
-                    <img src="<c:url value="/resource/images/${CartItemCompe.competition.competitionId}.jpg"></c:url>  "
+                    <div class="panel-heading"><strong>${CartCompe.name}</strong></div>
+                    <img src="<c:url value="/resource/images/${CartCompe.competitionId}.jpg"></c:url>  "
                          alt="image"
                          style="width: 100px; max-height: 80px;  padding-top: 15px"/>
 

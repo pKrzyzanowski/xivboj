@@ -21,10 +21,13 @@ public class Cart implements Serializable {
     private String cartId;
     @OneToOne(mappedBy = "cart")
     private Person person;
+
+    //    private Collection<CartItemCompe> allCartItems = new ArrayList<>();
     @Transient
-    private Collection<CartItemCompe> allCartItems = new ArrayList<>();
+    private Collection<Competition> allCartCompe = new ArrayList<>();
     @Transient
     private Map<Integer, Competition> cartCompetitions;
+
 
     public Cart() {
         cartCompetitions = new HashMap<Integer, Competition>();
@@ -43,9 +46,9 @@ public class Cart implements Serializable {
         this.person = person;
     }
 
-//    public Collection<CartItemCompe> getAllCartItems() {
-//        return cartItems.values();
-//    }
+    public Collection<Competition> getAllCartCompe() {
+        return cartCompetitions.values();
+    }
 
     public String getCartId() {
         return cartId;
