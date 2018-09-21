@@ -17,6 +17,13 @@
         </legend>
         <form:errors path="*" cssClass="alert alert-danger" element="div"/>
 
+        <div class="form-group">
+            <label class="control-label col-lg-2" for="nameId">id</label>
+            <div class="col-lg-10">
+                <form:textarea id="nameId" path="nameId" rows="2"/>
+            </div>
+        </div>
+
 
         <div class="form-group">
             <label class="control-label col-lg-2" for="name">Imię</label>

@@ -24,19 +24,19 @@ import java.util.List;
 @Repository
 public class InMemoryCompetitionRepository implements CompetitionRepository {
 
-    @Autowired
-    EntityManagerFactory entityManagerFactory;
-    @Autowired
-    EntityManager myEntityManager;
-
-    @Bean
-    EntityManager myEntityManager() {
-        return entityManagerFactory.createEntityManager();
-    }
-
-
-//    @PersistenceContext(unitName = "mybase")
+//    @Autowired
+//    EntityManagerFactory entityManagerFactory;
+//    @Autowired
 //    EntityManager myEntityManager;
+//
+//    @Bean
+//    EntityManager myEntityManager() {
+//        return entityManagerFactory.createEntityManager();
+//    }
+
+
+    @PersistenceUnit
+    EntityManagerFactory entityManagerFactory;
 
     private List<Competition> competitionList = new ArrayList<>();
 
@@ -51,11 +51,13 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     @Override
     @Transactional
     public List<Competition> getAllCompetitions() {
-//        myEntityManager.getTransaction().begin();
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
 //        Competition competition1 = myEntityManager.persist();
         Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM competition",Competition.class);
         List<Competition> resultList = nativeQuery.getResultList();
-//        myEntityManager.getTransaction().commit();
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
         return resultList;
     }
 
@@ -111,7 +113,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     @Override
     @Transactional
     public void addCompetition(Competition competition) {
-
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
 
         myEntityManager.getTransaction().begin();
 //        Competition competition1 = myEntityManager.persist();
@@ -166,13 +168,13 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     @Override
     @Transactional
     public Competition getCompetitionById(int competitionId) {
-
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         Competition competitionById = null;
 
-//        myEntityManager.getTransaction().begin();
+        myEntityManager.getTransaction().begin();
         competitionById= myEntityManager.find(Competition.class, competitionId);
-//        myEntityManager.getTransaction().commit();
-
+        myEntityManager.getTransaction().commit();
+myEntityManager.close();
 
         if (competitionById == null) {
             throw new CompetitionNotFoundException(competitionId);
