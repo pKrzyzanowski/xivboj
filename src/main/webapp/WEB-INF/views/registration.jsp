@@ -21,7 +21,7 @@
         <div class="form-group">
             <label class="control-label col-lg-2" for="name">Imię</label>
             <div class="col-lg-10">
-                <form:textarea id="name" path="name" rows="2"/>
+                <form:input id="name" path="name" type="text"/>
             </div>
         </div>
 
@@ -63,7 +63,6 @@
             <%--</div>--%>
 
 
-
     </fieldset>
 
 
@@ -78,16 +77,21 @@
         <div class="form-group">
             <label class="control-label col-lg-2" for="username">Login</label>
             <div class="col-lg-10">
-                <form:textarea id="username" path="username" rows="2"/>
+                <form:input id="username" path="username" type="text"/>
             </div>
         </div>
 
+
         <div class="form-group">
-            <label class="control-label col-lg-2" for="password">Hasło</label>
+            <label class="control-label col-lg-2 col-lg-2" for="password">
+                Hasło
+            </label>
             <div class="col-lg-10">
-                <form:textarea id="password" path="password" rows="2"/>
+                <form:input id="password" path="password" type="password"/>
+                <form:errors path="name" cssClass="text-danger"/>
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">

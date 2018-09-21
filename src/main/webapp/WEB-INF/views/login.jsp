@@ -30,12 +30,25 @@
                             <spring:message code="login.placeHolder.password"/> name="j_password" type="password"
                                    value="">
                         </div>
-                        <input class="btn btn-lg btn-success btn-block" type="submit" value=<spring:message code="login.button.login"/>>
+                        <input class="btn btn-lg btn-success btn-block" type="submit" value=<spring:message
+                                code="login.button.login"/>>
                     </fieldset>
                 </form>
+
             </div>
+            <br>
+
+            <h4>Jeżeli nie masz jeszcze konta, zarejestruj się!</h4>
+            <a href="<spring:url value="/people/add" />">
+               Rejestracja
+            </a>
         </div>
     </div>
+</div>
+<div>
+
+
+
 </div>
 
 
