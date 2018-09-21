@@ -37,11 +37,6 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public void nowa() {
-         competitionRepository.nowa();
-    }
-
-    @Override
     public void initializeBasicCompetitions() {
         competitionRepository.initializeBasicCompetitions();
     }

@@ -67,13 +67,6 @@ public class CompetitionController {
         return "redirect:/competitions";
     }
 
-
-    @RequestMapping(value = "/oku", method = RequestMethod.GET)
-    public String weelcome(Model model) {
-        competitionService.nowa();
-        return "competitions";
-    }
-
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
         binder.setAllowedFields("competitionId", "name", "rules", "preferedTime", "competitionImage");

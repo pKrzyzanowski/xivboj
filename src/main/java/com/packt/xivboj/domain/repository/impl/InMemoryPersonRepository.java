@@ -1,5 +1,6 @@
 package com.packt.xivboj.domain.repository.impl;
 
+import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.PersonRepository;
 import com.packt.xivboj.exception.PersonNotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,42 +18,18 @@ import java.util.List;
 @Repository
 public class InMemoryPersonRepository implements PersonRepository {
 
-//    @Autowired
-//    EntityManagerFactory entityManagerFactory;
-//    @Autowired
-//    EntityManager myEntityManager;
-//
-//    @Bean
-//    EntityManager myEntityManager() {
-//        return entityManagerFactory.createEntityManager();
-//    }
-
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
 
-    private List<Person> listOfPersons = new ArrayList<>();
+//    private List<Person> listOfPersons = new ArrayList<>();
 
     public InMemoryPersonRepository() {
-        Person jedrzej = new Person("Jedrzej", "Menkina");
-        jedrzej.setDescription("Mistrz ostatniego czternastoboju");
-        jedrzej.setAge(23);
 
-        Person dominik = new Person( "Dominik ", "Rabalski");
-        dominik.setDescription("Ostatnio prawie przegral");
-        dominik.setAge(23);
-
-        Person kuba = new Person( "Jakub", "Weltrowski");
-        kuba.setDescription("W ostatnim konkursie byl na podium");
-        kuba.setAge(22);
-
-        listOfPersons.add(jedrzej);
-        listOfPersons.add(dominik);
-        listOfPersons.add(kuba);
     }
 
     @Override
-    @Transactional
-    public Person getPersonById(String personId) {
+
+    public Person getPersonById(int personId) {
         Person personById = null;
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -66,7 +44,13 @@ public class InMemoryPersonRepository implements PersonRepository {
 
     @Override
     public List<Person> getAllPersons() {
-        return listOfPersons;
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
+        Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person", Person.class);
+        List<Person> resultList = nativeQuery.getResultList();
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
+        return resultList;
     }
 
     @Override
@@ -76,6 +60,6 @@ public class InMemoryPersonRepository implements PersonRepository {
         myEntityManager.persist(person);
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
-        listOfPersons.add(person);
+
     }
 }

@@ -28,7 +28,7 @@ public class PersonController {
     }
 
     @RequestMapping("/person")
-    public String getPersonById(@RequestParam("personId") String personId, Model model) {
+    public String getPersonById(@RequestParam("personId") int personId, Model model) {
         model.addAttribute("person", personService.getPersonById(personId));
         return "person";
     }

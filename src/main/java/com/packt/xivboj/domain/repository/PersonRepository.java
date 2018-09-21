@@ -5,7 +5,7 @@ import com.packt.xivboj.domain.Person;
 import java.util.List;
 
 public interface PersonRepository {
-    Person getPersonById(String personId);
+    Person getPersonById(int personId);
 
     List<Person> getAllPersons();
 

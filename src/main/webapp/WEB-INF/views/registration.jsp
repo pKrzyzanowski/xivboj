@@ -13,7 +13,7 @@
     <fieldset>
 
         <legend>
-            Rejestracja
+            Dane Osoby
         </legend>
         <form:errors path="*" cssClass="alert alert-danger" element="div"/>
 
@@ -62,6 +62,33 @@
             <%--</div>--%>
             <%--</div>--%>
 
+
+
+    </fieldset>
+
+
+    <fieldset>
+
+        <legend>
+            Login I haslo
+        </legend>
+        <form:errors path="*" cssClass="alert alert-danger" element="div"/>
+
+
+        <div class="form-group">
+            <label class="control-label col-lg-2" for="username">Login</label>
+            <div class="col-lg-10">
+                <form:textarea id="username" path="username" rows="2"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-lg-2" for="password">Hasło</label>
+            <div class="col-lg-10">
+                <form:textarea id="password" path="password" rows="2"/>
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
                 <input type="submit" value=<spring:message code="addCompetition.addCompetition"/>>
@@ -69,6 +96,7 @@
         </div>
 
     </fieldset>
+
 </form:form>
 
 

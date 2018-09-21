@@ -26,12 +26,12 @@
             <p>
                 <br>
                 <br>
-                <a href="<spring:url value="/competitions"/>" class="btn btn-primary"> <spring:message
-                        code="person.button.backToCompetitions"/></a>
+                <a href="<spring:url value="/people"/>" class="btn btn-primary"> <spring:message
+                        code="person.button.backToPeople"/></a>
 
         </div>
         <div class="col-md-5">
-            <img src="<c:url value="/resource/images/${person.nameId}.jpg"></c:url> " alt="image" style="width: 300px"/>
+            <img src="<c:url value="/resource/images/persons${person.nameId}.jpg"></c:url> " alt="image" style="width: 300px"/>
         </div>
         </p>
     </div>

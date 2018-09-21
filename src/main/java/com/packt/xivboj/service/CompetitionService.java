@@ -15,7 +15,5 @@ public interface CompetitionService {
     public Competition getCompetitionById(int competitionId);
 
 
-    public void nowa();
-
     public void initializeBasicCompetitions();
 }
