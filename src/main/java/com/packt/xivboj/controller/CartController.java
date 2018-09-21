@@ -1,6 +1,8 @@
 package com.packt.xivboj.controller;
 
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 public class CartController {
     @RequestMapping
     public String get(HttpServletRequest request) {
-        return "redirect:/cart/" + request.getSession(true).getId();
+
+
+        return "redirect:/cart/" +SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
+
     }
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)

@@ -11,6 +11,8 @@ import com.packt.xivboj.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,10 +53,14 @@ public class CartRestController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
 
-        String sessionId = request.getSession(true).getId();
-        Cart cart = cartService.read(sessionId);
+
+        String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
+        String userName = currentPrincipalName+"sCart";
+
+
+        Cart cart = cartService.read(userName);
         if(cart== null) {
-            cart = cartService.create(new Cart(sessionId));
+            cart = cartService.create(new Cart(userName));
         }
 
         Competition competition = competitionService.getCompetitionById(competitionId);
@@ -64,14 +70,18 @@ public class CartRestController {
 
         cart.addCartItem(new CartItemCompe(competition));
 
-        cartService.update(sessionId, cart);
+        cartService.update(userName, cart);
     }
 
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
 
-        String sessionId = request.getSession(true).getId();
+
+        String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
+        String userName = currentPrincipalName+"sCart";
+
+        String sessionId = userName;
         Cart cart = cartService.read(sessionId);
         if(cart== null) {
             cart = cartService.create(new Cart(sessionId));
