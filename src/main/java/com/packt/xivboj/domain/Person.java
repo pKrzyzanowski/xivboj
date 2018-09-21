@@ -3,6 +3,7 @@ package com.packt.xivboj.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @Entity
@@ -20,6 +21,8 @@ public class Person implements Serializable {
     private String password;
     private int enabled = 1;
     private String role = "ROLE_USER";
+    @OneToOne
+    private Cart cart;
 
     public Person(String name, String surname) {
 
@@ -28,6 +31,14 @@ public class Person implements Serializable {
     }
 
     public Person() {
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public String getRole() {

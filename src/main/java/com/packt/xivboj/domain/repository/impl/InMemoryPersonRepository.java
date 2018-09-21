@@ -1,9 +1,13 @@
 package com.packt.xivboj.domain.repository.impl;
 
+import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.PersonRepository;
 import com.packt.xivboj.exception.PersonNotFoundException;
+import com.packt.xivboj.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +24,9 @@ public class InMemoryPersonRepository implements PersonRepository {
 
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    CartService cartService;
 
 //    private List<Person> listOfPersons = new ArrayList<>();
 
@@ -55,9 +62,18 @@ public class InMemoryPersonRepository implements PersonRepository {
 
     @Override
     public void addPerson(Person person) {
+
+
+        Cart cart = new Cart();
+        cart.setCartId(person.getName()+"sCart");
+        person.setCart(cart);
+        cart.setPerson(person);
+        cartService.create(cart);
+
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
         myEntityManager.persist(person);
+        myEntityManager.persist(cart);
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 

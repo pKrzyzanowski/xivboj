@@ -68,7 +68,7 @@ public class CartRestController {
             throw new IllegalArgumentException(new CompetitionNotFoundException(competitionId));
         }
 
-        cart.addCartItem(new CartItemCompe(competition));
+        cart.addCartCompe(competition);
 
         cartService.update(userName, cart);
     }
@@ -92,7 +92,7 @@ public class CartRestController {
             throw new IllegalArgumentException(new CompetitionNotFoundException(competitionId));
         }
 
-        cart.removeCartItem(new CartItemCompe(competition));
+        cart.removeCartCompe(competition);
 
         cartService.update(sessionId, cart);
     }

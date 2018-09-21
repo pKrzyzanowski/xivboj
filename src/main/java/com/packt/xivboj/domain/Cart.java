@@ -1,24 +1,33 @@
 package com.packt.xivboj.domain;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
+@Entity
 public class Cart implements Serializable {
 
 
     private static final long serialVersionUID = -53008677344258065L;
 
+    @Id
     private String cartId;
-
-
-
+    @OneToOne(mappedBy = "cart")
+    private Person person;
+    @Transient
     private Collection<CartItemCompe> allCartItems = new ArrayList<>();
-
-    private Map<String, CartItemCompe> cartItems;
+    @Transient
+    private Map<Integer, Competition> cartCompetitions;
 
     public Cart() {
-        cartItems = new HashMap<String, CartItemCompe>();
+        cartCompetitions = new HashMap<Integer, Competition>();
     }
 
     public Cart(String cartId) {
@@ -26,9 +35,17 @@ public class Cart implements Serializable {
         this.cartId = cartId;
     }
 
-    public Collection<CartItemCompe> getAllCartItems() {
-        return cartItems.values();
+    public Person getPerson() {
+        return person;
     }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+//    public Collection<CartItemCompe> getAllCartItems() {
+//        return cartItems.values();
+//    }
 
     public String getCartId() {
         return cartId;
@@ -38,29 +55,29 @@ public class Cart implements Serializable {
         this.cartId = cartId;
     }
 
-    public Map<String, CartItemCompe> getCartItems() {
-        return cartItems;
+    public Map<Integer, Competition> getCartItems() {
+        return cartCompetitions;
     }
 
-    public void setCartItems(Map<String, CartItemCompe> cartItems) {
-        this.cartItems = cartItems;
+    public void setCartItems(Map<Integer, Competition> cartCompetitions) {
+        this.cartCompetitions = cartCompetitions;
     }
 
-    public void addCartItem(CartItemCompe item) {
-        int competitionId = item.getCompetition().getCompetitionId();
+    public void addCartCompe(Competition item) {
+        int competitionId = item.getCompetitionId();
 
-        if (cartItems.containsKey(competitionId)) {
-            CartItemCompe existingCartItem = cartItems.get(competitionId);
-            cartItems.put(""+competitionId, existingCartItem);
+        if (cartCompetitions.containsKey(competitionId)) {
+            Competition existingCartCompe = cartCompetitions.get(competitionId);
+            cartCompetitions.put(competitionId, existingCartCompe);
         } else {
-            cartItems.put(""+competitionId, item);
+            cartCompetitions.put(competitionId, item);
         }
 
     }
 
-    public void removeCartItem(CartItemCompe cartItemCompe) {
-        int competitionId = cartItemCompe.getCompetition().getCompetitionId();
-        cartItems.remove(competitionId);
+    public void removeCartCompe(Competition cartCompe) {
+        int competitionId = cartCompe.getCompetitionId();
+        cartCompetitions.remove(competitionId);
     }
 
     @Override
