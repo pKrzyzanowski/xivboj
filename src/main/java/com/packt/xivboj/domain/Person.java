@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
@@ -14,7 +15,8 @@ public class Person implements Serializable{
     private static final long serialVersionUID = 2284040482222162898L;
 
     @Id
-    private String nameId;
+    @GeneratedValue
+    private int nameId;
     private String name;
     private String surname;
     private int age;
@@ -24,8 +26,8 @@ public class Person implements Serializable{
 
 
 
-    public Person(String nameId, String name, String surname) {
-        this.nameId = nameId;
+    public Person( String name, String surname) {
+
         this.name = name;
         this.surname = surname;
     }
@@ -33,11 +35,11 @@ public class Person implements Serializable{
     public Person() {
     }
 
-    public String getNameId() {
+    public int getNameId() {
         return nameId;
     }
 
-    public void setNameId(String nameId) {
+    public void setNameId(int nameId) {
         this.nameId = nameId;
     }
 
@@ -74,20 +76,16 @@ public class Person implements Serializable{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (this == null){return false;}
-        if (getClass() != o.getClass()) {
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
             return false;
-        }
-        Person other = (Person) o;
-        if (nameId == null) {
-            if (o != null) {
-                return false;
-            }
-        } else if (!nameId.equals(other.nameId)) {
+        if (getClass() != obj.getClass())
             return false;
-        }
+        Person other = (Person) obj;
+        if (nameId != (other.nameId))
+            return false;
         return true;
     }
 

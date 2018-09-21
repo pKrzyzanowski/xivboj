@@ -12,9 +12,9 @@ public class PersonTest {
     @Test
     public void method_getPersonId_should_return_not_null_is_such_id_exists() {
 
-        Person person = new Person("P1", "Patryk", "Kruk");
+        Person person = new Person( "Patryk", "Kruk");
 
-        String id = person.getNameId();
+        int id = person.getNameId();
 
         Assert.assertEquals(id, "P1");
     }

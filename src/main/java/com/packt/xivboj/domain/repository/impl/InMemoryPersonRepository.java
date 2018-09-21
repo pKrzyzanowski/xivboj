@@ -27,20 +27,20 @@ public class InMemoryPersonRepository implements PersonRepository {
 //    }
 
     @PersistenceUnit
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
     private List<Person> listOfPersons = new ArrayList<>();
 
     public InMemoryPersonRepository() {
-        Person jedrzej = new Person("J1", "Jedrzej", "Menkina");
+        Person jedrzej = new Person("Jedrzej", "Menkina");
         jedrzej.setDescription("Mistrz ostatniego czternastoboju");
         jedrzej.setAge(23);
 
-        Person dominik = new Person("D1", "Dominik ", "Rabalski");
+        Person dominik = new Person( "Dominik ", "Rabalski");
         dominik.setDescription("Ostatnio prawie przegral");
         dominik.setAge(23);
 
-        Person kuba = new Person("K1", "Jakub", "Weltrowski");
+        Person kuba = new Person( "Jakub", "Weltrowski");
         kuba.setDescription("W ostatnim konkursie byl na podium");
         kuba.setAge(22);
 

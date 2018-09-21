@@ -129,7 +129,7 @@ public class Competition implements Serializable {
 
     @Override
     public String toString() {
-        return "Produkt [productId=" + competitionId + ", nazwa=" + name + "]";
+        return "Konkurencja [comeptitionId=" + competitionId + ", nazwa=" + name + "]";
     }
 
 
