@@ -7,9 +7,7 @@ import com.packt.xivboj.domain.repository.PersonRepository;
 import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,11 +20,10 @@ import java.util.List;
 @Repository
 public class InMemoryPersonRepository implements PersonRepository {
 
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
-
     @Autowired
     CartService cartService;
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory;
 
 //    private List<Person> listOfPersons = new ArrayList<>();
 
@@ -65,15 +62,25 @@ public class InMemoryPersonRepository implements PersonRepository {
 
 
         Cart cart = new Cart();
-        cart.setCartId(person.getName()+"sCart");
+        cart.setCartId(person.getName() + "sCart");
         person.setCart(cart);
         cart.setPerson(person);
         cartService.create(cart);
+
+//---------------- ten fragment dziala------------ jak dodac konkurencje do karty gdy karta jest juz dodana?
+        List<Competition> competitionList = new ArrayList<>();
+        Competition competition = new Competition();
+        competition.setName("lody");
+        competitionList.add(competition);
+        cart.setAllCartCompe(competitionList);
+//-------------------------------------
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
         myEntityManager.persist(person);
         myEntityManager.persist(cart);
+        myEntityManager.persist(competition);
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
