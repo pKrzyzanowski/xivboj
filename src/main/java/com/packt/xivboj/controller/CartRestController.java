@@ -84,8 +84,8 @@ public class CartRestController {
 
 
 
-//        myEntityManager.refresh(cart);
-//        myEntityManager.refresh(competition);
+        myEntityManager.merge(cart);
+        myEntityManager.merge(competition);
         myEntityManager.getTransaction().commit();
 
         cartService.update(userName, cart);

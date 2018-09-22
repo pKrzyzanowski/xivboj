@@ -68,18 +68,18 @@ public class InMemoryPersonRepository implements PersonRepository {
         cartService.create(cart);
 
 //---------------- ten fragment dziala------------ jak dodac konkurencje do karty gdy karta jest juz dodana?
-        List<Competition> competitionList = new ArrayList<>();
-        Competition competition = new Competition();
-        competition.setName("lody");
-        competitionList.add(competition);
-        cart.setAllCartCompe(competitionList);
+//        List<Competition> competitionList = new ArrayList<>();
+//        Competition competition = new Competition();
+//        competition.setName("lody");
+//        competitionList.add(competition);
+//        cart.setAllCartCompe(competitionList);
 //-------------------------------------
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
         myEntityManager.persist(person);
         myEntityManager.persist(cart);
-        myEntityManager.persist(competition);
+//        myEntityManager.persist(competition);
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
