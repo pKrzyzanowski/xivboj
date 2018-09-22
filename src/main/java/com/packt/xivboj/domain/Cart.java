@@ -1,10 +1,7 @@
 package com.packt.xivboj.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +16,7 @@ public class Cart implements Serializable {
 
     @Id
     private String cartId;
-    @OneToOne(mappedBy = "cart")
+    @OneToOne
     private Person person;
 
     //    private Collection<CartItemCompe> allCartItems = new ArrayList<>();
