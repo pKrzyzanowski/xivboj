@@ -5,11 +5,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "competition")
 @Table(name = "competition")
@@ -17,40 +16,40 @@ import java.io.Serializable;
 public class Competition implements Serializable {
     private static final long serialVersionUID = -538766763684258062L;
 
-
-
+    @ManyToMany
+    List<Person> personList;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int competitionId;
-
     //    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")
     @Column(name = "name")
     private String name;
-
     @Column(name = "rules")
     private String rules;
-
-
     @Column(name = "preferedTime")
     private int preferedTime;
-
     @Column(name = "path")
     private String path;
-
     private Person author;
     @JsonIgnore
 
     @Transient
     private MultipartFile competitionImage;
 
-
     public Competition() {
         super();
     }
-
-    public Competition( int competitionId, String name) {
+    public Competition(int competitionId, String name) {
         this.competitionId = competitionId;
         this.name = name;
+    }
+
+    public List<Person> getPersonList() {
+        return personList;
+    }
+
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
     }
 
     public int getCompetitionId() {
@@ -112,7 +111,7 @@ public class Competition implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Competition other = (Competition) obj;
- if (competitionId != (other.competitionId))
+        if (competitionId != (other.competitionId))
             return false;
         return true;
     }

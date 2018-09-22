@@ -51,9 +51,7 @@
                                         class="glyphicon glyphicon-remove"></span> <spring:message
                                         code="cart.backOffVote"/>
                                 </a>
-
                             </div>
-
                         </div>
                     </div>
                 </td>
@@ -73,6 +71,11 @@
         <a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
                 class="btn btn-success btn-right"></span> <spring:message code="cart.vote"/>
         </a>
+
+        <a href="<spring:url value="/competitions/vote"/>" class="btn btn-success pull-right"> <span
+                class="btn btn-success btn-right"></span>oddaj glosy
+        </a>
+
 
     </div>
 </section>

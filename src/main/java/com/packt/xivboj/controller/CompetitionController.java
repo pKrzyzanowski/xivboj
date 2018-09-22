@@ -1,7 +1,9 @@
 package com.packt.xivboj.controller;
 
 
+import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Competition;
+import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,9 +17,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 
 @Controller
@@ -27,6 +36,8 @@ public class CompetitionController {
     @Autowired
     CompetitionService competitionService;
 
+    @PersistenceUnit
+    EntityManagerFactory entityManagerFactory;
 
     @RequestMapping
     public String list(Model model) {
@@ -43,6 +54,45 @@ public class CompetitionController {
         Competition newCompetition = new Competition();
         model.addAttribute("newCompetition", newCompetition);
         return "addCompetition";
+    }
+
+    @RequestMapping(value = "/vote", method = RequestMethod.GET)
+    public String voteForCompetitions(Model model) {
+
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+
+
+        String query = "SELECT * FROM person where username =\"" +currentPrincipalName+ "\"";
+        Query nativeQuery = myEntityManager.createNativeQuery(query , Person.class);
+        Person currentUser =(Person) nativeQuery.getSingleResult();
+        int currentUserId = currentUser.getNameId();
+
+        query = "SELECT * FROM cart where person_nameId =" +currentUserId;
+        Query nativeQuery2 = myEntityManager.createNativeQuery(query , Cart.class);
+        Cart currentUsersCart = (Cart) nativeQuery2.getSingleResult();
+        String currentUsersCartId = currentUsersCart.getCartId();
+
+
+        List<Competition> competitions = new ArrayList<Competition>();
+        // pobranie kart z uzytkownika
+        // competitions = pobranie wielu konkurencji z karty
+        //przypisanie uzytkownikowi konkurencji
+        competitions = currentUser.getCompetitionList();
+        Collection<Competition> newCompetitions = new ArrayList<Competition>();
+        newCompetitions = currentUsersCart.getAllCartCompe();
+//        competitions.add(newCompetitions);
+//        currentUser.setCompetitionList();
+
+
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
+
+
+
+        return "cart";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -78,4 +128,3 @@ public class CompetitionController {
         return "competition";
     }
 }
-// sprawdzic czy bez tego persistence zapisuje normalnie do bazy

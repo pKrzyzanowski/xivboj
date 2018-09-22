@@ -3,10 +3,7 @@ package com.packt.xivboj.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 public class Cart implements Serializable {
@@ -14,25 +11,33 @@ public class Cart implements Serializable {
 
     private static final long serialVersionUID = -53008677344258065L;
 
+
     @Id
     private String cartId;
     @OneToOne
     private Person person;
-
     //    private Collection<CartItemCompe> allCartItems = new ArrayList<>();
-    @Transient
-    private Collection<Competition> allCartCompe = new ArrayList<>();
+
+
+    @OneToMany
+    private List<Competition> allCartCompe = new ArrayList<>();
+
     @Transient
     private Map<Integer, Competition> cartCompetitions;
-
-
     public Cart() {
         cartCompetitions = new HashMap<Integer, Competition>();
     }
-
     public Cart(String cartId) {
         this();
         this.cartId = cartId;
+    }
+
+    public Map<Integer, Competition> getCartCompetitions() {
+        return cartCompetitions;
+    }
+
+    public void setCartCompetitions(Map<Integer, Competition> cartCompetitions) {
+        this.cartCompetitions = cartCompetitions;
     }
 
     public Person getPerson() {
@@ -43,8 +48,13 @@ public class Cart implements Serializable {
         this.person = person;
     }
 
-    public Collection<Competition> getAllCartCompe() {
-        return cartCompetitions.values();
+    public List<Competition> getAllCartCompe() {
+        List<Competition> competitionList = new ArrayList<>(cartCompetitions.values());
+        return competitionList;
+    }
+
+    public void setAllCartCompe(List<Competition> allCartCompe) {
+        this.allCartCompe = allCartCompe;
     }
 
     public String getCartId() {

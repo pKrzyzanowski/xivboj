@@ -2,11 +2,14 @@ package com.packt.xivboj.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Person implements Serializable {
     private static final long serialVersionUID = 2284040482222162898L;
 
+    @ManyToMany(mappedBy = "personList")
+    List<Competition> competitionList;
     @Id
     @GeneratedValue
     private int nameId;
@@ -18,7 +21,6 @@ public class Person implements Serializable {
     private String password;
     private int enabled = 1;
     private String role = "ROLE_USER";
-
     @OneToOne(mappedBy = "person")
     private Cart cart;
 
@@ -29,6 +31,14 @@ public class Person implements Serializable {
     }
 
     public Person() {
+    }
+
+    public List<Competition> getCompetitionList() {
+        return competitionList;
+    }
+
+    public void setCompetitionList(List<Competition> competitionList) {
+        this.competitionList = competitionList;
     }
 
     public Cart getCart() {
