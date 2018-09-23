@@ -85,7 +85,7 @@ public class CartRestController {
         myEntityManager.merge(cart);
         myEntityManager.merge(competition);
         myEntityManager.getTransaction().commit();
-
+// jest setAllCartCompet i widnieja  w niej wartosci to dlaczego nie nie mozna ich przekazac do cart.jsp?
         cartService.update(cart);
     }
 
