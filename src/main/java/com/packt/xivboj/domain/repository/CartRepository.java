@@ -6,14 +6,15 @@ import com.packt.xivboj.domain.Competition;
 import java.util.List;
 
 public interface CartRepository {
+
     Cart create(Cart cart);
 
     Cart read(String cartId);
 
-    void update(String cartId, Cart cart);
+    void update(Cart cart);
 
     void delete(String cartId);
 
-    public List<Competition> getAllCompetitionsbyCartsId(String cartId);
+    List<Competition> getAllCompetitionsbyCartsId(String cartId);
 
 }

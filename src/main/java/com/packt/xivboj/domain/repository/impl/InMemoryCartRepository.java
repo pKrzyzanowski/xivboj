@@ -6,10 +6,7 @@ import com.packt.xivboj.domain.repository.CartRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +14,12 @@ import java.util.List;
 @Repository
 public class InMemoryCartRepository implements CartRepository {
 
-    final String QueryString = "SELECT allCartCompe_competitionId FROM cart_competition";
     @PersistenceUnit
     EntityManagerFactory entityManagerFactory;
-
 
     public InMemoryCartRepository() {
     }
 
-    @Transactional
     public Cart create(Cart cart) {
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
@@ -54,8 +48,7 @@ public class InMemoryCartRepository implements CartRepository {
         return CartById;
     }
 
-
-    public void update(String cartId, Cart cart) {
+    public void update( Cart cart) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
@@ -79,12 +72,16 @@ public class InMemoryCartRepository implements CartRepository {
     }
 
     public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
-
-
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
-        TypedQuery<Integer> nativeQuery = myEntityManager.createQuery("SELECT e.allCartCompe_competitionId  FROM as e", Integer.class);
+
+//        TypedQuery<Integer> nativeQuery = myEntityManager.createQuery("SELECT e.allCartCompe_competitionId  FROM  e where e.Cart_cartId ="+cartId, Integer.class);
+//        List<Integer> resultList = nativeQuery.getResultList();
+//
+       String query= "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " +"\""+cartId+"\"";
+        Query nativeQuery = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " +"\"cartId\"");
         List<Integer> resultList = nativeQuery.getResultList();
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 

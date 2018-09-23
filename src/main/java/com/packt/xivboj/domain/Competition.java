@@ -30,6 +30,8 @@ public class Competition implements Serializable {
     private int preferedTime;
     @Column(name = "path")
     private String path;
+
+    @Transient
     private Person author;
     @JsonIgnore
 

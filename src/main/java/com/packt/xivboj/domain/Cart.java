@@ -9,6 +9,7 @@ import java.util.*;
 public class Cart implements Serializable {
 
 
+
     private static final long serialVersionUID = -53008677344258065L;
 
 
@@ -20,6 +21,7 @@ public class Cart implements Serializable {
 
 
     @OneToMany
+    @JoinTable(name = "CartCompetition")
     private List<Competition> allCartCompe = new ArrayList<>();
 
     @Transient
@@ -73,15 +75,26 @@ public class Cart implements Serializable {
         this.cartCompetitions = cartCompetitions;
     }
 
-    public void addCartCompe(Competition item) {
-        int competitionId = item.getCompetitionId();
+    public void addCartCompe(Competition competition) {
+        int competitionId = competition.getCompetitionId();
 
-        if (cartCompetitions.containsKey(competitionId)) {
-            Competition existingCartCompe = cartCompetitions.get(competitionId);
-            cartCompetitions.put(competitionId, existingCartCompe);
-        } else {
-            cartCompetitions.put(competitionId, item);
-        }
+//        if (cartCompetitions.containsKey(competitionId)) {
+//            Competition existingCartCompe = cartCompetitions.get(competitionId);
+//            cartCompetitions.put(competitionId, existingCartCompe);
+//        } else {
+//            cartCompetitions.put(competitionId, item);
+//        }
+
+//        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+//        myEntityManager.getTransaction().begin();
+//
+//
+//
+//
+//        myEntityManager.getTransaction().commit();
+//        myEntityManager.close();
+
+
 
     }
 

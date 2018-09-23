@@ -28,8 +28,8 @@ public class CartServiceImpl implements CartService {
     }
 
 
-    public void update(String cartId, Cart cart) {
-        cartRepository.update(cartId, cart);
+    public void update(Cart cart) {
+        cartRepository.update(cart);
     }
 
 

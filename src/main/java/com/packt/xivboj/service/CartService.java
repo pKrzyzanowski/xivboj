@@ -10,11 +10,11 @@ public interface CartService {
 
     Cart read(String cartId);
 
-    void update(String cartId, Cart cart);
+    void update(Cart cart);
 
     void delete(String cartId);
 
     Cart validate(String cartId);
 
-    public List<Competition> getAllCompetitionsbyCartsId(String cartId);
+     List<Competition> getAllCompetitionsbyCartsId(String cartId);
 }

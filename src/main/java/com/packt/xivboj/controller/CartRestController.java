@@ -43,7 +43,7 @@ public class CartRestController {
     @RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@PathVariable(value = "cartId") String cartId, @RequestBody Cart cart) {
-        cartService.update(cartId, cart);
+        cartService.update(cart);
     }
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
@@ -55,7 +55,6 @@ public class CartRestController {
     @RequestMapping(value = "/add/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
-
 
         String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
         String userName = currentPrincipalName + "sCart";
@@ -73,25 +72,22 @@ public class CartRestController {
 
 //        cart.addCartCompe(competition);
 
-
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
-
-
         String cartId = cart.getCartId();
-        List<Competition> cartCompetitions = cart.getAllCartCompe();
+
+        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
 //        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
+
         cartCompetitions.add(competition);
         cart.setAllCartCompe(cartCompetitions);
-
-
 
         myEntityManager.merge(cart);
         myEntityManager.merge(competition);
         myEntityManager.getTransaction().commit();
 
-        cartService.update(userName, cart);
+//        cartService.update(cart);
     }
 
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
@@ -115,7 +111,7 @@ public class CartRestController {
 
         cart.removeCartCompe(competition);
 
-        cartService.update(sessionId, cart);
+        cartService.update(cart);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
