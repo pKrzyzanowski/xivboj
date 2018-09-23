@@ -4,9 +4,11 @@ import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.repository.CartRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class InMemoryCartRepository implements CartRepository {
         return CartById;
     }
 
-    public void update( Cart cart) {
+    public void update(Cart cart) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
@@ -75,17 +77,22 @@ public class InMemoryCartRepository implements CartRepository {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
-//        TypedQuery<Integer> nativeQuery = myEntityManager.createQuery("SELECT e.allCartCompe_competitionId  FROM  e where e.Cart_cartId ="+cartId, Integer.class);
-//        List<Integer> resultList = nativeQuery.getResultList();
-//
-       String query= "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " +"\""+cartId+"\"";
-        Query nativeQuery = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " +"\"cartId\"");
+        String query = "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " + "\"" + cartId + "\"";
+        Query nativeQuery = myEntityManager.createNativeQuery(query);
         List<Integer> resultList = nativeQuery.getResultList();
 
+        List<Competition> competitions = new ArrayList<>();
+
+        for (Integer integer : resultList) {
+
+
+            Query findCompetitionById = myEntityManager.createNativeQuery("SELECT * FROM competition WHERE competitionId =" + integer, Competition.class);
+            Competition competition = (Competition) findCompetitionById.getSingleResult();
+            competitions.add(competition);
+        }
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
-        List<Competition> competitions = new ArrayList<>();
 
         return competitions;
 
