@@ -80,21 +80,22 @@ public class InMemoryCartRepository implements CartRepository {
 
     public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
         List<Competition> competitions = new ArrayList<>();
-
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
         String query = "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " + "\"" + cartId + "\"";
         Query nativeQuery = myEntityManager.createNativeQuery(query);
         List<Integer> resultList = nativeQuery.getResultList();
+
+
         for (Integer competitionId : resultList) {
             competitions.add(competitionService.getCompetitionById(competitionId));
         }
-
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
 
         return competitions;
+
     }
 }
