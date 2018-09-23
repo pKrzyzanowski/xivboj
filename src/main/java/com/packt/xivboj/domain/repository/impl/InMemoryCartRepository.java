@@ -3,6 +3,8 @@ package com.packt.xivboj.domain.repository.impl;
 import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.repository.CartRepository;
+import com.packt.xivboj.service.CompetitionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,6 +20,9 @@ public class InMemoryCartRepository implements CartRepository {
 
     @PersistenceUnit
     EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    CompetitionService competitionService;
 
     public InMemoryCartRepository() {
     }
@@ -74,27 +79,22 @@ public class InMemoryCartRepository implements CartRepository {
     }
 
     public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
+        List<Competition> competitions = new ArrayList<>();
+
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
         String query = "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " + "\"" + cartId + "\"";
         Query nativeQuery = myEntityManager.createNativeQuery(query);
         List<Integer> resultList = nativeQuery.getResultList();
-
-        List<Competition> competitions = new ArrayList<>();
-
-        for (Integer integer : resultList) {
-
-
-            Query findCompetitionById = myEntityManager.createNativeQuery("SELECT * FROM competition WHERE competitionId =" + integer, Competition.class);
-            Competition competition = (Competition) findCompetitionById.getSingleResult();
-            competitions.add(competition);
+        for (Integer competitionId : resultList) {
+            competitions.add(competitionService.getCompetitionById(competitionId));
         }
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
 
         return competitions;
-
     }
 }
