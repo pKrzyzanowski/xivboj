@@ -1,12 +1,15 @@
 package com.packt.xivboj.service.impl;
 
 import com.packt.xivboj.domain.Cart;
+import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.repository.CartRepository;
 import com.packt.xivboj.exception.InvalidCartException;
 import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class CartServiceImpl implements CartService {
@@ -42,5 +45,9 @@ public class CartServiceImpl implements CartService {
 
         }
         return cart;
+    }
+
+    public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
+        return cartRepository.getAllCompetitionsbyCartsId(cartId);
     }
 }

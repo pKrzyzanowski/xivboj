@@ -8,6 +8,7 @@ import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,8 +25,6 @@ public class InMemoryPersonRepository implements PersonRepository {
     CartService cartService;
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
-
-//    private List<Person> listOfPersons = new ArrayList<>();
 
     public InMemoryPersonRepository() {
 
@@ -58,31 +57,26 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
+    @Transactional
     public void addPerson(Person person) {
 
 
+
+
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
+
+        myEntityManager.persist(person);
+
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
+
+        //wraz z nowa osba tworzy sie nowa karta
         Cart cart = new Cart();
         cart.setCartId(person.getName() + "sCart");
         person.setCart(cart);
         cart.setPerson(person);
         cartService.create(cart);
-
-//---------------- ten fragment dziala------------ jak dodac konkurencje do karty gdy karta jest juz dodana?
-//        List<Competition> competitionList = new ArrayList<>();
-//        Competition competition = new Competition();
-//        competition.setName("lody");
-//        competitionList.add(competition);
-//        cart.setAllCartCompe(competitionList);
-//-------------------------------------
-
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-        myEntityManager.persist(person);
-        myEntityManager.persist(cart);
-//        myEntityManager.persist(competition);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
 
     }
 }

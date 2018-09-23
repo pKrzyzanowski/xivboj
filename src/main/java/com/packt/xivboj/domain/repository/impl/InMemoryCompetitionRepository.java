@@ -47,7 +47,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         myEntityManager.getTransaction().begin();
         myEntityManager.persist(competition);
         myEntityManager.getTransaction().commit();
-//        competitionList.add(competition);
         myEntityManager.close();
     }
 

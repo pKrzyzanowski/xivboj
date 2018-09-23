@@ -78,7 +78,10 @@ public class CartRestController {
         myEntityManager.getTransaction().begin();
 
 
+
+        String cartId = cart.getCartId();
         List<Competition> cartCompetitions = cart.getAllCartCompe();
+//        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
         cartCompetitions.add(competition);
         cart.setAllCartCompe(cartCompetitions);
 
@@ -120,9 +123,9 @@ public class CartRestController {
     public void handleClientErrors(Exception ex) {
     }
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Wewnêtrzny b³¹d serwera")
-    public void handleServerErrors(Exception ex) {
-        System.out.println("okukubanbo");
-    }
+//    @ExceptionHandler(Exception.class)
+//    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Wewnêtrzny b³¹d serwera")
+//    public void handleServerErrors(Exception ex) {
+//        System.out.println("serwer error");
+//    }
 }
