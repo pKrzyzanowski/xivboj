@@ -33,24 +33,27 @@ public class InMemoryPersonRepository implements PersonRepository {
     @Override
 
     public Person getPersonById(int personId) {
-        Person personById = null;
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
-        personById = myEntityManager.find(Person.class, personId);
+
+        Person personById = myEntityManager.find(Person.class, personId);
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
-        if (personById == null) {
-            throw new PersonNotFoundException(personId);
-        }
         return personById;
+//        if (personById == null) {
+//            throw new PersonNotFoundException(personId);
+//        }
     }
 
     @Override
     public List<Person> getAllPersons() {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
+
         Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person", Person.class);
         List<Person> resultList = nativeQuery.getResultList();
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
         return resultList;
@@ -59,10 +62,6 @@ public class InMemoryPersonRepository implements PersonRepository {
     @Override
     @Transactional
     public void addPerson(Person person) {
-
-
-
-
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 

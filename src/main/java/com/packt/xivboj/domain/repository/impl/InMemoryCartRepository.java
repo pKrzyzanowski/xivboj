@@ -46,7 +46,9 @@ public class InMemoryCartRepository implements CartRepository {
     public Cart read(String cartId) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
+
         Cart CartById = myEntityManager.find(Cart.class, cartId);
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
         return CartById;
@@ -56,13 +58,16 @@ public class InMemoryCartRepository implements CartRepository {
     public void update(String cartId, Cart cart) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
-//        if (!listOfCarts.keySet().contains(cartId)) {
-//            throw new IllegalArgumentException("takiego koszyka nie ma");
-//        }
+
         myEntityManager.merge(cart);
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
-//        listOfCarts.put(cartId, cart);
+
+        //        if (!listOfCarts.keySet().contains(cartId)) {
+//            throw new IllegalArgumentException("takiego koszyka nie ma");
+//        }
+
     }
 
 

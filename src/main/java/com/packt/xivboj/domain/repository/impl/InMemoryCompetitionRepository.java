@@ -20,8 +20,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     @PersistenceUnit
     EntityManagerFactory entityManagerFactory;
 
-//    private List<Competition> competitionList = new ArrayList<>();
-
     public InMemoryCompetitionRepository() {
     }
 
@@ -30,8 +28,10 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     public List<Competition> getAllCompetitions() {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
+
         Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM competition", Competition.class);
         List<Competition> resultList = nativeQuery.getResultList();
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
         return resultList;
@@ -45,7 +45,9 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     public void addCompetition(Competition competition) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
+
         myEntityManager.persist(competition);
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
     }
@@ -63,9 +65,11 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     public Competition getCompetitionById(int competitionId) {
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        Competition competitionById = null;
         myEntityManager.getTransaction().begin();
+
+        Competition competitionById = null;
         competitionById = myEntityManager.find(Competition.class, competitionId);
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
@@ -73,7 +77,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
             throw new CompetitionNotFoundException(competitionId);
         }
         return competitionById;
-
     }
 
 
