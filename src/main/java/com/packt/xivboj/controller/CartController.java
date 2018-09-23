@@ -16,10 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CartController {
     @RequestMapping
     public String get(HttpServletRequest request) {
-
-
         return "redirect:/cart/" +SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
-
     }
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)

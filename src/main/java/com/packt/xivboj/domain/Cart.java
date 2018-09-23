@@ -1,16 +1,25 @@
 package com.packt.xivboj.domain;
 
 
+import com.packt.xivboj.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Cart implements Serializable {
 
 
-
     private static final long serialVersionUID = -53008677344258065L;
+
+    @Autowired
+    @Transient
+    CartService cartService;
 
 
     @Id
@@ -22,13 +31,16 @@ public class Cart implements Serializable {
 
     @OneToMany
     @JoinTable(name = "CartCompetition")
+//    private List<Competition> allCartCompe =
     private List<Competition> allCartCompe = new ArrayList<>();
 
     @Transient
     private Map<Integer, Competition> cartCompetitions;
+
     public Cart() {
         cartCompetitions = new HashMap<Integer, Competition>();
     }
+
     public Cart(String cartId) {
         this();
         this.cartId = cartId;
@@ -51,7 +63,9 @@ public class Cart implements Serializable {
     }
 
     public List<Competition> getAllCartCompe() {
-        List<Competition> competitionList = new ArrayList<>(cartCompetitions.values());
+
+        List<Competition> competitionList = cartService.getAllCompetitionsbyCartsId(getCartId());
+//        List<Competition> competitionList = new ArrayList<>(cartCompetitions.values());
         return competitionList;
     }
 
@@ -93,7 +107,6 @@ public class Cart implements Serializable {
 //
 //        myEntityManager.getTransaction().commit();
 //        myEntityManager.close();
-
 
 
     }

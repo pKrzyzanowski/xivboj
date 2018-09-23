@@ -78,7 +78,6 @@ public class CartRestController {
         String cartId = cart.getCartId();
 
         List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
-//        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
 
         cartCompetitions.add(competition);
         cart.setAllCartCompe(cartCompetitions);
@@ -87,7 +86,7 @@ public class CartRestController {
         myEntityManager.merge(competition);
         myEntityManager.getTransaction().commit();
 
-//        cartService.update(cart);
+        cartService.update(cart);
     }
 
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
