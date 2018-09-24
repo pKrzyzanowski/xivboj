@@ -54,7 +54,7 @@ public class InMemoryCartRepository implements CartRepository {
     @Transactional
     public Cart read(String cartId) {
 
-         cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
+        cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -84,8 +84,10 @@ public class InMemoryCartRepository implements CartRepository {
 //        myEntityManager = entityManagerFactory.createEntityManager();
 //        myEntityManager.getTransaction().begin();
         //        // tutaj ustawic karcie konkurencje
-        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
-        CartById.setAllCartCompe(cartCompetitions);
+
+
+//        List<Competition> cartCompetitions = CartById.getAllCartCompe();
+//        CartById.setAllCartCompe(cartCompetitions);
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
@@ -125,25 +127,25 @@ public class InMemoryCartRepository implements CartRepository {
 //        listOfCarts.remove(cartId);
     }
 
-    @Transactional
-    public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
-        List<Competition> competitions = new ArrayList<>();
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        String query = "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " + "\"" + cartId + "\"";
-        Query nativeQuery = myEntityManager.createNativeQuery(query);
-        List<Integer> resultList = nativeQuery.getResultList();
-
-
-        for (Integer competitionId : resultList) {
-            competitions.add(competitionService.getCompetitionById(competitionId));
-        }
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-
-
-        return competitions;
-
-    }
+//    @Transactional
+//    public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
+//        List<Competition> competitions = new ArrayList<>();
+//        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+//        myEntityManager.getTransaction().begin();
+//
+//        String query = "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " + "\"" + cartId + "\"";
+//        Query nativeQuery = myEntityManager.createNativeQuery(query);
+//        List<Integer> resultList = nativeQuery.getResultList();
+//
+//
+//        for (Integer competitionId : resultList) {
+//            competitions.add(competitionService.getCompetitionById(competitionId));
+//        }
+//        myEntityManager.getTransaction().commit();
+//        myEntityManager.close();
+//
+//
+//        return competitions;
+//
+//    }
 }

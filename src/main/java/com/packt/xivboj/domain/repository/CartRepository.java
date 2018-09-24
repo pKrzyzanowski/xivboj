@@ -15,6 +15,6 @@ public interface CartRepository {
 
     void delete(String cartId);
 
-    List<Competition> getAllCompetitionsbyCartsId(String cartId);
+//    List<Competition> getAllCompetitionsbyCartsId(String cartId);
 
 }

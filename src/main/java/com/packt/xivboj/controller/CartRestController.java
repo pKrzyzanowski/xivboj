@@ -83,7 +83,7 @@ public class CartRestController {
 
         String cartId = cart.getCartId();
 
-        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
+        List<Competition> cartCompetitions = cart.getAllCartCompe();
         cartCompetitions.add(competition);
         cart.setAllCartCompe(cartCompetitions);
 

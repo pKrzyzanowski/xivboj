@@ -47,7 +47,7 @@ public class CartServiceImpl implements CartService {
         return cart;
     }
 
-    public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
-        return cartRepository.getAllCompetitionsbyCartsId(cartId);
-    }
+//    public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
+//        return cartRepository.getAllCompetitionsbyCartsId(cartId);
+//    }
 }

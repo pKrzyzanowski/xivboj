@@ -34,8 +34,8 @@ public class CartController {
         Cart cart = cartService.read(cartId);
 
         // tutaj ustawic karcie konkurencje
-        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
-        cart.setAllCartCompe(cartCompetitions);
+//        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
+//        cart.setAllCartCompe(cartCompetitions);
 
         model.addAttribute("cart",cart );
         return "cart";

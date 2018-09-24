@@ -30,7 +30,7 @@ public class Cart implements Serializable {
     //    private Collection<CartItemCompe> allCartItems = new ArrayList<>();
 
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "CartCompetition")
 //    private List<Competition> allCartCompe =
     private List<Competition> allCartCompe = new ArrayList<>();

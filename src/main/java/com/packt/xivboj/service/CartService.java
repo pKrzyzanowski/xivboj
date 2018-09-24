@@ -16,5 +16,5 @@ public interface CartService {
 
     Cart validate(String cartId);
 
-     List<Competition> getAllCompetitionsbyCartsId(String cartId);
+//     List<Competition> getAllCompetitionsbyCartsId(String cartId);
 }
