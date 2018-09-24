@@ -51,7 +51,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
     }
-
+    @Transactional
     @Override
     public void removeCompetition(int competitionId) {
 //        if (!competitionList.contains(getCompetitionById(competitionId))) {

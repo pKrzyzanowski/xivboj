@@ -8,6 +8,7 @@ import com.packt.xivboj.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -28,30 +29,37 @@ public class CartRestController {
     @Autowired
     private CompetitionService competitionService;
 
+    @Transactional
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
     Cart create(@RequestBody Cart cart) {
         return cartService.create(cart);
     }
 
+    @Transactional
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public @ResponseBody
     Cart read(@PathVariable(value = "cartId") String cartId) {
-        return cartService.read(cartId);
+
+        Cart cart = cartService.read(cartId);
+        return cart;
     }
 
+    @Transactional
     @RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@PathVariable(value = "cartId") String cartId, @RequestBody Cart cart) {
         cartService.update(cart);
     }
 
+    @Transactional
     @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "cartId") String cartId) {
         cartService.delete(cartId);
     }
 
+    @Transactional
     @RequestMapping(value = "/add/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
@@ -72,23 +80,25 @@ public class CartRestController {
 
 //        cart.addCartCompe(competition);
 
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
 
         String cartId = cart.getCartId();
 
         List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
-
         cartCompetitions.add(competition);
         cart.setAllCartCompe(cartCompetitions);
 
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
         myEntityManager.merge(cart);
         myEntityManager.merge(competition);
         myEntityManager.getTransaction().commit();
+        myEntityManager.close();
+
 // jest setAllCartCompet i widnieja  w niej wartosci to dlaczego nie nie mozna ich przekazac do cart.jsp?
         cartService.update(cart);
     }
 
+    @Transactional
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {

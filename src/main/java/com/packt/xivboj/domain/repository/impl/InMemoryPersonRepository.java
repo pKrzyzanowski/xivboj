@@ -31,7 +31,7 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-
+    @Transactional
     public Person getPersonById(int personId) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -45,7 +45,7 @@ public class InMemoryPersonRepository implements PersonRepository {
 //            throw new PersonNotFoundException(personId);
 //        }
     }
-
+    @Transactional
     @Override
     public List<Person> getAllPersons() {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();

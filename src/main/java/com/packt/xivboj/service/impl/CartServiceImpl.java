@@ -40,7 +40,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart validate(String cartId) {
         Cart cart = cartRepository.read(cartId);
-        if (cart == null || cart.getCartItems().size() == 0) {
+        if (cart == null || cart.getAllCartCompe().size() == 0) {
             throw new InvalidCartException(cartId);
 
         }

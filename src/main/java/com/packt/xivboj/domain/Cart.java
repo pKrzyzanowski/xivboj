@@ -3,6 +3,7 @@ package com.packt.xivboj.domain;
 
 import com.packt.xivboj.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -62,13 +63,11 @@ public class Cart implements Serializable {
         this.person = person;
     }
 
+    @Transactional
     public List<Competition> getAllCartCompe() {
-
-        List<Competition> competitionList = cartService.getAllCompetitionsbyCartsId(getCartId());
-//        List<Competition> competitionList = new ArrayList<>(cartCompetitions.values());
-        return competitionList;
+        return allCartCompe;
     }
-
+    @Transactional
     public void setAllCartCompe(List<Competition> allCartCompe) {
         this.allCartCompe = allCartCompe;
     }
