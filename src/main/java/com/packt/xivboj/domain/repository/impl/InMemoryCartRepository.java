@@ -77,16 +77,15 @@ public class InMemoryCartRepository implements CartRepository {
             myEntityManager.merge(person);
 
         }
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-
-
-        myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
+//        myEntityManager.getTransaction().commit();
+//        myEntityManager.close();
+//
+//
+//        myEntityManager = entityManagerFactory.createEntityManager();
+//        myEntityManager.getTransaction().begin();
         //        // tutaj ustawic karcie konkurencje
         List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
         CartById.setAllCartCompe(cartCompetitions);
-
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
