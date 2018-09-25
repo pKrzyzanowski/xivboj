@@ -2,6 +2,8 @@ package com.packt.xivboj.domain;
 
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -13,10 +15,11 @@ import java.util.List;
 @Entity(name = "competition")
 @Table(name = "competition")
 @XmlRootElement
-public class Competition implements Serializable {
+public class Competition implements Serializable,Comparable {
     private static final long serialVersionUID = -538766763684258062L;
 
     @ManyToMany(mappedBy = "competitionList")
+    @LazyCollection(LazyCollectionOption.FALSE)
     List<Person> personList;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -135,4 +138,12 @@ public class Competition implements Serializable {
     }
 
 
+    @Override
+    public int compareTo(Object compareObj) {
+        int compareQuantityOfVoices=((Competition)compareObj).getPersonList().size();
+
+        return compareQuantityOfVoices-this.getPersonList().size();
+
+
+    }
 }
