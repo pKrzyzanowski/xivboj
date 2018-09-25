@@ -46,7 +46,7 @@ public class ResultsController {
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
-        int treshHold = competitionList.get(14).getPersonList().size();
+        int treshHold = competitionList.get(13).getPersonList().size();
         model.addAttribute("competitionList", competitionList);
         model.addAttribute("treshHold", treshHold);
         return "results";

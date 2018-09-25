@@ -9,19 +9,25 @@
 <body>
 <section class="container" ng-app="cartApp">
     <div class="row">
-        <br>
-        <br>
-        <br>
+
         <div class="col-md-3">
             <h1>${competition.name}</h1>
-
+            <br>
+            <br>
+            <br>
 
             <p style="font-size: 20px"><strong><springc:message code="competition.rules"/></strong> ${competition.rules}
             </p>
-            <p style="font-size: 20px"><strong><springc:message
-                    code="competition.preferedTime"/> </strong>${competition.preferedTime}
+            <p style="font-size: 20px">
+                <strong><springc:message
+                        code="competition.preferedTime"/>
+                </strong>${competition.preferedTime}
                 <springc:message code="competition.min"/></p>
-
+            <p style="font-size: 20px">
+                <strong>Autor:
+                </strong>
+                ${competition.autorsName}
+            </p>
             <br>
             <br>
             <p data-ng-controller="cartCtrl">
@@ -33,7 +39,8 @@
 
         </div>
         <div class="col-md-4">
-            <img src="<c:url value="/resource/images/${competition.competitionId}.jpg"></c:url> " alt="image"
+            <img src="<c:url value="/resource/images/competitions/${competition.competitionId}.jpg"></c:url> "
+                 alt="image"
                  style="width: 300px"/>
         </div>
         </p>

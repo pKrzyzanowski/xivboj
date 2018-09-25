@@ -15,7 +15,7 @@ import java.util.List;
 @Entity(name = "competition")
 @Table(name = "competition")
 @XmlRootElement
-public class Competition implements Serializable,Comparable {
+public class Competition implements Serializable, Comparable {
     private static final long serialVersionUID = -538766763684258062L;
 
     @ManyToMany(mappedBy = "competitionList")
@@ -33,10 +33,7 @@ public class Competition implements Serializable,Comparable {
     private int preferedTime;
     @Column(name = "path")
     private String path;
-
     private String autorsName;
-//    @Transient
-//    private Person author;
     @JsonIgnore
 
     @Transient
@@ -45,9 +42,19 @@ public class Competition implements Serializable,Comparable {
     public Competition() {
         super();
     }
+
+
     public Competition(int competitionId, String name) {
         this.competitionId = competitionId;
         this.name = name;
+    }
+
+    public String getAutorsName() {
+        return autorsName;
+    }
+
+    public void setAutorsName(String autorsName) {
+        this.autorsName = autorsName;
     }
 
     public List<Person> getPersonList() {
@@ -100,13 +107,6 @@ public class Competition implements Serializable,Comparable {
         this.preferedTime = preferedTime;
     }
 
-//    public Person getAuthor() {
-//        return author;
-//    }
-//
-//    public void setAuthor(Person author) {
-//        this.author = author;
-//    }
 
     @Override
     public boolean equals(Object obj) {
@@ -140,9 +140,9 @@ public class Competition implements Serializable,Comparable {
 
     @Override
     public int compareTo(Object compareObj) {
-        int compareQuantityOfVoices=((Competition)compareObj).getPersonList().size();
+        int compareQuantityOfVoices = ((Competition) compareObj).getPersonList().size();
 
-        return compareQuantityOfVoices-this.getPersonList().size();
+        return compareQuantityOfVoices - this.getPersonList().size();
 
 
     }
