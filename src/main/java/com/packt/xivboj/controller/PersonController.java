@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 @Controller
 @RequestMapping("/people")
@@ -44,6 +46,19 @@ public class PersonController {
     public String processAddNewPerson(@ModelAttribute("newPerson") Person personToBeAdded, HttpServletRequest request, BindingResult result) {
 
         personService.addPerson(personToBeAdded);
+
+        MultipartFile personImage = personToBeAdded.getPersonImage();
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+        if (personImage != null && !personImage.isEmpty()) {
+            try {
+                personImage.transferTo(new File(rootDirectory + "resources\\images\\persons\\" + personToBeAdded.getNameId() + ".jpg"));
+            } catch (Exception e) {
+                throw new RuntimeException("niepowodzenie podczas proby zapisu obrazka", e);
+            }
+        }
+
+
+
 
         return "redirect:/people";
     }

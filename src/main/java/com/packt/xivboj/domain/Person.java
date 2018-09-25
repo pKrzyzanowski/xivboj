@@ -1,5 +1,7 @@
 package com.packt.xivboj.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -23,6 +25,8 @@ public class Person implements Serializable {
     private String role = "ROLE_USER";
     @OneToOne(mappedBy = "person")
     private Cart cart;
+    @Transient
+    private MultipartFile PersonImage;
 
     public Person(String name, String surname) {
 
@@ -31,6 +35,18 @@ public class Person implements Serializable {
     }
 
     public Person() {
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public MultipartFile getPersonImage() {
+        return PersonImage;
+    }
+
+    public void setPersonImage(MultipartFile personImage) {
+        PersonImage = personImage;
     }
 
     public List<Competition> getCompetitionList() {

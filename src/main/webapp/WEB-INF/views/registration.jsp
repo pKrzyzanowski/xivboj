@@ -52,15 +52,17 @@
             </div>
         </div>
 
-            <%--<div class="form-group">--%>
-            <%--<label class="control-label col-lg-2 col-lg-2" for="competitionImage">--%>
-            <%--<spring:message code="addCompetition.form.competitionImage.label"/>--%>
-            <%--</label>--%>
-            <%--<div class="col-lg-10">--%>
-            <%--<form:input id="competitionImage" path="competitionImage" type="file"/>--%>
-            <%--<form:errors path="competitionImage" cssClass="text-danger"/>--%>
-            <%--</div>--%>
-            <%--</div>--%>
+
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-lg-2" for="personImage">
+                <spring:message code="addCompetition.form.competitionImage.label"/>
+            </label>
+            <div class="col-lg-10">
+                <form:input id="personImage" path="personImage" type="file"/>
+                <form:errors path="personImage" cssClass="text-danger"/>
+            </div>
+        </div>
+
 
 
     </fieldset>
