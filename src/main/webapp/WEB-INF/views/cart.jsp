@@ -35,17 +35,15 @@
         <table class="table table-hover">
             <tr>
                 <th>Twoje głosy</th>
-                <div><strong>{{cartId}}</strong></div>
-                <div><strong>${cart.cartId}</strong></div>
-                <div><strong>${cart}</strong></div>
             </tr>
 
-
-            ${competition.name}
-
+            <%--<tr ng-repeat="competition in cart.allCartCompe" class="competition">--%>
+            <%--{{item.name}}--%>
+                <%--Competition {{item.name}}--%>
+            <%--</tr>--%>
 
             <%--<tr ng-repeat="competition in ${cart.allCartCompe}">--%>
-            //
+
             <%--<tr ng-repeat="item in cart.allCartCompe">--%>
             <c:forEach items="${cart.allCartCompe}" var="competition">
                 <tr>

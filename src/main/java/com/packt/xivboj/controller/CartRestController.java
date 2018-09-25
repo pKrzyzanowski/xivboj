@@ -91,6 +91,8 @@ public class CartRestController {
         myEntityManager.getTransaction().begin();
         myEntityManager.merge(cart);
         myEntityManager.merge(competition);
+
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
