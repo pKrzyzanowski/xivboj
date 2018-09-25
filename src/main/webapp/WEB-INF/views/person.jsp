@@ -22,16 +22,20 @@
             </p>
             <p style="font-size: 20px"><strong><spring:message code="person.age"/></strong>${person.age}</p>
 
-
             <p>
                 <br>
                 <br>
                 <a href="<spring:url value="/people"/>" class="btn btn-primary"> <spring:message
                         code="person.button.backToPeople"/></a>
 
+                <c:forEach items="${person.competitionList}" var="competition">
+${competition.name}
+                </c:forEach>
+
         </div>
         <div class="col-md-5">
-            <img src="<c:url value="/resource/images/persons/${person.nameId}.jpg"></c:url> " alt="image" style="width: 300px"/>
+            <img src="<c:url value="/resource/images/persons/${person.nameId}.jpg"></c:url> " alt="image"
+                 style="width: 300px"/>
         </div>
         </p>
     </div>

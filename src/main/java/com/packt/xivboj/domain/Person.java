@@ -1,5 +1,7 @@
 package com.packt.xivboj.domain;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 2284040482222162898L;
 
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     List<Competition> competitionList;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

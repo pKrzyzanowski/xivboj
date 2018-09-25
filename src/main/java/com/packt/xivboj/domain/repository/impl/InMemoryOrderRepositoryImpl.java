@@ -41,20 +41,18 @@ public class InMemoryOrderRepositoryImpl implements OrderRepository {
         Person person = (Person) nativeQuery.getSingleResult();
         order.setPerson(person);
 
-
-
         List<Integer> competitionIdList = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId " + "FROM" +
                 " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
+
         List<Competition> competitionList = new ArrayList<>();
 
         for (Integer competitionId : competitionIdList) {
             competitionList.add(myEntityManager.find(Competition.class, competitionId));
         }
+
+
         person.setCompetitionList(competitionList);
         myEntityManager.merge(person);
-
-
-
         myEntityManager.persist(order);
 
         myEntityManager.getTransaction().commit();

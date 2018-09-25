@@ -59,36 +59,36 @@ public class CompetitionController {
     @RequestMapping(value = "/vote", method = RequestMethod.GET)
     public String voteForCompetitions(Model model) {
 
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-
-
-        String query = "SELECT * FROM person where username =\"" +currentPrincipalName+ "\"";
-        Query nativeQuery = myEntityManager.createNativeQuery(query , Person.class);
-        Person currentUser =(Person) nativeQuery.getSingleResult();
-        int currentUserId = currentUser.getNameId();
-
-        query = "SELECT * FROM cart where person_nameId =" +currentUserId;
-        Query nativeQuery2 = myEntityManager.createNativeQuery(query , Cart.class);
-        Cart currentUsersCart = (Cart) nativeQuery2.getSingleResult();
-        String currentUsersCartId = currentUsersCart.getCartId();
-
-
-        List<Competition> competitions = new ArrayList<Competition>();
-        // pobranie kart z uzytkownika
-        // competitions = pobranie wielu konkurencji z karty
-        //przypisanie uzytkownikowi konkurencji
-        competitions = currentUser.getCompetitionList();
-        Collection<Competition> newCompetitions = new ArrayList<Competition>();
-        newCompetitions = currentUsersCart.getAllCartCompe();
-//        competitions.add(newCompetitions);
-//        currentUser.setCompetitionList();
-
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
+//        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+//        myEntityManager.getTransaction().begin();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+//
+//
+//        String query = "SELECT * FROM person where username =\"" +currentPrincipalName+ "\"";
+//        Query nativeQuery = myEntityManager.createNativeQuery(query , Person.class);
+//        Person currentUser =(Person) nativeQuery.getSingleResult();
+//        int currentUserId = currentUser.getNameId();
+//
+//        query = "SELECT * FROM cart where person_nameId =" +currentUserId;
+//        Query nativeQuery2 = myEntityManager.createNativeQuery(query , Cart.class);
+//        Cart currentUsersCart = (Cart) nativeQuery2.getSingleResult();
+//        String currentUsersCartId = currentUsersCart.getCartId();
+//
+//
+//        List<Competition> competitions = new ArrayList<Competition>();
+//        // pobranie kart z uzytkownika
+//        // competitions = pobranie wielu konkurencji z karty
+//        //przypisanie uzytkownikowi konkurencji
+//        competitions = currentUser.getCompetitionList();
+//        Collection<Competition> newCompetitions = new ArrayList<Competition>();
+//        newCompetitions = currentUsersCart.getAllCartCompe();
+////        competitions.add(newCompetitions);
+////        currentUser.setCompetitionList();
+//
+//
+//        myEntityManager.getTransaction().commit();
+//        myEntityManager.close();
 
 
 
