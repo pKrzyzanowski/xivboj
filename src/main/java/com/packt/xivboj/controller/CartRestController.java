@@ -67,7 +67,6 @@ public class CartRestController {
         String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
         String userName = currentPrincipalName + "sCart";
 
-
         Cart cart = cartService.read(userName);
         if (cart == null) {
             cart = cartService.create(new Cart(userName));
@@ -97,7 +96,7 @@ public class CartRestController {
         myEntityManager.close();
 
 // jest setAllCartCompet i widnieja  w niej wartosci to dlaczego nie nie mozna ich przekazac do cart.jsp?
-        cartService.update(cart);
+//        cartService.update(cart);
     }
 
     @Transactional

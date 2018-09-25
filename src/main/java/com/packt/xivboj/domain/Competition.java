@@ -16,7 +16,7 @@ import java.util.List;
 public class Competition implements Serializable {
     private static final long serialVersionUID = -538766763684258062L;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "competitionList")
     List<Person> personList;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

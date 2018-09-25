@@ -8,10 +8,10 @@ import java.util.List;
 public class Person implements Serializable {
     private static final long serialVersionUID = 2284040482222162898L;
 
-    @ManyToMany(mappedBy = "personList")
+    @ManyToMany
     List<Competition> competitionList;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int nameId;
     private String name;
     private String surname;

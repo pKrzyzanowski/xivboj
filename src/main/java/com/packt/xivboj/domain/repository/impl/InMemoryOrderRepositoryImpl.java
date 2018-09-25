@@ -14,9 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class InMemoryOrderRepositoryImpl implements OrderRepository {
@@ -34,7 +33,6 @@ public class InMemoryOrderRepositoryImpl implements OrderRepository {
     public long saveOrder(Order order) {
 
 
-
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
@@ -42,6 +40,18 @@ public class InMemoryOrderRepositoryImpl implements OrderRepository {
         Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
         Person person = (Person) nativeQuery.getSingleResult();
         order.setPerson(person);
+
+
+
+        List<Integer> competitionIdList = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId " + "FROM" +
+                " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
+        List<Competition> competitionList = new ArrayList<>();
+
+        for (Integer competitionId : competitionIdList) {
+            competitionList.add(myEntityManager.find(Competition.class, competitionId));
+        }
+        person.setCompetitionList(competitionList);
+        myEntityManager.merge(person);
 
 
 

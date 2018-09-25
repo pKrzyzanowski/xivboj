@@ -11,7 +11,7 @@ public class Order implements Serializable {
     private static final long serialVersionUID = -3560539622417210355L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
     @Transient
     private Cart cart;
