@@ -16,7 +16,7 @@
                 <li><a href="<spring:url value="/"/>"><spring:message code="navigation.home"/></a></li>
                 <li><a href="<spring:url value="/competitions"/>"><spring:message code="navigation.competitions"/></a></li>
                 <li><a href="<spring:url value="/people"/> "><spring:message code="navigation.competitors"/></a></li>
-                <li><a href="#"><spring:message code="navigation.votingResults"/></a></li>
+                <li><a href="<spring:url value="/results"/>"><spring:message code="navigation.votingResults"/></a></li>
                 <li><a href="<spring:url value="/competitions/add"/> "><spring:message code="navigation.addCompetition"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

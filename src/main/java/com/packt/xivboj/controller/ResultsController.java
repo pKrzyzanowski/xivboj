@@ -11,16 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
+@RequestMapping("/results")
 public class ResultsController{
 
 
-    @RequestMapping("/")
+@RequestMapping
     public String results(Model model) {
 
         return "results";
     }
-
-
 
 
 }
