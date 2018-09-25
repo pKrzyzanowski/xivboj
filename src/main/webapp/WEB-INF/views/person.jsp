@@ -45,7 +45,7 @@
             <c:forEach items="${person.competitionList}" var="competition">
 
                 <p>
-                <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
+                <div class="col-md-6" style="padding-bottom: 15px">
                     <div class="thumbnail" style="width: 170px; height: 160px">
                         <div class="panel-heading"><strong>${competition.name}</strong></div>
                         <img src="<c:url value="/resource/images/competitions/${competition.competitionId}.jpg"></c:url>  "

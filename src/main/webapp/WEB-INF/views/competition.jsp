@@ -12,7 +12,7 @@
         <br>
         <br>
         <br>
-        <div class="col-md-5">
+        <div class="col-md-3">
             <h1>${competition.name}</h1>
 
 
@@ -27,18 +27,39 @@
             <p data-ng-controller="cartCtrl">
                 <a href="<spring:url value="/competitions"/>" class="btn btn-primary"> <springc:message
                         code="competition.backToCompetitions"/></a>
-                <a href="#" ng-click="addToCart('${competition.competitionId}')" class="btn btn-primary"> <springc:message
-                        code="competition.voteNow"/></a>
+                <a href="#" ng-click="addToCart('${competition.competitionId}')" class="btn btn-primary">
+                    <springc:message
+                            code="competition.voteNow"/></a>
 
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <img src="<c:url value="/resource/images/${competition.competitionId}.jpg"></c:url> " alt="image"
                  style="width: 300px"/>
         </div>
         </p>
         <br>
-        <br>
-        <br>
+        <div class="col-md-5">
+            <h1>Osoby głosujące</h1>
+            <br>
+            <br>
+
+            <c:forEach items="${competition.personList}" var="person">
+                <div class=" col-md-6" style="padding-bottom: 15px">
+                    <div class="thumbnail" style="width: 170px; height: 160px">
+
+
+                        <div class="panel-heading"><strong>${person.name}</strong></div>
+                        <div style="position: relative;text-align: center">
+                            <img src="<c:url value="/resource/images/persons/${person.nameId}.jpg"></c:url> "
+                                 alt="image"
+                                 style="width: 100px; max-height: 80px;  padding-top: 15px"/>
+                        </div>
+
+
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </section>
 
