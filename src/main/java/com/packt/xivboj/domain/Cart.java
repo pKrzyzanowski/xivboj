@@ -63,11 +63,11 @@ public class Cart implements Serializable {
         this.person = person;
     }
 
-    @Transactional
+//    @Transactional
     public List<Competition> getAllCartCompe() {
         return allCartCompe;
     }
-    @Transactional
+//    @Transactional
     public void setAllCartCompe(List<Competition> allCartCompe) {
         this.allCartCompe = allCartCompe;
     }

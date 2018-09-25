@@ -29,14 +29,14 @@ public class CartRestController {
     @Autowired
     private CompetitionService competitionService;
 
-    @Transactional
+//    @Transactional
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
     Cart create(@RequestBody Cart cart) {
         return cartService.create(cart);
     }
 
-    @Transactional
+//    @Transactional
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public @ResponseBody
     Cart read(@PathVariable(value = "cartId") String cartId) {
@@ -45,21 +45,21 @@ public class CartRestController {
         return cart;
     }
 
-    @Transactional
+//    @Transactional
     @RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@PathVariable(value = "cartId") String cartId, @RequestBody Cart cart) {
         cartService.update(cart);
     }
 
-    @Transactional
+//    @Transactional
     @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "cartId") String cartId) {
         cartService.delete(cartId);
     }
 
-    @Transactional
+//    @Transactional
     @RequestMapping(value = "/add/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
@@ -99,7 +99,7 @@ public class CartRestController {
 //        cartService.update(cart);
     }
 
-    @Transactional
+//    @Transactional
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {

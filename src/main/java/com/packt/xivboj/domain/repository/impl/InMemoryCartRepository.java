@@ -34,7 +34,7 @@ public class InMemoryCartRepository implements CartRepository {
     public InMemoryCartRepository() {
     }
 
-    @Transactional
+//    @Transactional
     public Cart create(Cart cart) {
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
@@ -51,7 +51,7 @@ public class InMemoryCartRepository implements CartRepository {
         return cart;
     }
 
-    @Transactional
+//    @Transactional
     public Cart read(String cartId) {
 
         cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
@@ -127,25 +127,4 @@ public class InMemoryCartRepository implements CartRepository {
 //        listOfCarts.remove(cartId);
     }
 
-//    @Transactional
-//    public List<Competition> getAllCompetitionsbyCartsId(String cartId) {
-//        List<Competition> competitions = new ArrayList<>();
-//        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-//        myEntityManager.getTransaction().begin();
-//
-//        String query = "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " + "\"" + cartId + "\"";
-//        Query nativeQuery = myEntityManager.createNativeQuery(query);
-//        List<Integer> resultList = nativeQuery.getResultList();
-//
-//
-//        for (Integer competitionId : resultList) {
-//            competitions.add(competitionService.getCompetitionById(competitionId));
-//        }
-//        myEntityManager.getTransaction().commit();
-//        myEntityManager.close();
-//
-//
-//        return competitions;
-//
-//    }
 }

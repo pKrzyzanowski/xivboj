@@ -24,7 +24,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public List<Competition> getAllCompetitions() {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -41,7 +41,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public void addCompetition(Competition competition) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -51,7 +51,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
     }
-    @Transactional
+//    @Transactional
     @Override
     public void removeCompetition(int competitionId) {
 //        if (!competitionList.contains(getCompetitionById(competitionId))) {
@@ -61,7 +61,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public Competition getCompetitionById(int competitionId) {
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
