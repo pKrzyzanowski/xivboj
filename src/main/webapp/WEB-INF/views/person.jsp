@@ -22,15 +22,16 @@
             </p>
             <p style="font-size: 20px"><strong><spring:message code="person.age"/></strong>${person.age}</p>
 
+
+            <c:forEach items="${person.competitionList}" var="competition">
+               <p> ${competition.competitionId}</p>
+            </c:forEach>
             <p>
                 <br>
                 <br>
                 <a href="<spring:url value="/people"/>" class="btn btn-primary"> <spring:message
                         code="person.button.backToPeople"/></a>
 
-                <c:forEach items="${person.competitionList}" var="competition">
-${competition.name}
-                </c:forEach>
 
         </div>
         <div class="col-md-5">
