@@ -15,7 +15,7 @@ public class Order implements Serializable {
     private Long orderId;
     @Transient
     private Cart cart;
-    @Transient
+    @OneToOne
     private Person person;
 
 
