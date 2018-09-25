@@ -1,3 +1,5 @@
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.Authentication" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-inverse">
@@ -10,6 +12,15 @@
             </button>
 
         </div>
+
+
+
+        <%
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+        %>
+        <c:set var="userName" value="<%= currentPrincipalName %>"/>
+        <c:set var="anonymousUser" value="anonymousUser"/>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
 
@@ -20,7 +31,13 @@
                 <li><a href="<spring:url value="/competitions/add"/> "><spring:message code="navigation.addCompetition"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<c:url value="/j_spring_security_logout"/> "><spring:message code="navigation.logIn"/></a></li>
+
+                        <c:if test="${!userName.contains(anonymousUser)}">
+                        <li><a href="<c:url value="/j_spring_security_logout"/> ">Wyloguj się (<%= currentPrincipalName %>)</a></li>
+                        </c:if>
+
+
+
                 <li><a href="<spring:url value="/cart"/>"><span class="glyphicon glyphicon-user"></span><spring:message code="navigation.myVotes"/></a></li>
             </ul>
         </div>

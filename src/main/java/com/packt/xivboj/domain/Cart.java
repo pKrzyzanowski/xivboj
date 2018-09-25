@@ -2,6 +2,8 @@ package com.packt.xivboj.domain;
 
 
 import com.packt.xivboj.service.CartService;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +32,8 @@ public class Cart implements Serializable {
     //    private Collection<CartItemCompe> allCartItems = new ArrayList<>();
 
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "CartCompetition")
 //    private List<Competition> allCartCompe =
     private List<Competition> allCartCompe = new ArrayList<>();
