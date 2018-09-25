@@ -1,17 +1,17 @@
 package com.packt.xivboj.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table (name = "zamowienie")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = -3560539622417210355L;
 
     @Id
+    @GeneratedValue
     private Long orderId;
     @Transient
     private Cart cart;
