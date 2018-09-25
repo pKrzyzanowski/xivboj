@@ -44,8 +44,7 @@ public class Competition implements Serializable, Comparable {
     }
 
 
-    public Competition(int competitionId, String name) {
-        this.competitionId = competitionId;
+    public Competition(String name) {
         this.name = name;
     }
 
