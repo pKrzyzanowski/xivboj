@@ -12,7 +12,7 @@
         <p></p>
         <p></p>
         <p></p>
-        <div class="col-md-5">
+        <div class="col-md-3">
             <h1>${person.name}</h1>
             <p></p>
             <p></p>
@@ -23,9 +23,6 @@
             <p style="font-size: 20px"><strong><spring:message code="person.age"/></strong>${person.age}</p>
 
 
-            <c:forEach items="${person.competitionList}" var="competition">
-               <p> ${competition.competitionId}</p>
-            </c:forEach>
             <p>
                 <br>
                 <br>
@@ -34,9 +31,31 @@
 
 
         </div>
-        <div class="col-md-5">
+
+        <div class="col-md-4">
+            <br>
+            <br>
             <img src="<c:url value="/resource/images/persons/${person.nameId}.jpg"></c:url> " alt="image"
                  style="width: 300px"/>
+        </div>
+        <div class="col-md-5">
+            <h1>Oddane głosy</h1>
+            <br>
+            <br>
+            <c:forEach items="${person.competitionList}" var="competition">
+
+                <p>
+                <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
+                    <div class="thumbnail" style="width: 170px; height: 160px">
+                        <div class="panel-heading"><strong>${competition.name}</strong></div>
+                        <img src="<c:url value="/resource/images/competitions/${competition.competitionId}.jpg"></c:url>  "
+                             alt="image"
+                             style="width: 100px; max-height: 80px;  padding-top: 15px"/>
+
+                    </div>
+                </div>
+                </p>
+            </c:forEach>
         </div>
         </p>
     </div>

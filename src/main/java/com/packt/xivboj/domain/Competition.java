@@ -31,8 +31,9 @@ public class Competition implements Serializable {
     @Column(name = "path")
     private String path;
 
-    @Transient
-    private Person author;
+    private String autorsName;
+//    @Transient
+//    private Person author;
     @JsonIgnore
 
     @Transient

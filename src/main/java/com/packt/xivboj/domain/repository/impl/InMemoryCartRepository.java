@@ -69,7 +69,7 @@ public class InMemoryCartRepository implements CartRepository {
             Person person = (Person) nativeQuery.getSingleResult();
 
             CartById = new Cart();
-            CartById.setCartId(person.getName() + "sCart");
+            CartById.setCartId(currentPrincipalName + "sCart");
             //pobrac osobe na ktorej koncie jestsmy i stowrzyc nowa karte oraz nadac tej karcie osobe
             CartById.setPerson(person);
             person.setCart(CartById);

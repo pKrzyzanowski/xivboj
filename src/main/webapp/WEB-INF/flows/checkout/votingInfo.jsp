@@ -36,7 +36,7 @@
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                 <div class="thumbnail" style="width: 170px; height: 160px">
                     <div class="panel-heading"><strong>${CartCompe.name}</strong></div>
-                    <img src="<c:url value="/resource/images/${CartCompe.competitionId}.jpg"></c:url>  "
+                    <img src="<c:url value="/resource/images/competitions/${CartCompe.competitionId}.jpg"></c:url>  "
                          alt="image"
                          style="width: 100px; max-height: 80px;  padding-top: 15px"/>
 
