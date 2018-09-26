@@ -22,12 +22,11 @@
                 <form action="<c:url value="/j_spring_security_check"></c:url> " method="post">
                     <fieldset>
                         <div class="form-group">
-                            <input class="form-control" placeholder=
-                            <spring:message code="login.placeHolder.userName"/> name="j_username" type="text">
+                            <input class="form-control" placeholder="Nazwa" name="j_username" type="text">
                         </div>
                         <div class="form-group">
                             <input class="form-control" placeholder=
-                            <spring:message code="login.placeHolder.password"/> name="j_password" type="password"
+                                    "Has³o" name="j_password" type="password"
                                    value="">
                         </div>
                         <input class="btn btn-lg btn-success btn-block" type="submit" value=<spring:message
@@ -38,15 +37,16 @@
             </div>
             <br>
 
-            <h4>Je¿eli nie masz jeszcze konta, zarejestruj siê!</h4>
-            <a href="<spring:url value="/people/add" />">
-               Rejestracja
-            </a>
+            <h4>Je¿eli nie masz jeszcze konta,
+                <a href="<spring:url value="/people/add" />">
+                    zarejestruj siê!
+                </a>
+            </h4>
+
         </div>
     </div>
 </div>
 <div>
-
 
 
 </div>

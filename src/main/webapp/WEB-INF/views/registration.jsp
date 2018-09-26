@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="surname">
-                nazwisko
+                Nazwisko
             </label>
             <div class="col-lg-10">
                 <form:input id="surname" path="surname" type="text"/>
@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="age">
-                wiek
+                Wiek
             </label>
             <div class="col-lg-10">
                 <form:input id="age" path="age" type="text"/>
@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="description">
-                opis
+                Opis
             </label>
             <div class="col-lg-10">
                 <form:input id="description" path="description" type="text"/>
@@ -54,7 +54,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="personImage">
-                <spring:message code="addCompetition.form.competitionImage.label"/>
+                Zdjêcie
             </label>
             <div class="col-lg-10">
                 <form:input id="personImage" path="personImage" type="file"/>
