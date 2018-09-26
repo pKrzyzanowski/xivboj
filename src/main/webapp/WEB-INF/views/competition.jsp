@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="springc" uri="http://www.springframework.org/tags" %>
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
@@ -46,7 +47,7 @@
         </p>
         <br>
         <div class="col-md-5">
-            <h1>Osoby gÅ‚osujÄ…ce</h1>
+            <h1>Osoby g³osuj±ce</h1>
             <br>
             <br>
 

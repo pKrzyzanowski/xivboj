@@ -11,10 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +37,21 @@ public class InMemoryCartRepository implements CartRepository {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
-        myEntityManager.persist(cart);
 
+//        Cart cartFromDb = null;
+//        try {
+//            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM cart where name =" + "\"" + cart.getCartId() + "\"", Cart.class);
+//            cartFromDb = (Cart) nativeQuery.getSingleResult();
+//        } catch (NoResultException e) {
+//            e.printStackTrace();
+//        }
+//        if (cartFromDb==null) {
+//            myEntityManager.persist(cart);
+//        }
+
+        myEntityManager.persist(cart);
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
-//        if (listOfCarts.keySet().contains(cart.getCartId())) {
-//            throw new IllegalArgumentException(String.format("Nie mo¿na utworzyæ koszyka. Koszyk o wskazanym  id (%) ju¿ istnieje.", cart.getCartId()));
-//        }
 
         return cart;
     }
@@ -54,14 +59,14 @@ public class InMemoryCartRepository implements CartRepository {
 //    @Transactional
     public Cart read(String cartId) {
 
-        cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
+//        cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
         Cart CartById = myEntityManager.find(Cart.class, cartId);
 
-        if (CartById == null) {
+        if (CartById==null) {
 
             String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -70,25 +75,11 @@ public class InMemoryCartRepository implements CartRepository {
 
             CartById = new Cart();
             CartById.setCartId(currentPrincipalName + "sCart");
-            //pobrac osobe na ktorej koncie jestsmy i stowrzyc nowa karte oraz nadac tej karcie osobe
             CartById.setPerson(person);
             person.setCart(CartById);
             myEntityManager.persist(CartById);
             myEntityManager.merge(person);
-
         }
-//        myEntityManager.getTransaction().commit();
-//        myEntityManager.close();
-//
-//
-//        myEntityManager = entityManagerFactory.createEntityManager();
-//        myEntityManager.getTransaction().begin();
-        //        // tutaj ustawic karcie konkurencje
-
-
-//        List<Competition> cartCompetitions = CartById.getAllCartCompe();
-//        CartById.setAllCartCompe(cartCompetitions);
-
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
         return CartById;

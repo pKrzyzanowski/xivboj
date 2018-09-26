@@ -68,19 +68,14 @@ public class CartRestController {
         String userName = currentPrincipalName + "sCart";
 
         Cart cart = cartService.read(userName);
-        if (cart == null) {
-            cart = cartService.create(new Cart(userName));
-        }
+//        if (cart == null) {
+//            cart = cartService.create(new Cart(userName));
+//        }
 
         Competition competition = competitionService.getCompetitionById(competitionId);
         if (competition == null) {
             throw new IllegalArgumentException(new CompetitionNotFoundException(competitionId));
         }
-
-//        cart.addCartCompe(competition);
-
-
-        String cartId = cart.getCartId();
 
         List<Competition> cartCompetitions = cart.getAllCartCompe();
         cartCompetitions.add(competition);
@@ -94,9 +89,6 @@ public class CartRestController {
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
-
-// jest setAllCartCompet i widnieja  w niej wartosci to dlaczego nie nie mozna ich przekazac do cart.jsp?
-//        cartService.update(cart);
     }
 
 //    @Transactional
@@ -108,20 +100,27 @@ public class CartRestController {
         String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
         String userName = currentPrincipalName + "sCart";
 
-        String sessionId = userName;
-        Cart cart = cartService.read(sessionId);
-        if (cart == null) {
-            cart = cartService.create(new Cart(sessionId));
-        }
-
+        Cart cart = cartService.read(userName);
         Competition competition = competitionService.getCompetitionById(competitionId);
         if (competition == null) {
             throw new IllegalArgumentException(new CompetitionNotFoundException(competitionId));
         }
+//        if (cart == null) {
+//            cart = cartService.create(new Cart(sessionId));
+//        }
 
-        cart.removeCartCompe(competition);
+        List<Competition> cartCompetitions = cart.getAllCartCompe();
+        cartCompetitions.remove(competition);
+        cart.setAllCartCompe(cartCompetitions);
 
-        cartService.update(cart);
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
+        myEntityManager.merge(cart);
+        myEntityManager.merge(competition);
+
+
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

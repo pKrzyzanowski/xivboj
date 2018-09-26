@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 <html>
 <head>
 
@@ -38,7 +38,7 @@
             </div>
             <br>
 
-            <h4>JeÅ¼eli nie masz jeszcze konta, zarejestruj siÄ™!</h4>
+            <h4>Je¿eli nie masz jeszcze konta, zarejestruj siê!</h4>
             <a href="<spring:url value="/people/add" />">
                Rejestracja
             </a>

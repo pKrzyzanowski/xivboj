@@ -1,9 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Bootstrap Example</title>
-    <meta charset="utf-8">
+    <meta charset="ISO-8859-2, windows-1250, UTF8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -33,12 +35,12 @@
     <br><br><br>
     <h1>O konkursie</h1>
     <br><br>
-    <p>CzternastobÃ³j klasyczny siÄ™ga swoimi korzeniami do 2017 roku.</p>
-    <p>Jest to kombinacja czternastu konkurencji wybranychprzez uczestnikÃ³w.</p>
-    <p>IdeÄ… konkursu jest zakoÅ„czenie sporÃ³w o to, kto jest ogÃ³lnie najlepszy.</p>
-    <p>OprÃ³cz samych rozgrywek jest faza gÅ‚osowania na konkurencje.</p>
-    <p>Jest to nieodÅ‚Ä…cznyi i nie mniej waÅ¼ny niÅ¼ reszta etap konkursu.</p>
-    <p>Niniejsza strona ma usprawniÄ‡ proces gÅ‚osowania i uczyniÄ‡ go bardzieÅ„ oficjalnym.</p>
+    <p>Czternastobój klasyczny siêga swoimi korzeniami do 2017 roku.</p>
+    <p>Jest to kombinacja czternastu konkurencji wybranychprzez uczestników.</p>
+    <p>Ide± konkursu jest zakoñczenie sporów o to, kto jest ogólnie najlepszy.</p>
+    <p>Oprócz samych rozgrywek jest faza g³osowania na konkurencje.</p>
+    <p>Jest to nieod³±cznyi i nie mniej wa¿ny ni¿ reszta etap konkursu.</p>
+    <p>Niniejsza strona ma usprawniæ proces g³osowania i uczyniæ go bardzieñ oficjalnym.</p>
 </div>
 <br><br>
 

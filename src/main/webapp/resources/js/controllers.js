@@ -30,7 +30,7 @@ cartApp.controller('cartCtrl',  function ($scope, $http) {
     $scope.removeFromCart = function(competitionId) {
         $http.put('/rest/cart/remove/'+competitionId)
             .success(function(data) {
-                $scope.refreshCart($http.get('/rest/cart/get/cartId'));
+                $scope.refreshCart($scope.cartId);
             });
     };
 });

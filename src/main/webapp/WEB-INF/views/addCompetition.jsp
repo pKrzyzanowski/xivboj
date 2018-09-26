@@ -1,7 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 <html>
 <head>
 </head>
@@ -12,7 +11,7 @@
     <fieldset>
 
         <legend>
-            Dodaj nowÄ… konkurencjÄ™
+            Dodaj now± konkurencjê
         </legend>
         <form:errors path="*" cssClass="alert alert-danger" element="div"/>
 

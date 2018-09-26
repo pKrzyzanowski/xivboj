@@ -21,7 +21,7 @@ import java.util.List;
 public class InMemoryOrderRepositoryImpl implements OrderRepository {
 
     @PersistenceUnit
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
     @Autowired
     CartService cartService;
@@ -40,6 +40,7 @@ public class InMemoryOrderRepositoryImpl implements OrderRepository {
         Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
         Person person = (Person) nativeQuery.getSingleResult();
         order.setPerson(person);
+
 
         List<Integer> competitionIdList = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId " + "FROM" +
                 " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();

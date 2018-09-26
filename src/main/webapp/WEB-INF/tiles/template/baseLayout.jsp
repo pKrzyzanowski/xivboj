@@ -3,15 +3,15 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 
 <!DOCTYPE html>
 <html lang="pl">
 <head>
 
-    <meta charset="UTF-8"/>
+    <%--<meta charset="ISO-8859-2, windows-1250, UTF8"/>--%>
     <%--<meta name="viewport" content="width=device-width,initial scale=1.0"/>--%>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <%--<meta http-equiv="Content-Type" content="text/html;charset=utf-8">--%>
     <link href="https://fonts.googleapis.com/css?family=Baloo+Tammudu|Lemon|Short+Stack" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lemon|Short+Stack" rel="stylesheet">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
@@ -48,7 +48,7 @@
 <body>
 <div class="jumbotron">
     <div class="container text-center">
-        <h1>CzternastobÃ³j Klasyczny</h1>
+        <h1>Czternastobój Klasyczny</h1>
         <p>odkryj swoje granice</p>
     </div>
 </div>

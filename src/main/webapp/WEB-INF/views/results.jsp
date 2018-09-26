@@ -1,9 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 </head>
@@ -34,7 +33,7 @@
                  style="width: 150px; max-height: 140px;  padding-top: 5px"/>
 
             <div class="button" style="position: absolute ;; bottom: 10px;text-align: center">
-                <h3>${competition.personList.size()}</h3> - IloÅ›Ä‡ gÅ‚osÃ³w
+                <h3>${competition.personList.size()}</h3> - Ilo¶æ g³osów
             </div>
 
 

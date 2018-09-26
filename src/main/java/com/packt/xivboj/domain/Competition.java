@@ -31,8 +31,6 @@ public class Competition implements Serializable, Comparable {
     private String rules;
     @Column(name = "preferedTime")
     private int preferedTime;
-    @Column(name = "path")
-    private String path;
     private String autorsName;
     @JsonIgnore
 
@@ -42,7 +40,6 @@ public class Competition implements Serializable, Comparable {
     public Competition() {
         super();
     }
-
 
     public Competition(String name) {
         this.name = name;

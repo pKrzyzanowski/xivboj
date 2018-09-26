@@ -1,15 +1,13 @@
 package com.packt.xivboj.domain.repository.impl;
 
 import com.packt.xivboj.domain.Competition;
+import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.CompetitionRepository;
 import com.packt.xivboj.exception.CompetitionNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-//    @Transactional
     public List<Competition> getAllCompetitions() {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -41,17 +38,26 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-//    @Transactional
     public void addCompetition(Competition competition) {
+
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
-        myEntityManager.persist(competition);
+        Competition competitionFromDb = null;
+        try {
+            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM competition where name =" + "\"" + competition.getName() + "\"", Competition.class);
+            competitionFromDb = (Competition) nativeQuery.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+        }
+
+        if (competitionFromDb==null) {
+            myEntityManager.persist(competition);
+        }
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
     }
-//    @Transactional
     @Override
     public void removeCompetition(int competitionId) {
 //        if (!competitionList.contains(getCompetitionById(competitionId))) {
@@ -61,7 +67,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-//    @Transactional
     public Competition getCompetitionById(int competitionId) {
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();

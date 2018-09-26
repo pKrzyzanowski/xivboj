@@ -1,8 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 </head>
@@ -19,7 +18,7 @@
 
 
         <div class="form-group">
-            <label class="control-label col-lg-2" for="name">ImiÄ™</label>
+            <label class="control-label col-lg-2" for="name">Imiê</label>
             <div class="col-lg-10">
                 <form:input id="name" path="name" type="text"/>
             </div>
@@ -86,7 +85,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="password">
-                HasÅ‚o
+                Has³o
             </label>
             <div class="col-lg-10">
                 <form:input id="password" path="password" type="password"/>

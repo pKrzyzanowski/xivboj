@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +24,6 @@ public class InMemoryPersonRepository implements PersonRepository {
     private EntityManagerFactory entityManagerFactory;
 
     public InMemoryPersonRepository() {
-
     }
 
     @Override
@@ -65,8 +61,23 @@ public class InMemoryPersonRepository implements PersonRepository {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
-        myEntityManager.persist(person);
 
+
+
+//        List<Person> personFromDb = null;
+//        try {
+//            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM Person where (name)=(" + "\"" + person.getName() + "\")", Person.class);
+//            personFromDb =  nativeQuery.getResultList();
+//        } catch (NoResultException e) {
+//            e.printStackTrace();
+//        }
+//        if (personFromDb.get(0)==null) {
+//        }
+//
+
+//        myEntityManager.persist(person);
+
+            myEntityManager.persist(person);
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 

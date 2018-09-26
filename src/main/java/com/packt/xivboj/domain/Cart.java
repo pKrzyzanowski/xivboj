@@ -5,14 +5,11 @@ import com.packt.xivboj.service.CartService;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class Cart implements Serializable {
@@ -23,39 +20,24 @@ public class Cart implements Serializable {
     @Autowired
     @Transient
     CartService cartService;
-
-
     @Id
     private String cartId;
     @OneToOne
     private Person person;
-    //    private Collection<CartItemCompe> allCartItems = new ArrayList<>();
 
 
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "CartCompetition")
-//    private List<Competition> allCartCompe =
     private List<Competition> allCartCompe = new ArrayList<>();
 
-    @Transient
-    private Map<Integer, Competition> cartCompetitions;
-
     public Cart() {
-        cartCompetitions = new HashMap<Integer, Competition>();
+
     }
 
     public Cart(String cartId) {
         this();
         this.cartId = cartId;
-    }
-
-    public Map<Integer, Competition> getCartCompetitions() {
-        return cartCompetitions;
-    }
-
-    public void setCartCompetitions(Map<Integer, Competition> cartCompetitions) {
-        this.cartCompetitions = cartCompetitions;
     }
 
     public Person getPerson() {
@@ -66,11 +48,11 @@ public class Cart implements Serializable {
         this.person = person;
     }
 
-//    @Transactional
+
     public List<Competition> getAllCartCompe() {
         return allCartCompe;
     }
-//    @Transactional
+
     public void setAllCartCompe(List<Competition> allCartCompe) {
         this.allCartCompe = allCartCompe;
     }
@@ -83,39 +65,10 @@ public class Cart implements Serializable {
         this.cartId = cartId;
     }
 
-    public Map<Integer, Competition> getCartItems() {
-        return cartCompetitions;
-    }
-
-    public void setCartItems(Map<Integer, Competition> cartCompetitions) {
-        this.cartCompetitions = cartCompetitions;
-    }
-
-    public void addCartCompe(Competition competition) {
-        int competitionId = competition.getCompetitionId();
-
-//        if (cartCompetitions.containsKey(competitionId)) {
-//            Competition existingCartCompe = cartCompetitions.get(competitionId);
-//            cartCompetitions.put(competitionId, existingCartCompe);
-//        } else {
-//            cartCompetitions.put(competitionId, item);
-//        }
-
-//        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-//        myEntityManager.getTransaction().begin();
-//
-//
-//
-//
-//        myEntityManager.getTransaction().commit();
-//        myEntityManager.close();
-
-
-    }
 
     public void removeCartCompe(Competition cartCompe) {
-        int competitionId = cartCompe.getCompetitionId();
-        cartCompetitions.remove(competitionId);
+//        int competitionId = cartCompe.getCompetitionId();
+//        cartCompetitions.remove(competitionId);
     }
 
     @Override
