@@ -17,7 +17,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="name">
-                <spring:message code="addCompetition.form.name.label"/>
+                Nazwa konkurencji
             </label>
             <div class="col-lg-10">
                 <form:input id="name" path="name" type="text"/>
@@ -27,7 +27,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="preferedTime">
-                <spring:message code="addCompetition.form.preferedTime.label"/>
+                Przewidywany czas
             </label>
             <div class="col-lg-10">
                 <form:input id="preferedTime" path="preferedTime" type="text"/>
@@ -37,7 +37,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="rules">
-                <spring:message code="addCompetition.form.rules.label"/>
+                Zasady
             </label>
             <div class="col-lg-10">
                 <form:input id="rules" path="rules" type="text"/>
@@ -47,7 +47,7 @@
 
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="competitionImage">
-                <spring:message code="addCompetition.form.competitionImage.label"/>
+                Zdjêcie
             </label>
             <div class="col-lg-10">
                 <form:input id="competitionImage" path="competitionImage" type="file"/>

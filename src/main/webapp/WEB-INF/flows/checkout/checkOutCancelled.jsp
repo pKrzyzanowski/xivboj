@@ -1,11 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 <html>
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=" utf-8
-    ">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <title>Invalid cart </title>
     <link rel="stylesheet" href="/resource/css/myCss.css">

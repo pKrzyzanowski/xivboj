@@ -1,12 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 <html>
 <head>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=" utf-8
-    ">
     <link rel="stylesheet"
           href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <title>Customer</title>
@@ -18,8 +15,8 @@
 <section>
     <div class="jumbotron">
         <div class="container">
-            <h1>Twoje g≈Çosy</h1>
-            <p>Zag≈Çosowane konkurencje</p>
+            <h1>Twoje g≥osy</h1>
+            <p>Zag≥osowane konkurencje</p>
         </div>
     </div>
 </section>
@@ -49,7 +46,7 @@
     <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">
             <input type="submit" id="btnAdd" class="btn btn-primary" value="Dalej" name="_eventId_next"/>
-            <button id="btnCancel" class="btn btn-default" name="_eventId_back">Powr√≥t</button>
+            <button id="btnCancel" class="btn btn-default" name="_eventId_back">PowrÛt</button>
         </div>
     </div>
 

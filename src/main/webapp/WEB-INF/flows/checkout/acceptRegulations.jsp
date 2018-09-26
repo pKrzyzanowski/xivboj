@@ -1,11 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ page contentType="text/html; charset=ISO-8859-2" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=" utf-8
-    ">
     <link rel="stylesheet"
           href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <title>Customer</title>
@@ -20,7 +18,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1>Regulamin</h1>
-            <p>oÅ›wiadczenie o zgodzie</p>
+            <p>o¶wiadczenie o zgodzie</p>
         </div>
     </div>
 </section>
@@ -41,8 +39,8 @@
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
                         <input type="submit" id="btnAdd" class="btn btn-primary"
-                               value="AkceptujÄ™" name="_eventId_regulationsAccepted"/>
-                        <button id="btnCancel" class="btn btn-default" name="_eventId_backToAcceptRegulations">PowrÃ³t
+                               value="Akceptujê" name="_eventId_regulationsAccepted"/>
+                        <button id="btnCancel" class="btn btn-default" name="_eventId_backToAcceptRegulations">Powrót
                         </button>
                     </div>
                 </div>

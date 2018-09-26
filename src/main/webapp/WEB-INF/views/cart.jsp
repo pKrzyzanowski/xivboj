@@ -1,7 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html; charset=ISO-8859-2" %>
+
 <html>
 <head>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
@@ -80,16 +80,13 @@
         </table>
 
         <a href="<spring:url value="/competitions" />" class="btn btn-default">
-            <span class="glyphicon-hand-left glyphicon"></span> <spring:message code="cart.return"/>
+            <span class="glyphicon-hand-left glyphicon"></span> Powrót
         </a>
 
         <a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
-                class="btn btn-success btn-right"></span> <spring:message code="cart.vote"/>
+                class="btn btn-success btn-right"></span> Zagłosuj!
         </a>
 
-        <a href="<spring:url value="/competitions/vote"/>" class="btn btn-success pull-right"> <span
-                class="btn btn-success btn-right"></span>oddaj glosy
-        </a>
 
 
     </div>

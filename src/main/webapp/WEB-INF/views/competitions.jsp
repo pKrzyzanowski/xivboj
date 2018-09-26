@@ -26,14 +26,12 @@
                     <div class="button" style="position: absolute ;; bottom: 10px;text-align: center">
                         <p data-ng-controller="cartCtrl">
                             <a href="#" class="btn btn-primary"
-                               ng-click="addToCart('${competition.competitionId}')"> <springc:message
-                                    code="competition.voteNow"/></a>
+                               ng-click="addToCart('${competition.competitionId}')"> Oddaj g³os!</a>
                         </p>
                         <a
                                 href="<spring:url value="/competitions/competition?id=${competition.competitionId}"/>"
                                 class="btn btn-primary">
-                            <span class="glyphicon-info-sing glyphicon"/></span> <springc:message
-                                code="competitions.button.details"/>
+                            <span class="glyphicon-info-sing glyphicon"/></span> Szczegó³y
                         </a>
 
                     </div>
