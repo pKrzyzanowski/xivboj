@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -32,6 +31,7 @@ public class Person implements Serializable {
     //    @ColumnTransformer(read = "aes_encrypt(password, 'mySecretKey')", write = "aes_encrypt(?, 'mySecretKey')")
     @Size(min = 6, max = 50, message = "{Person.password.validation}")
     private String password;
+    private String confirmPassword;
     private int enabled = 1;
     private String role = "ROLE_USER";
     @OneToOne(mappedBy = "person")

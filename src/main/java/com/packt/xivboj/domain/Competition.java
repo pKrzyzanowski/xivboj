@@ -7,6 +7,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
@@ -26,10 +28,13 @@ public class Competition implements Serializable, Comparable {
     private int competitionId;
     //    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")
     @Column(name = "name")
+    @Size(min = 1, max = 50, message = "{competition.name.validation}")
     private String name;
     @Column(name = "rules")
+    @Size(min = 1, max = 50, message = "{competition.rules.validation}")
     private String rules;
     @Column(name = "preferedTime")
+    @Min(value = 1, message = "{competition.preferedTime.validation}")
     private int preferedTime;
     private String autorsName;
 

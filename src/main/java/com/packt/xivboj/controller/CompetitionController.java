@@ -97,14 +97,11 @@ public class CompetitionController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewCompetition(@ModelAttribute("newCompetition") @Valid Competition competitionToBeAdded, HttpServletRequest request, BindingResult result) {
+    public String processAddNewCompetition(@ModelAttribute("newCompetition") @Valid Competition competitionToBeAdded,BindingResult result, HttpServletRequest request ) {
 
         if (result.hasErrors()) {
             return "addCompetition";
         }
-
-
-
 
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
