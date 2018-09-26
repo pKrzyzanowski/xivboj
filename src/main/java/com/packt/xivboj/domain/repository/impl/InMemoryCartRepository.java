@@ -59,7 +59,7 @@ public class InMemoryCartRepository implements CartRepository {
 //    @Transactional
     public Cart read(String cartId) {
 
-//        cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
+        cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();

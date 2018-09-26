@@ -33,10 +33,6 @@ public class CartController {
         model.addAttribute("cartId", cartId);
         Cart cart = cartService.read(cartId);
 
-        // tutaj ustawic karcie konkurencje
-//        List<Competition> cartCompetitions = cartService.getAllCompetitionsbyCartsId(cartId);
-//        cart.setAllCartCompe(cartCompetitions);
-
         model.addAttribute("cart",cart );
         return "cart";
     }

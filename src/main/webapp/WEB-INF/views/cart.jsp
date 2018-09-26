@@ -33,7 +33,7 @@
 
         <table class="table table-hover">
             <tr>
-                <th>Twoje głosy</th>
+                <th>Twoje głosy (pozostało ${14-cart.allCartCompe.size()} do wykorzystania)</th>
             </tr>
 
             <%--<tr ng-repeat="competition in cart.allCartCompe" class="competition">--%>
