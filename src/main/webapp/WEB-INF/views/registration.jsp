@@ -61,10 +61,8 @@
             </label>
             <div class="col-lg-10">
                 <form:input id="personImage" path="personImage" type="file"/>
-
             </div>
         </div>
-
 
 
     </fieldset>
@@ -92,6 +90,7 @@
 
             </div>
         </div>
+
 
 
         <div class="form-group">

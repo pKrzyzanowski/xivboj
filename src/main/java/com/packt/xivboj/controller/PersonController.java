@@ -70,7 +70,7 @@ public class PersonController {
     }
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
-        binder.setAllowedFields("name","surname","age","description","PersonImage","username","password");
+        binder.setAllowedFields("name","surname","age","description","personImage","username","password");
         binder.setDisallowedFields("cart", "enabled","role");
     }
 

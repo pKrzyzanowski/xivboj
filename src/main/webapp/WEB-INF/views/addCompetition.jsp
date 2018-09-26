@@ -51,7 +51,6 @@
             </label>
             <div class="col-lg-10">
                 <form:input id="competitionImage" path="competitionImage" type="file"/>
-                <form:errors path="competitionImage" cssClass="text-danger"/>
             </div>
         </div>
 
