@@ -1,11 +1,13 @@
 package com.packt.xivboj.domain;
 
-import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,12 +21,16 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int nameId;
+    @Size(min = 1, max = 50, message = "{Person.name.validation}")
     private String name;
     private String surname;
+    @Min(value = 1, message = "{Person.age.validation}")
     private int age;
+    @Size(min = 1, max = 50, message = "{Person.description.validation}")
     private String description;
     private String username;
-//    @ColumnTransformer(read = "aes_encrypt(password, 'mySecretKey')", write = "aes_encrypt(?, 'mySecretKey')")
+    //    @ColumnTransformer(read = "aes_encrypt(password, 'mySecretKey')", write = "aes_encrypt(?, 'mySecretKey')")
+    @Size(min = 6, max = 50, message = "{Person.password.validation}")
     private String password;
     private int enabled = 1;
     private String role = "ROLE_USER";

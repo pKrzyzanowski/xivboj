@@ -69,9 +69,6 @@ http://www.springframework.org/schema/beans
         <property name="maxUploadSize" value="10240000"/>
     </bean>
 
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="validationMessageSource" ref="messageSource"/>
-    </bean>
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -90,7 +87,9 @@ http://www.springframework.org/schema/beans
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
     <!--<bean id="entityManager" class="javax.persistence.EntityManager" abstract="true"/>-->
 
 </beans>

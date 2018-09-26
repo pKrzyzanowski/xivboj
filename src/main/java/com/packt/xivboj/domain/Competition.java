@@ -32,8 +32,8 @@ public class Competition implements Serializable, Comparable {
     @Column(name = "preferedTime")
     private int preferedTime;
     private String autorsName;
-    @JsonIgnore
 
+    @JsonIgnore
     @Transient
     private MultipartFile competitionImage;
 

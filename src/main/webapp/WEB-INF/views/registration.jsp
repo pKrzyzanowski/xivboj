@@ -10,17 +10,17 @@
 <form:form modelAttribute="newPerson" class="form-horizontal" enctype="multipart/form-data">
 
     <fieldset>
-
         <legend>
             Dane Osoby
         </legend>
-        <form:errors path="*" cssClass="alert alert-danger" element="div"/>
 
+        <form:errors path="*" cssClass="alert alert-danger" element="div"/>
 
         <div class="form-group">
             <label class="control-label col-lg-2" for="name">Imiê</label>
             <div class="col-lg-10">
                 <form:input id="name" path="name" type="text"/>
+
             </div>
         </div>
 
@@ -30,6 +30,7 @@
             </label>
             <div class="col-lg-10">
                 <form:input id="surname" path="surname" type="text"/>
+
             </div>
         </div>
 
@@ -39,6 +40,7 @@
             </label>
             <div class="col-lg-10">
                 <form:input id="age" path="age" type="text"/>
+
             </div>
         </div>
 
@@ -48,6 +50,7 @@
             </label>
             <div class="col-lg-10">
                 <form:input id="description" path="description" type="text"/>
+
             </div>
         </div>
 
@@ -58,7 +61,7 @@
             </label>
             <div class="col-lg-10">
                 <form:input id="personImage" path="personImage" type="file"/>
-                <form:errors path="personImage" cssClass="text-danger"/>
+
             </div>
         </div>
 
@@ -70,11 +73,8 @@
     <fieldset>
 
         <legend>
-            Login I haslo
+            Login I has³o
         </legend>
-        <form:errors path="*" cssClass="alert alert-danger" element="div"/>
-
-
         <div class="form-group">
             <label class="control-label col-lg-2" for="username">Login</label>
             <div class="col-lg-10">
@@ -89,7 +89,7 @@
             </label>
             <div class="col-lg-10">
                 <form:input id="password" path="password" type="password"/>
-                <form:errors path="name" cssClass="text-danger"/>
+
             </div>
         </div>
 
