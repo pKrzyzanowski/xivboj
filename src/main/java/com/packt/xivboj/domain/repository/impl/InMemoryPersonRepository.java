@@ -83,7 +83,7 @@ public class InMemoryPersonRepository implements PersonRepository {
 
         //wraz z nowa osba tworzy sie nowa karta
         Cart cart = new Cart();
-        cart.setCartId(person.getName() + "sCart");
+        cart.setCartId(person.getUsername() + "sCart");
         person.setCart(cart);
         cart.setPerson(person);
         cartService.create(cart);
