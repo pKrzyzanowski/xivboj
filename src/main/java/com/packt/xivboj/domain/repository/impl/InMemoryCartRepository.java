@@ -66,20 +66,7 @@ public class InMemoryCartRepository implements CartRepository {
 
         Cart CartById = myEntityManager.find(Cart.class, cartId);
 
-        if (CartById==null) {
 
-            String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
-
-            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
-            Person person = (Person) nativeQuery.getSingleResult();
-
-            CartById = new Cart();
-            CartById.setCartId(currentPrincipalName + "sCart");
-            CartById.setPerson(person);
-            person.setCart(CartById);
-            myEntityManager.persist(CartById);
-            myEntityManager.merge(person);
-        }
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
         return CartById;

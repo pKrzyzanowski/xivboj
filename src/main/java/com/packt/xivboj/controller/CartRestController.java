@@ -2,6 +2,7 @@ package com.packt.xivboj.controller;
 
 import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Competition;
+import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.exception.CompetitionNotFoundException;
 import com.packt.xivboj.service.CartService;
 import com.packt.xivboj.service.CompetitionService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -68,6 +70,37 @@ public class CartRestController {
         String userName = currentPrincipalName + "sCart";
 
         Cart cart = cartService.read(userName);
+
+
+
+
+        if (cart==null) {
+
+
+
+            EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+            myEntityManager.getTransaction().begin();
+
+            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
+            Person person = (Person) nativeQuery.getSingleResult();
+
+            cart = new Cart();
+            cart.setCartId(currentPrincipalName + "sCart");
+            cart.setPerson(person);
+            person.setCart(cart);
+            myEntityManager.persist(cart);
+            myEntityManager.merge(person);
+
+            myEntityManager.getTransaction().commit();
+            myEntityManager.close();
+
+
+
+
+
+        }
+
+
 //        if (cart == null) {
 //            cart = cartService.create(new Cart(userName));
 //        }

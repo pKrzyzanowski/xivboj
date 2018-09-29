@@ -35,6 +35,7 @@ public class Person implements Serializable {
     private int enabled = 1;
     private String role = "ROLE_USER";
     @OneToOne(mappedBy = "person")
+    @JsonIgnore
     private Cart cart;
     @Transient
     @JsonIgnore

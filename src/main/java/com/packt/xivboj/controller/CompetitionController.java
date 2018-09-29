@@ -117,7 +117,6 @@ public class CompetitionController {
         competitionToBeAdded.setAutorsName(personName);
 
 
-
         competitionService.addCompetition(competitionToBeAdded);
 
         MultipartFile competitionImage = competitionToBeAdded.getCompetitionImage();

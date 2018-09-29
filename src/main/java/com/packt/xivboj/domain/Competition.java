@@ -21,12 +21,13 @@ public class Competition implements Serializable, Comparable {
     private static final long serialVersionUID = -538766763684258062L;
 
     @ManyToMany(mappedBy = "competitionList")
+    @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
+    private
     List<Person> personList;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int competitionId;
-    //    @Pattern(regexp="P[1-9]+", message="{cart.cleanCart}")
     @Column(name = "name")
     @Size(min = 1, max = 50, message = "{competition.name.validation}")
     private String name;
