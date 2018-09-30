@@ -6,10 +6,7 @@ cartApp.controller('cartCtrl',  function ($scope, $http) {
         $http.get('/rest/cart/'+$scope.cartId)
             .success(function(data) {
                 $scope.cart = data;
-                debugger;
-            }).error(function(data) {
-            debugger;
-        });
+            });
     };
 
     $scope.clearCart = function() {
@@ -33,7 +30,7 @@ cartApp.controller('cartCtrl',  function ($scope, $http) {
     $scope.removeFromCart = function(competitionId) {
         $http.put('/rest/cart/remove/'+competitionId)
             .success(function(data) {
-                $scope.refreshCart($scope.cartId);
+                $scope.refreshCart($http.get('/rest/cart/get/cartId'));
             });
     };
 });

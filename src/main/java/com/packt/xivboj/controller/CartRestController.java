@@ -17,6 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,22 +66,14 @@ public class CartRestController {
     @RequestMapping(value = "/add/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
 
         String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
         String userName = currentPrincipalName + "sCart";
-
         Cart cart = cartService.read(userName);
 
-
-
-
         if (cart==null) {
-
-
-
-            EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-            myEntityManager.getTransaction().begin();
-
             Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
             Person person = (Person) nativeQuery.getSingleResult();
 
@@ -90,34 +83,29 @@ public class CartRestController {
             person.setCart(cart);
             myEntityManager.persist(cart);
             myEntityManager.merge(person);
-
-            myEntityManager.getTransaction().commit();
-            myEntityManager.close();
-
-
-
-
-
         }
 
-
-//        if (cart == null) {
-//            cart = cartService.create(new Cart(userName));
-//        }
 
         Competition competition = competitionService.getCompetitionById(competitionId);
-        if (competition == null) {
-            throw new IllegalArgumentException(new CompetitionNotFoundException(competitionId));
+
+
+        List<Integer> competitionIdListFromUserCart = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId " + "FROM" +
+                " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
+
+         Integer userId =(Integer) myEntityManager.createNativeQuery( "SELECT nameId " + "FROM" +
+                " person" + " where username =" + "\"" + currentPrincipalName + "\"").getSingleResult();
+
+        List<Integer> competitionIdListFromUserVotes = myEntityManager.createNativeQuery("SELECT competitionList_competitionId " + "FROM" +
+                " person_competition" + " where personList_nameId =" + "\"" + userId + "\"").getResultList();
+
+        if (!competitionIdListFromUserCart.contains(competition.getCompetitionId()) && !competitionIdListFromUserVotes.contains(competition.getCompetitionId())) {
+            List<Competition> cartCompetitions = cart.getAllCartCompe();
+            cartCompetitions.add(competition);
+            cart.setAllCartCompe(cartCompetitions);
+
+            myEntityManager.merge(cart);
+            myEntityManager.merge(competition);
         }
-
-        List<Competition> cartCompetitions = cart.getAllCartCompe();
-        cartCompetitions.add(competition);
-        cart.setAllCartCompe(cartCompetitions);
-
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-        myEntityManager.merge(cart);
-        myEntityManager.merge(competition);
 
 
         myEntityManager.getTransaction().commit();
@@ -138,9 +126,6 @@ public class CartRestController {
         if (competition == null) {
             throw new IllegalArgumentException(new CompetitionNotFoundException(competitionId));
         }
-//        if (cart == null) {
-//            cart = cartService.create(new Cart(sessionId));
-//        }
 
         List<Competition> cartCompetitions = cart.getAllCartCompe();
         cartCompetitions.remove(competition);

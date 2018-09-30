@@ -14,22 +14,24 @@
 </head>
 <body>
 
-<section>
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Thanks for voting</h1>
-            <p>now, train to competition</p>
-        </div>
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>Dziêki za g³osy</h1>
+        <p>Trenuj do konkursu!</p>
     </div>
-</section>
-<div class="thumbnail" style="width:600px; height: auto; position: relative;text-align: center">
-    <section class="container">
-        <img src="<c:url value="/resource/images/siteStatic/goodLuck.jpg"></c:url>  " alt="image" style="width: 300px"/>
-        <p><a href="<spring:url value="/competitions" />" class="btn btn-primary">
-            <span class="glyphicon-hand-left glyphicon"></span> Competitions
-        </a>
-        </p>
-    </section>
+</div>
+
+<div class="container" style="position: relative;text-align: center">
+    <div class="col-md-4 col-md-offset-4">
+        <section class="container">
+            <img src="<c:url value="/resource/images/siteStatic/goodLuck.jpg"></c:url>  " alt="image"
+                 style="width: 300px"/>
+            <p><a href="<spring:url value="/competitions" />" class="btn btn-primary">
+                <span class="glyphicon-hand-left glyphicon"></span> Konkurencje
+            </a>
+            </p>
+        </section>
+    </div>
 </div>
 </body>
 

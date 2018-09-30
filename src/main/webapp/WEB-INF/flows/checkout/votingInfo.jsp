@@ -12,22 +12,19 @@
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans" rel="stylesheet">
 </head>
 <body>
-<section>
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Twoje g這sy</h1>
-            <p>Zag這sowane konkurencje</p>
-        </div>
+
+
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>Twoje g這sy</h1>
+        <p>Zag這sowane konkurencje</p>
     </div>
-</section>
-<section class="thumbnail" style="width: 600px">
+</div>
+
+<div class="col-md-4 col-md-offset-4">
     <section class="row">
         <form:form modelAttribute="order" class="form-horizontal">
-
-
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
-        <p>konkurencje na ktore zaglosowales to</p>
-
         <c:forEach items="${order.cart.allCartCompe}" var="CartCompe">
 
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
@@ -36,14 +33,11 @@
                     <img src="<c:url value="/resource/images/competitions/${CartCompe.competitionId}.jpg"></c:url>  "
                          alt="image"
                          style="width: 100px; max-height: 80px;  padding-top: 15px"/>
-
                 </div>
             </div>
         </c:forEach>
     </section>
-
-    <p>czy jestes pewien ze chcesz na nei zaglosowac? Nie bedzie juz odwrotu</p>
-    <div class="form-group">
+    <div class="form-group" style="position: relative;text-align: center">
         <div class="col-lg-offset-2 col-lg-10">
             <input type="submit" id="btnAdd" class="btn btn-primary" value="Dalej" name="_eventId_next"/>
             <button id="btnCancel" class="btn btn-default" name="_eventId_back">Powr鏒</button>
@@ -52,6 +46,6 @@
 
     </fieldset>
     </form:form>
-</section>
+</div>
 </body>
 </html>

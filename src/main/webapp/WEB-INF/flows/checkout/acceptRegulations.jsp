@@ -14,15 +14,15 @@
 <body>
 
 
-<section>
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Regulamin</h1>
-            <p>o¶wiadczenie o zgodzie</p>
-        </div>
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>Regulamin</h1>
+        <p>o¶wiadczenie o zgodzie</p>
     </div>
-</section>
-<div class="thumbnail" style="width: 600px">
+</div>
+
+<div class="col-md-4 col-md-offset-4">
+
     <section class="container">
         <form:form modelAttribute="order">
             <fieldset>
@@ -31,7 +31,6 @@
                 <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
                 <p>zgodznie z zasada honoru, oraz uscisku dloni zgadam sie na ponizsze zasady konkurencji</p>
                 <c:forEach items="${order.cart.allCartCompe}" var="CartCompe">
-                    <%--tutaj bedzie kafelek identyczny jak ten ktory jest w zakladce competitions tyle ze bez przycisku glosow i szczegoly--%>
                     <p><strong>${CartCompe.name}: </strong>${CartCompe.rules}</p>
                 </c:forEach>
 
@@ -49,5 +48,13 @@
         </form:form>
     </section>
 </div>
+
+
+
+
+
+
+
+
 </body>
 </html>

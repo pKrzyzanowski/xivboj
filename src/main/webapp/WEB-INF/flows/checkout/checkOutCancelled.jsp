@@ -14,8 +14,8 @@
 <section>
     <div class="jumbotron">
         <div class="container">
-            <h1 class="alert alert-danger">check out cancelled</h1>
-            <p>Your voting is cancaled</p>
+            <h1 class="alert alert-danger">Anulacja</h1>
+            <p>G³osowanie anulowane</p>
         </div>
     </div>
 </section>
@@ -24,7 +24,7 @@
     <div class="container">
         <p>
             <a href="<spring:url value="/competitions" />" class="btn btn-primary">
-                <span class="glyphicon-hand-left glyphicon"></span> Competitions
+                <span class="glyphicon-hand-left glyphicon"></span> Konkurencje
             </a>
         </p>
     </div>
