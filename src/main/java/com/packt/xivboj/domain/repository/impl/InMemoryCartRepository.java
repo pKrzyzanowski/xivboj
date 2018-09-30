@@ -20,7 +20,7 @@ import java.util.List;
 public class InMemoryCartRepository implements CartRepository {
 
     @PersistenceUnit
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
     @Autowired
     CompetitionService competitionService;
@@ -31,32 +31,19 @@ public class InMemoryCartRepository implements CartRepository {
     public InMemoryCartRepository() {
     }
 
-//    @Transactional
     public Cart create(Cart cart) {
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
-
-//        Cart cartFromDb = null;
-//        try {
-//            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM cart where name =" + "\"" + cart.getCartId() + "\"", Cart.class);
-//            cartFromDb = (Cart) nativeQuery.getSingleResult();
-//        } catch (NoResultException e) {
-//            e.printStackTrace();
-//        }
-//        if (cartFromDb==null) {
-//            myEntityManager.persist(cart);
-//        }
-
         myEntityManager.persist(cart);
+
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
         return cart;
     }
 
-//    @Transactional
     public Cart read(String cartId) {
 
         cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
@@ -76,16 +63,10 @@ public class InMemoryCartRepository implements CartRepository {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
-
         myEntityManager.merge(cart);
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
-
-        //        if (!listOfCarts.keySet().contains(cartId)) {
-//            throw new IllegalArgumentException("takiego koszyka nie ma");
-//        }
-
     }
 
 
@@ -93,16 +74,9 @@ public class InMemoryCartRepository implements CartRepository {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
-
         myEntityManager.remove(myEntityManager.find(Cart.class, cartId));
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
-
-//        if (!listOfCarts.keySet().contains(cartId)) {
-//            throw new IllegalArgumentException("nie mozna usunac takigo koszyka bo on nie istnieje");
-//        }
-//        listOfCarts.remove(cartId);
     }
-
 }

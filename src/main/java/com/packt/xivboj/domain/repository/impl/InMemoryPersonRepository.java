@@ -26,7 +26,6 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-//    @Transactional
     public Person getPersonById(int personId) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -36,12 +35,9 @@ public class InMemoryPersonRepository implements PersonRepository {
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
         return personById;
-//        if (personById == null) {
-//            throw new PersonNotFoundException(personId);
-//        }
     }
 
-    //    @Transactional
+
     @Override
     public List<Person> getAllPersons() {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
@@ -56,7 +52,6 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-//    @Transactional
     public void addPerson(Person person) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -66,7 +61,6 @@ public class InMemoryPersonRepository implements PersonRepository {
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
-        //wraz z nowa osba tworzy sie nowa karta
         Cart cart = new Cart();
         cart.setCartId(person.getUsername() + "sCart");
         person.setCart(cart);

@@ -16,7 +16,7 @@ import java.util.List;
 public class InMemoryCompetitionRepository implements CompetitionRepository {
 
     @PersistenceUnit
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
     public InMemoryCompetitionRepository() {
     }
@@ -32,9 +32,6 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
         return resultList;
-    }
-
-    public void initializeBasicCompetitions() {
     }
 
     @Override
@@ -58,12 +55,9 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
     }
+
     @Override
     public void removeCompetition(int competitionId) {
-//        if (!competitionList.contains(getCompetitionById(competitionId))) {
-//            throw new IllegalArgumentException(String.format("Produkt o wskazanym id (%) nie istnieje", competitionId));
-//        }
-//        competitionList.remove(getCompetitionById(competitionId));
     }
 
     @Override

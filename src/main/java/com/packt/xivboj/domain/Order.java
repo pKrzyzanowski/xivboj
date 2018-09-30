@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table (name = "zamowienie")
+@Table(name = "zamowienie")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = -3560539622417210355L;
@@ -25,7 +25,6 @@ public class Order implements Serializable {
     public Order(Person person) {
         this.person = person;
     }
-
 
     public Long getOrderId() {
         return orderId;

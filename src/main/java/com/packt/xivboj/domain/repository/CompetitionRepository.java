@@ -6,14 +6,11 @@ import java.util.List;
 
 public interface CompetitionRepository {
 
-     List<Competition> getAllCompetitions();
+    List<Competition> getAllCompetitions();
 
-     void addCompetition(Competition competition);
+    void addCompetition(Competition competition);
 
-     void removeCompetition(int competitionId);
+    void removeCompetition(int competitionId);
 
-     Competition getCompetitionById(int competitionId);
-
-     void initializeBasicCompetitions();
-
+    Competition getCompetitionById(int competitionId);
 }

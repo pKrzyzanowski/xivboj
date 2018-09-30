@@ -27,18 +27,8 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public void removeCompetition(int competitionId) {
-        competitionRepository.removeCompetition(competitionId);
-    }
-
-    @Override
     public Competition getCompetitionById(int competitionId) {
         return competitionRepository.getCompetitionById(competitionId);
-    }
-
-    @Override
-    public void initializeBasicCompetitions() {
-        competitionRepository.initializeBasicCompetitions();
     }
 
 

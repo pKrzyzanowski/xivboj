@@ -2,20 +2,19 @@ package com.packt.xivboj.controller;
 
 
 import com.packt.xivboj.domain.Person;
-import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
@@ -24,7 +23,7 @@ import java.io.File;
 @RequestMapping("/people")
 public class PersonController {
     @PersistenceUnit
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
     @Autowired
     PersonService personService;
@@ -38,7 +37,7 @@ public class PersonController {
     @RequestMapping("/person")
     public String getPersonById(@RequestParam("personId") int personId, Model model) {
         Person person = personService.getPersonById(personId);
-        model.addAttribute("person",person);
+        model.addAttribute("person", person);
         return "person";
     }
 
@@ -50,24 +49,22 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewPerson( @ModelAttribute("newPerson")@Valid  Person personToBeAdded,BindingResult result, HttpServletRequest request ) {
-
+    public String processAddNewPerson(@ModelAttribute("newPerson") @Valid Person personToBeAdded, BindingResult result, HttpServletRequest request) {
 
         Person existingPerson = null;
         try {
             EntityManager myEntityManager = entityManagerFactory.createEntityManager();
             myEntityManager.getTransaction().begin();
 
-            existingPerson = (Person) myEntityManager.createNativeQuery( "SELECT * FROM" +
-                    " person where username =" + "\"" + personToBeAdded.getUsername() + "\"",Person.class).getSingleResult();
+            existingPerson = (Person) myEntityManager.createNativeQuery("SELECT * FROM" +
+                    " person where username =" + "\"" + personToBeAdded.getUsername() + "\"", Person.class).getSingleResult();
 
             myEntityManager.getTransaction().commit();
             myEntityManager.close();
         } catch (NoResultException e) {
         }
 
-
-        if(result.hasErrors() || existingPerson!=null) {
+        if (result.hasErrors() || existingPerson != null) {
             return "registration";
         }
 
@@ -83,15 +80,12 @@ public class PersonController {
             }
         }
 
-
-
         return "redirect:/people";
     }
+
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
-        binder.setAllowedFields("name","surname","age","description","personImage","username","password");
-        binder.setDisallowedFields("cart", "enabled","role");
+        binder.setAllowedFields("name", "surname", "age", "description", "personImage", "username", "password");
+        binder.setDisallowedFields("cart", "enabled", "role");
     }
-
-
 }

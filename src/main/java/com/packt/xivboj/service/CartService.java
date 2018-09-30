@@ -15,6 +15,4 @@ public interface CartService {
     void delete(String cartId);
 
     Cart validate(String cartId);
-
-//     List<Competition> getAllCompetitionsbyCartsId(String cartId);
 }

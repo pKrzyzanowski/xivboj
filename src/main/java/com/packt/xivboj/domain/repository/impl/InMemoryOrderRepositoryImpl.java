@@ -32,7 +32,6 @@ public class InMemoryOrderRepositoryImpl implements OrderRepository {
 
     public long saveOrder(Order order) {
 
-
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
@@ -40,7 +39,6 @@ public class InMemoryOrderRepositoryImpl implements OrderRepository {
         Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
         Person person = (Person) nativeQuery.getSingleResult();
         order.setPerson(person);
-
 
         List<Integer> competitionIdList = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId " + "FROM" +
                 " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
@@ -50,7 +48,6 @@ public class InMemoryOrderRepositoryImpl implements OrderRepository {
         for (Integer competitionId : competitionIdList) {
             competitionList.add(myEntityManager.find(Competition.class, competitionId));
         }
-
 
         person.setCompetitionList(competitionList);
         myEntityManager.merge(person);

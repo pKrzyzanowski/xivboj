@@ -35,11 +35,6 @@ public class Cart implements Serializable {
 
     }
 
-    public Cart(String cartId) {
-        this();
-        this.cartId = cartId;
-    }
-
     public Person getPerson() {
         return person;
     }
@@ -63,12 +58,6 @@ public class Cart implements Serializable {
 
     public void setCartId(String cartId) {
         this.cartId = cartId;
-    }
-
-
-    public void removeCartCompe(Competition cartCompe) {
-//        int competitionId = cartCompe.getCompetitionId();
-//        cartCompetitions.remove(competitionId);
     }
 
     @Override

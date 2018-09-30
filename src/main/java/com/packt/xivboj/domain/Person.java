@@ -30,7 +30,6 @@ public class Person implements Serializable {
     private int age;
     private String description;
     private String username;
-//    @ColumnTransformer(read = "aes_encrypt(password, 'mySecretKey')", write = "aes_encrypt(?, 'mySecretKey')")
     private String password;
     private int enabled = 1;
     private String role = "ROLE_USER";

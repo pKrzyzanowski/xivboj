@@ -21,24 +21,15 @@ import java.util.List;
 public class ResultsController {
 
     @PersistenceUnit
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
 
     @RequestMapping
     public String results(Model model)
     {
 
-
-
-
-
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
-
-
-//        String query = "SELECT allCartCompe_competitionId FROM cartcompetition WHERE Cart_cartId = " + "\"" + cartId + "\"";
-//        Query nativeQuery = myEntityManager.createNativeQuery(query);
-//        List<Integer> resultList = nativeQuery.getResultList();
 
         Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM competition", Competition.class);
         List<Competition> competitionList = nativeQuery.getResultList();

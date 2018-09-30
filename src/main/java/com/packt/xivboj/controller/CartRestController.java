@@ -32,14 +32,12 @@ public class CartRestController {
     @Autowired
     private CompetitionService competitionService;
 
-//    @Transactional
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
     Cart create(@RequestBody Cart cart) {
         return cartService.create(cart);
     }
 
-//    @Transactional
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public @ResponseBody
     Cart read(@PathVariable(value = "cartId") String cartId) {
@@ -48,24 +46,22 @@ public class CartRestController {
         return cart;
     }
 
-//    @Transactional
+
     @RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@PathVariable(value = "cartId") String cartId, @RequestBody Cart cart) {
         cartService.update(cart);
     }
 
-//    @Transactional
     @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "cartId") String cartId) {
         cartService.delete(cartId);
     }
 
-//    @Transactional
     @RequestMapping(value = "/add/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void addItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
+    public void addItem(@PathVariable int competitionId)  {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
@@ -85,9 +81,7 @@ public class CartRestController {
             myEntityManager.merge(person);
         }
 
-
         Competition competition = competitionService.getCompetitionById(competitionId);
-
 
         List<Integer> competitionIdListFromUserCart = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId"
                 + " FROM cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
@@ -107,7 +101,6 @@ public class CartRestController {
             myEntityManager.merge(cart);
             myEntityManager.merge(competition);
         }
-
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
