@@ -89,16 +89,17 @@ public class CartRestController {
         Competition competition = competitionService.getCompetitionById(competitionId);
 
 
-        List<Integer> competitionIdListFromUserCart = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId " + "FROM" +
-                " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
+        List<Integer> competitionIdListFromUserCart = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId"
+                + " FROM cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
 
          Integer userId =(Integer) myEntityManager.createNativeQuery( "SELECT nameId " + "FROM" +
-                " person" + " where username =" + "\"" + currentPrincipalName + "\"").getSingleResult();
+                " person where username =" + "\"" + currentPrincipalName + "\"").getSingleResult();
 
-        List<Integer> competitionIdListFromUserVotes = myEntityManager.createNativeQuery("SELECT competitionList_competitionId " + "FROM" +
-                " person_competition" + " where personList_nameId =" + "\"" + userId + "\"").getResultList();
+        List<Integer> competitionIdListFromUserVotes = myEntityManager.createNativeQuery("SELECT competitionList_competitionId"
+                + " FROM person_competition where personList_nameId =" + "\"" + userId + "\"").getResultList();
 
-        if (!competitionIdListFromUserCart.contains(competition.getCompetitionId()) && !competitionIdListFromUserVotes.contains(competition.getCompetitionId())) {
+        if (!competitionIdListFromUserCart.contains(competition.getCompetitionId())
+                && !competitionIdListFromUserVotes.contains(competition.getCompetitionId())) {
             List<Competition> cartCompetitions = cart.getAllCartCompe();
             cartCompetitions.add(competition);
             cart.setAllCartCompe(cartCompetitions);
@@ -112,7 +113,6 @@ public class CartRestController {
         myEntityManager.close();
     }
 
-//    @Transactional
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
@@ -146,9 +146,9 @@ public class CartRestController {
     public void handleClientErrors(Exception ex) {
     }
 
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Wewnêtrzny b³¹d serwera")
-//    public void handleServerErrors(Exception ex) {
-//        System.out.println("serwer error");
-//    }
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Wewnêtrzny b³¹d serwera")
+    public void handleServerErrors(Exception ex) {
+        System.out.println("serwer error");
+    }
 }

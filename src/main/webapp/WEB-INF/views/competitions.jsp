@@ -23,17 +23,26 @@
                          style="width: 150px; max-height: 140px;  padding-top: 5px"/>
 
 
-                    <div class="button" style="position: absolute ;; bottom: 10px;text-align: center">
-                        <p data-ng-controller="cartCtrl">
-                            <a href="#" class="btn btn-primary"
-                               ng-click="addToCart('${competition.competitionId}')"> Oddaj g³os!</a>
-                        </p>
-                        <a
-                                href="<spring:url value="/competitions/competition?id=${competition.competitionId}"/>"
-                                class="btn btn-primary">
-                            <span class="glyphicon-info-sing glyphicon"/></span> Szczegó³y
-                        </a>
+                    <div class="button" style="position: absolute ;; bottom: 10px;text-align: center"
+                         data-ng-controller="cartCtrl">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a
+                                    href="#" class="btn btn-outline-secondary"
+                                    ng-click="addToCart('${competition.competitionId}')">
+                                <button type="button" class="btn btn-outline-secondary">
+                                    Oddaj g³os!
+                                </button>
+                            </a>
 
+                            <a
+                                    href="<spring:url value="/competitions/competition?id=${competition.competitionId}"/>"
+                                    class="btn btn-outline-secondary">
+                                <button type="button" class="btn btn-outline-secondary">
+
+                                    Szczegó³y
+                                </button>
+                            </a>
+                        </div>
                     </div>
 
                 </div>

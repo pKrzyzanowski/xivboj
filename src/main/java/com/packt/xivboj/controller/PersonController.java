@@ -5,6 +5,8 @@ import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
@@ -20,6 +23,8 @@ import java.io.File;
 @Controller
 @RequestMapping("/people")
 public class PersonController {
+    @PersistenceUnit
+    EntityManagerFactory entityManagerFactory;
 
     @Autowired
     PersonService personService;
@@ -48,7 +53,21 @@ public class PersonController {
     public String processAddNewPerson( @ModelAttribute("newPerson")@Valid  Person personToBeAdded,BindingResult result, HttpServletRequest request ) {
 
 
-        if(result.hasErrors()) {
+        Person existingPerson = null;
+        try {
+            EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+            myEntityManager.getTransaction().begin();
+
+            existingPerson = (Person) myEntityManager.createNativeQuery( "SELECT * FROM" +
+                    " person where username =" + "\"" + personToBeAdded.getUsername() + "\"",Person.class).getSingleResult();
+
+            myEntityManager.getTransaction().commit();
+            myEntityManager.close();
+        } catch (NoResultException e) {
+        }
+
+
+        if(result.hasErrors() || existingPerson!=null) {
             return "registration";
         }
 

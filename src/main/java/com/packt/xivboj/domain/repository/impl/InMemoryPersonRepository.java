@@ -1,17 +1,16 @@
 package com.packt.xivboj.domain.repository.impl;
 
 import com.packt.xivboj.domain.Cart;
-import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.PersonRepository;
-import com.packt.xivboj.exception.PersonNotFoundException;
 import com.packt.xivboj.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import java.util.List;
 
 
@@ -41,7 +40,8 @@ public class InMemoryPersonRepository implements PersonRepository {
 //            throw new PersonNotFoundException(personId);
 //        }
     }
-//    @Transactional
+
+    //    @Transactional
     @Override
     public List<Person> getAllPersons() {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
@@ -61,23 +61,8 @@ public class InMemoryPersonRepository implements PersonRepository {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
+        myEntityManager.persist(person);
 
-
-
-//        List<Person> personFromDb = null;
-//        try {
-//            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM Person where (name)=(" + "\"" + person.getName() + "\")", Person.class);
-//            personFromDb =  nativeQuery.getResultList();
-//        } catch (NoResultException e) {
-//            e.printStackTrace();
-//        }
-//        if (personFromDb.get(0)==null) {
-//        }
-//
-
-//        myEntityManager.persist(person);
-
-            myEntityManager.persist(person);
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
@@ -87,6 +72,5 @@ public class InMemoryPersonRepository implements PersonRepository {
         person.setCart(cart);
         cart.setPerson(person);
         cartService.create(cart);
-
     }
 }

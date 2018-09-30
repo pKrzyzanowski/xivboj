@@ -32,11 +32,16 @@
             <br>
             <br>
             <p data-ng-controller="cartCtrl">
-                <a href="<spring:url value="/competitions"/>" class="btn btn-primary"> <springc:message
-                        code="competition.backToCompetitions"/></a>
-                <a href="#" ng-click="addToCart('${competition.competitionId}')" class="btn btn-primary">
-                    <springc:message
-                            code="competition.voteNow"/></a>
+                <a href="<spring:url value="/competitions"/>">
+                    <button type="button" class="btn btn-outline-secondary">
+                        <springc:message code="competition.backToCompetitions"/>
+                    </button>
+                </a>
+                <a href="#" ng-click="addToCart('${competition.competitionId}')">
+                    <button type="button" class="btn btn-outline-secondary">
+                        Oddaj glos!
+                    </button>
+                </a>
 
         </div>
         <div class="col-md-4">

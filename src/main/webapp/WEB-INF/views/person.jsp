@@ -26,8 +26,10 @@
             <p>
                 <br>
                 <br>
-                <a href="<spring:url value="/people"/>" class="btn btn-primary"> <spring:message
-                        code="person.button.backToPeople"/></a>
+                <a href="<spring:url value="/people"/>"> <button type="button" class="btn btn-outline-secondary">
+                    <spring:message
+                            code="person.button.backToPeople"/>
+                </button></a>
 
 
         </div>
