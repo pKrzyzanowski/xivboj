@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface CompetitionService {
 
-     List<Competition> getAllCompetitions();
+    List<Competition> getAllCompetitions();
 
-     void addCompetition(Competition competition);
+    void addCompetition(Competition competition);
 
-     Competition getCompetitionById(int competitionId);
+    Competition getCompetitionById(int competitionId);
 
 }

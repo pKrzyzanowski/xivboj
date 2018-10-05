@@ -23,7 +23,7 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int nameId;
-    @Size(min=4, max=50, message="{Size.Product.name.validation}")
+    @Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
 
     private String name;
     private String surname;

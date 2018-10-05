@@ -1,5 +1,6 @@
 package com.packt.xivboj.controller;
 
+import com.packt.xivboj.util.PrincipalUtil;
 import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
@@ -9,7 +10,6 @@ import com.packt.xivboj.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -17,7 +17,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,8 +26,10 @@ public class CartRestController {
 
     @PersistenceUnit
     EntityManagerFactory entityManagerFactory;
+
     @Autowired
     private CartService cartService;
+
     @Autowired
     private CompetitionService competitionService;
 
@@ -41,7 +42,6 @@ public class CartRestController {
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public @ResponseBody
     Cart read(@PathVariable(value = "cartId") String cartId) {
-
         Cart cart = cartService.read(cartId);
         return cart;
     }
@@ -61,7 +61,7 @@ public class CartRestController {
 
     @RequestMapping(value = "/add/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void addItem(@PathVariable int competitionId)  {
+    public void addItem(@PathVariable int competitionId) {
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
 
@@ -69,7 +69,7 @@ public class CartRestController {
         String userName = currentPrincipalName + "sCart";
         Cart cart = cartService.read(userName);
 
-        if (cart==null) {
+        if (cart == null) {
             Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
             Person person = (Person) nativeQuery.getSingleResult();
 
@@ -86,7 +86,7 @@ public class CartRestController {
         List<Integer> competitionIdListFromUserCart = myEntityManager.createNativeQuery("SELECT allCartCompe_competitionId"
                 + " FROM cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
 
-         Integer userId =(Integer) myEntityManager.createNativeQuery( "SELECT nameId " + "FROM" +
+        Integer userId = (Integer) myEntityManager.createNativeQuery("SELECT nameId " + "FROM" +
                 " person where username =" + "\"" + currentPrincipalName + "\"").getSingleResult();
 
         List<Integer> competitionIdListFromUserVotes = myEntityManager.createNativeQuery("SELECT competitionList_competitionId"
@@ -109,26 +109,22 @@ public class CartRestController {
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
+        String userCartName = PrincipalUtil.getCurrentUserCartName();
 
-
-        String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
-        String userName = currentPrincipalName + "sCart";
-
-        Cart cart = cartService.read(userName);
+        Cart cart = cartService.read(userCartName);
         Competition competition = competitionService.getCompetitionById(competitionId);
         if (competition == null) {
             throw new IllegalArgumentException(new CompetitionNotFoundException(competitionId));
         }
 
-        List<Competition> cartCompetitions = cart.getAllCartCompe();
-        cartCompetitions.remove(competition);
-        cart.setAllCartCompe(cartCompetitions);
+        cart.getAllCartCompe().remove(competition);
 
+        //cała logika entityManagera powinna znajdować się w ImplRepository
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
         myEntityManager.merge(cart);
+        //nie jestem pewien czy potrzebujesz to mergowac, jeżeli cart mergujesz to tamto competition tez sila rzeczy sie dopisze, ale mozesz sprawdzic, przetestowac
         myEntityManager.merge(competition);
-
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
@@ -137,11 +133,12 @@ public class CartRestController {
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Niepoprawne ¿¹danie, sprawdŸ przesy³ane dane.")
     public void handleClientErrors(Exception ex) {
+        System.out.println("Client error." + ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Wewnêtrzny b³¹d serwera")
     public void handleServerErrors(Exception ex) {
-        System.out.println("serwer error");
+        System.out.println("Server error." + ex.getMessage());
     }
 }

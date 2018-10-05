@@ -48,7 +48,7 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
             e.printStackTrace();
         }
 
-        if (competitionFromDb==null) {
+        if (competitionFromDb == null) {
             myEntityManager.persist(competition);
         }
 
