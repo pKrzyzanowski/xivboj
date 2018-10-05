@@ -10,13 +10,13 @@ First 14 competitions will be organized during the tournament.
 All data is kept in a database. It is possible to see the other competitors' votes. 
 
 ## Technologies
-#### Spring MVC
-#### Hibernate 
-#### mySQL
-#### Maven
-#### Tomcat
-#### JSON
-#### JDBC
+    #### Spring MVC
+    #### Hibernate 
+    #### mySQL
+    #### Maven
+    #### Tomcat
+    #### JSON
+    #### JDBC
 
 ## Open the Project
 In order to open the project, it is required to have Tomcat (at least version 8) installed.
