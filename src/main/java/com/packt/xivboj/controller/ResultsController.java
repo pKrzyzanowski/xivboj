@@ -25,8 +25,7 @@ public class ResultsController {
 
 
     @RequestMapping
-    public String results(Model model)
-    {
+    public String results(Model model) {
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();
@@ -38,7 +37,7 @@ public class ResultsController {
         myEntityManager.close();
 
         int treshHold = 0;
-        if (competitionList.size()>12) {
+        if (competitionList.size() > 12) {
             treshHold = competitionList.get(13).getPersonList().size();
         }
         model.addAttribute("competitionList", competitionList);

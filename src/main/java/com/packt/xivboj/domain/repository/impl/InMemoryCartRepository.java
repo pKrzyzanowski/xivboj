@@ -6,6 +6,7 @@ import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.CartRepository;
 import com.packt.xivboj.service.CartService;
 import com.packt.xivboj.service.CompetitionService;
+import com.packt.xivboj.util.PrincipalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
@@ -14,10 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 @Repository
-public class InMemoryCartRepository implements CartRepository {
+public class InMemoryCartRepository extends InMemoryBaseRepository implements CartRepository {
 
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
@@ -28,55 +30,51 @@ public class InMemoryCartRepository implements CartRepository {
     @Autowired
     CartService cartService;
 
+    @Autowired
     public InMemoryCartRepository() {
     }
 
-    public Cart create(Cart cart) {
-
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        myEntityManager.persist(cart);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-
+    public Cart create(final Cart cart) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                entityManager.persist(cart);
+            }
+        });
         return cart;
     }
 
-    public Cart read(String cartId) {
+    //skoro i tak cartId jest przypisywane potem to nie musimy podawac tego w argumencie metody
+    //cartIdArg do usuniecia na moje
+    public Cart read(String cartIdArg) {
+        final String cartId = PrincipalUtil.getCurrentUserCartName();
 
-        cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
+        final AtomicReference<Cart> cartById = new AtomicReference<>();
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                cartById.set(entityManager.find(Cart.class, cartId));
+            }
+        });
 
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        Cart CartById = myEntityManager.find(Cart.class, cartId);
-
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-        return CartById;
+        return cartById.get();
     }
 
-    public void update(Cart cart) {
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        myEntityManager.merge(cart);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
+    public void update(final Cart cart) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                entityManager.merge(cart);
+            }
+        });
     }
 
-
-    public void delete(String cartId) {
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        myEntityManager.remove(myEntityManager.find(Cart.class, cartId));
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
+    public void delete(final String cartId) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                entityManager.remove(entityManager.find(Cart.class, cartId));
+            }
+        });
     }
 }

@@ -20,19 +20,19 @@ public class Cart implements Serializable {
     @Autowired
     @Transient
     CartService cartService;
+
     @Id
     private String cartId;
+
     @OneToOne
     private Person person;
 
-
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name = "CartCompetition")
+    @JoinTable(name = "CartCompetition") //COMPETITION NIE COMPE, zrefactoruj (shift +f6)
     private List<Competition> allCartCompe = new ArrayList<>();
 
     public Cart() {
-
     }
 
     public Person getPerson() {
@@ -42,7 +42,6 @@ public class Cart implements Serializable {
     public void setPerson(Person person) {
         this.person = person;
     }
-
 
     public List<Competition> getAllCartCompe() {
         return allCartCompe;

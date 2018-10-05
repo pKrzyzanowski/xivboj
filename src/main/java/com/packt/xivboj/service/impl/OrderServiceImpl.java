@@ -22,6 +22,6 @@ public class OrderServiceImpl implements OrderService {
     public Long saveOrder(Order order) {
 
 
-        return  orderRepository.saveOrder(order);
+        return orderRepository.saveOrder(order);
     }
 }
