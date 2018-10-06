@@ -30,7 +30,7 @@
 
                 <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
                 <p>zgodznie z zasada honoru, oraz uscisku dloni zgadam sie na ponizsze zasady konkurencji</p>
-                <c:forEach items="${order.cart.allCartCompe}" var="CartCompe">
+                <c:forEach items="${order.cart.allCartCompetition}" var="CartCompe">
                     <p><strong>${CartCompe.name}: </strong>${CartCompe.rules}</p>
                 </c:forEach>
 

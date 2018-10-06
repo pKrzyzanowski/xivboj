@@ -19,6 +19,7 @@ public class InMemoryPersonRepository implements PersonRepository {
 
     @Autowired
     CartService cartService;
+
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
 

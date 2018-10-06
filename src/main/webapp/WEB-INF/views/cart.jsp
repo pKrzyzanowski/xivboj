@@ -33,7 +33,7 @@
 
         <table class="table table-hover">
             <tr>
-                <th>Twoje głosy (pozostało ${14-cart.allCartCompe.size()} do wykorzystania)</th>
+                <th>Twoje głosy (pozostało ${14-cart.allCartCompetition.size()} do wykorzystania)</th>
             </tr>
 
             <%--<tr ng-repeat="competition in cart.allCartCompe" class="competition">--%>
@@ -44,7 +44,7 @@
             <%--<tr ng-repeat="competition in ${cart.allCartCompe}">--%>
 
             <%--<tr ng-repeat="item in cart.allCartCompe">--%>
-            <c:forEach items="${cart.allCartCompe}" var="competition">
+            <c:forEach items="${cart.allCartCompetition}" var="competition">
                 <tr>
                     <td>
                         <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">

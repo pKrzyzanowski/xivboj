@@ -110,7 +110,6 @@ public class Competition implements Serializable, Comparable {
         this.preferedTime = preferedTime;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -124,7 +123,6 @@ public class Competition implements Serializable, Comparable {
             return false;
         return true;
     }
-
 
     @Override
     public int hashCode() {

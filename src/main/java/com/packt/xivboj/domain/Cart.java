@@ -14,25 +14,24 @@ import java.util.List;
 @Entity
 public class Cart implements Serializable {
 
-
     private static final long serialVersionUID = -53008677344258065L;
 
     @Autowired
     @Transient
     CartService cartService;
+
     @Id
     private String cartId;
+
     @OneToOne
     private Person person;
-
 
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "CartCompetition")
-    private List<Competition> allCartCompe = new ArrayList<>();
+    private List<Competition> allCartCompetition = new ArrayList<>();
 
     public Cart() {
-
     }
 
     public Person getPerson() {
@@ -43,13 +42,12 @@ public class Cart implements Serializable {
         this.person = person;
     }
 
-
-    public List<Competition> getAllCartCompe() {
-        return allCartCompe;
+    public List<Competition> getAllCartCompetition() {
+        return allCartCompetition;
     }
 
-    public void setAllCartCompe(List<Competition> allCartCompe) {
-        this.allCartCompe = allCartCompe;
+    public void setAllCartCompetition(List<Competition> allCartCompe) {
+        this.allCartCompetition = allCartCompe;
     }
 
     public String getCartId() {
@@ -78,10 +76,7 @@ public class Cart implements Serializable {
             return false;
         Cart other = (Cart) obj;
         if (cartId == null) {
-            if (other.cartId != null)
-                return false;
-        } else if (!cartId.equals(other.cartId))
-            return false;
-        return true;
+            return other.cartId == null;
+        } else return cartId.equals(other.cartId);
     }
 }

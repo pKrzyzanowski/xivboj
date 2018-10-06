@@ -1,14 +1,11 @@
 package com.packt.xivboj.domain;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +20,7 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int nameId;
-    @Size(min=4, max=50, message="{Size.Product.name.validation}")
+    @Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
 
     private String name;
     private String surname;

@@ -22,6 +22,7 @@ import java.io.File;
 @Controller
 @RequestMapping("/people")
 public class PersonController {
+
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
 

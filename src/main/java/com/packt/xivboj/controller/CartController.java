@@ -19,21 +19,22 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/cart")
 public class CartController {
+
     @Autowired
     CartService cartService;
 
     @RequestMapping
     public String get(HttpServletRequest request) {
-        return "redirect:/cart/" +SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
+        return "redirect:/cart/" + SecurityContextHolder.getContext().getAuthentication().getName() + "sCart";
     }
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public String getCart(@PathVariable(value = "cartId") String cartId, Model model) {
 
         model.addAttribute("cartId", cartId);
-        Cart cart = cartService.read(cartId);
+        Cart cart = cartService.read();
 
-        model.addAttribute("cart",cart );
+        model.addAttribute("cart", cart);
         return "cart";
     }
 }

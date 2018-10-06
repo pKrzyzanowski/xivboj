@@ -6,7 +6,7 @@ public interface CartRepository {
 
     Cart create(Cart cart);
 
-    Cart read(String cartId);
+    Cart read();
 
     void update(Cart cart);
 

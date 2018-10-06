@@ -25,7 +25,7 @@
     <section class="row">
         <form:form modelAttribute="order" class="form-horizontal">
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
-        <c:forEach items="${order.cart.allCartCompe}" var="CartCompe">
+        <c:forEach items="${order.cart.allCartCompetition}" var="CartCompe">
 
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                 <div class="thumbnail" style="width: 170px; height: 160px">

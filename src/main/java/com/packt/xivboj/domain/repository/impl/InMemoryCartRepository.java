@@ -14,10 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 @Repository
-public class InMemoryCartRepository implements CartRepository {
+public class InMemoryCartRepository extends InMemoryBaseRepository implements CartRepository {
 
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
@@ -31,52 +32,45 @@ public class InMemoryCartRepository implements CartRepository {
     public InMemoryCartRepository() {
     }
 
-    public Cart create(Cart cart) {
-
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        myEntityManager.persist(cart);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-
+    public Cart create(final Cart cart) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                entityManager.persist(cart);
+            }
+        });
         return cart;
     }
 
-    public Cart read(String cartId) {
+    public Cart read() {
+        final String cartId = SecurityContextHolder.getContext().getAuthentication().getName() + "sCart";
+        final AtomicReference<Cart> CartById = new AtomicReference<>();
 
-        cartId = SecurityContextHolder.getContext().getAuthentication().getName()+"sCart";
-
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        Cart CartById = myEntityManager.find(Cart.class, cartId);
-
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-        return CartById;
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                CartById.set(entityManager.find(Cart.class, cartId));
+            }
+        });
+        return CartById.get();
     }
 
-    public void update(Cart cart) {
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        myEntityManager.merge(cart);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
+    public void update(final Cart cart) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                entityManager.merge(cart);
+            }
+        });
     }
 
-
-    public void delete(String cartId) {
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        myEntityManager.remove(myEntityManager.find(Cart.class, cartId));
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
+    public void delete(final String cartId) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                entityManager.remove(entityManager.find(Cart.class, cartId));
+            }
+        });
     }
+
 }

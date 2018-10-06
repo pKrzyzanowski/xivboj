@@ -1,5 +1,6 @@
 package com.packt.xivboj.domain.repository.impl;
 
+import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.CompetitionRepository;
@@ -10,10 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 @Repository
-public class InMemoryCompetitionRepository implements CompetitionRepository {
+public class InMemoryCompetitionRepository extends InMemoryBaseRepository implements CompetitionRepository {
 
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
@@ -31,29 +33,28 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
 
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
+
         return resultList;
     }
 
     @Override
-    public void addCompetition(Competition competition) {
+    public void addCompetition(final Competition competition) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                Competition competitionFromDb = null;
+                try {
+                    Query nativeQuery = entityManager.createNativeQuery("SELECT * FROM competition where name =" + "\"" + competition.getName() + "\"", Competition.class);
+                    competitionFromDb = (Competition) nativeQuery.getSingleResult();
+                } catch (NoResultException e) {
+                    e.printStackTrace();
+                }
 
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        Competition competitionFromDb = null;
-        try {
-            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM competition where name =" + "\"" + competition.getName() + "\"", Competition.class);
-            competitionFromDb = (Competition) nativeQuery.getSingleResult();
-        } catch (NoResultException e) {
-            e.printStackTrace();
-        }
-
-        if (competitionFromDb==null) {
-            myEntityManager.persist(competition);
-        }
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
+                if (competitionFromDb == null) {
+                    entityManager.persist(competition);
+                }
+            }
+        });
     }
 
     @Override
@@ -61,22 +62,20 @@ public class InMemoryCompetitionRepository implements CompetitionRepository {
     }
 
     @Override
-    public Competition getCompetitionById(int competitionId) {
+    public Competition getCompetitionById(final int competitionId) {
 
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
+        final AtomicReference<Competition> competitionById = new AtomicReference<>();
 
-        Competition competitionById = null;
-        competitionById = myEntityManager.find(Competition.class, competitionId);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-
-        if (competitionById == null) {
-            throw new CompetitionNotFoundException(competitionId);
-        }
-        return competitionById;
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                try {
+                    competitionById.set(entityManager.find(Competition.class, competitionId));
+                } catch (Exception e) {
+                    throw new CompetitionNotFoundException(competitionId);
+                }
+            }
+        });
+        return competitionById.get();
     }
-
-
 }
