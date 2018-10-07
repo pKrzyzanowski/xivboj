@@ -28,6 +28,8 @@ public class CompetitionController {
     @Autowired
     CompetitionService competitionService;
 
+
+
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
 
@@ -44,14 +46,11 @@ public class CompetitionController {
         return "addCompetition";
     }
 
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddNewCompetition(@ModelAttribute("newCompetition") @Valid Competition competitionToBeAdded, BindingResult result, HttpServletRequest request) {
-
         if (result.hasErrors()) {
             return "addCompetition";
         }
-
 
         EntityManager myEntityManager = entityManagerFactory.createEntityManager();
         myEntityManager.getTransaction().begin();

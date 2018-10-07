@@ -15,4 +15,8 @@ public interface CartService {
     void delete(String cartId);
 
     Cart validate(String cartId);
+
+    void removeCompetitionFromCart(Cart cart, Competition competition);
+
+    void addCompetitionToCart(Cart cart, Competition competition);
 }

@@ -72,4 +72,18 @@ public class InMemoryCartRepository extends InMemoryBaseRepository implements Ca
         });
     }
 
+    @Override
+    public void removeCompetitionFromCart(Cart cart, Competition competition) {
+        List<Competition> cartCompetitions = cart.getAllCartCompetition();
+        cartCompetitions.remove(competition);
+        cart.setAllCartCompetition(cartCompetitions);
+    }
+
+    @Override
+    public void addCompetitionToCart(Cart cart, Competition competition) {
+        List<Competition> cartCompetitions = cart.getAllCartCompetition();
+        cartCompetitions.add(competition);
+        cart.setAllCartCompetition(cartCompetitions);
+    }
+
 }

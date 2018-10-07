@@ -3,6 +3,7 @@ package com.packt.xivboj.controller;
 import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
+import com.packt.xivboj.domain.repository.impl.BaseRepositoryTransaction;
 import com.packt.xivboj.domain.repository.impl.InMemoryBaseRepository;
 import com.packt.xivboj.exception.CompetitionNotFoundException;
 import com.packt.xivboj.service.CartService;
@@ -26,9 +27,6 @@ import static com.packt.xivboj.util.PrincipalUtil.getCurrentUserCartName;
 @RestController
 @RequestMapping(value = "/rest/cart")
 public class CartRestController extends InMemoryBaseRepository {
-
-    @PersistenceUnit
-    EntityManagerFactory entityManagerFactory;
 
     @Autowired
     private CartService cartService;
@@ -65,63 +63,52 @@ public class CartRestController extends InMemoryBaseRepository {
 
     @RequestMapping(value = "/add/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void addItem(@PathVariable int competitionId) {
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
+    public void addItem(@PathVariable final int competitionId) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
+                Cart cart = cartService.read();
+                if (cart == null) {
+                    Query nativeQuery = entityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
+                    Person person = (Person) nativeQuery.getSingleResult();
+                    cart = new Cart();
+                    cart.setCartId(getCurrentUserCartName());
+                    cart.setPerson(person);
+                    person.setCart(cart);
+                    entityManager.persist(cart);
+                    entityManager.merge(person);
+                }
+                Competition competition = competitionService.getCompetitionById(competitionId);
 
-        String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
-        Cart cart = cartService.read();
-        if (cart == null) {
-            Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
-            Person person = (Person) nativeQuery.getSingleResult();
-            cart = new Cart();
-            cart.setCartId(getCurrentUserCartName());
-            cart.setPerson(person);
-            person.setCart(cart);
-            myEntityManager.persist(cart);
-            myEntityManager.merge(person);
-        }
-        Competition competition = competitionService.getCompetitionById(competitionId);
-
-        if (!competitionService.getListOfCompetitionsIdByCartName(getCurrentUserCartName())
-                .contains(competition.getCompetitionId())
-                && !competitionService.getListOfCompetitionIdFromUserVotes(personService.getCurrentPersonId())
-                .contains(competition.getCompetitionId())) {
-            List<Competition> cartCompetitions = cart.getAllCartCompetition();
-            cartCompetitions.add(competition);
-            cart.setAllCartCompetition(cartCompetitions);
-
-            myEntityManager.merge(cart);
-            myEntityManager.merge(competition);
-        }
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
+                if (!competitionService.getListOfCompetitionsIdByCartName(getCurrentUserCartName())
+                        .contains(competition.getCompetitionId())
+                        && !competitionService.getListOfCompetitionIdFromUserVotes(personService.getCurrentPersonId())
+                        .contains(competition.getCompetitionId())) {
+                    cartService.addCompetitionToCart(cart, competition);
+                    entityManager.merge(cart);
+                    entityManager.merge(competition);
+                }
+            }
+        });
     }
 
     @RequestMapping(value = "/remove/{competitionId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeItem(@PathVariable int competitionId, HttpServletRequest request) throws IllegalAccessException {
-
-        String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
-        String userName = currentPrincipalName + "sCart";
-
-        Cart cart = cartService.read();
-        Competition competition = competitionService.getCompetitionById(competitionId);
+        final Cart cart = cartService.read();
+        final Competition competition = competitionService.getCompetitionById(competitionId);
         if (competition == null) {
             throw new IllegalArgumentException(new CompetitionNotFoundException(competitionId));
         }
-
-        List<Competition> cartCompetitions = cart.getAllCartCompetition();
-        cartCompetitions.remove(competition);
-        cart.setAllCartCompetition(cartCompetitions);
-
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-        myEntityManager.merge(cart);
-        myEntityManager.merge(competition);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
+        cartService.removeCompetitionFromCart(cart, competition);
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                entityManager.merge(cart);
+                entityManager.merge(competition);
+            }
+        });
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
