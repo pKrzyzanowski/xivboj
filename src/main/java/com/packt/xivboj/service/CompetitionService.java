@@ -12,4 +12,8 @@ public interface CompetitionService {
 
      Competition getCompetitionById(int competitionId);
 
+     List<Integer> getListOfCompetitionsIdByCartName(String cartName);
+
+     List<Integer> getListOfCompetitionIdFromUserVotes(Integer userId);
+
 }

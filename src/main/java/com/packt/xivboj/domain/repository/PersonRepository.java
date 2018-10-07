@@ -14,4 +14,6 @@ public interface PersonRepository {
 
     void addPerson(Person person);
 
+    Integer getCurrentPersonId();
+
 }

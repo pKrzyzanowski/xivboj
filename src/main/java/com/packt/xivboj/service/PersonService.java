@@ -14,4 +14,7 @@ public interface PersonService {
     List<Person> getAllPersons();
 
     void addPerson(Person person);
+
+    Integer getCurrentPersonId();
+
 }

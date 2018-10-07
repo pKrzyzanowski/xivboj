@@ -31,5 +31,15 @@ public class CompetitionServiceImpl implements CompetitionService {
         return competitionRepository.getCompetitionById(competitionId);
     }
 
+    @Override
+    public List<Integer> getListOfCompetitionsIdByCartName(String cartName) {
+        return competitionRepository.getListOfCompetitionsIdByCartName(cartName);
+    }
+
+    @Override
+    public List<Integer> getListOfCompetitionIdFromUserVotes(Integer userId) {
+        return competitionRepository.getListOfCompetitionIdFromUserVotes(userId);
+    }
+
 
 }

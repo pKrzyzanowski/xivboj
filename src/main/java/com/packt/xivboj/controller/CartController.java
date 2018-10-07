@@ -24,16 +24,14 @@ public class CartController {
     CartService cartService;
 
     @RequestMapping
-    public String get(HttpServletRequest request) {
+    public String get() {
         return "redirect:/cart/" + SecurityContextHolder.getContext().getAuthentication().getName() + "sCart";
     }
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public String getCart(@PathVariable(value = "cartId") String cartId, Model model) {
-
         model.addAttribute("cartId", cartId);
         Cart cart = cartService.read();
-
         model.addAttribute("cart", cart);
         return "cart";
     }

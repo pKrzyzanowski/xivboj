@@ -54,8 +54,6 @@ public class InMemoryCartRepository extends InMemoryBaseRepository implements Ca
         return CartById.get();
     }
 
-
-
     public void update(final Cart cart) {
         packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
             @Override

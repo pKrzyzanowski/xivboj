@@ -13,4 +13,9 @@ public interface CompetitionRepository {
     void removeCompetition(int competitionId);
 
     Competition getCompetitionById(int competitionId);
+
+    List<Integer> getListOfCompetitionsIdByCartName(String cartName);
+
+    List<Integer> getListOfCompetitionIdFromUserVotes(Integer userId);
+
 }

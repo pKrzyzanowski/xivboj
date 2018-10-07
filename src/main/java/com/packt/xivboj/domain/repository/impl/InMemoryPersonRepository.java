@@ -5,6 +5,7 @@ import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.PersonRepository;
 import com.packt.xivboj.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -78,5 +79,17 @@ public class InMemoryPersonRepository extends InMemoryBaseRepository implements 
                 entityManager.persist(person);
             }
         });
+    }
+
+    @Override
+    public Integer getCurrentPersonId() {
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        Integer userId = (Integer) myEntityManager.createNativeQuery("SELECT nameId " + "FROM" +
+                " person where username =" + "\"" + userName + "\"").getSingleResult();
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
+        return userId;
     }
 }

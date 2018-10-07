@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.packt.xivboj.util.PrincipalUtil.getCurrentUserCartName;
+
 
 @Repository
 public class InMemoryCompetitionRepository extends InMemoryBaseRepository implements CompetitionRepository {
@@ -78,4 +80,29 @@ public class InMemoryCompetitionRepository extends InMemoryBaseRepository implem
         });
         return competitionById.get();
     }
+
+    @Override
+    public List<Integer> getListOfCompetitionsIdByCartName(String cartName) {
+
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
+        List<Integer> competitionIdListFromUserCart = myEntityManager.createNativeQuery("SELECT allCartCompetition_competitionId"
+                + " FROM cartcompetition" + " where cart_cartId =" + "\"" + getCurrentUserCartName() + "\"").getResultList();
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
+        return competitionIdListFromUserCart;
+    }
+
+    @Override
+    public List<Integer> getListOfCompetitionIdFromUserVotes(Integer userId) {
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
+        List<Integer> competitionIdListFromUserVotes = myEntityManager.createNativeQuery("SELECT competitionList_competitionId"
+                + " FROM person_competition where personList_nameId =" + "\"" + userId + "\"").getResultList();
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
+        return competitionIdListFromUserVotes;
+    }
+
+
 }

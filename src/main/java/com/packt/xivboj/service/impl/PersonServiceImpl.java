@@ -35,4 +35,9 @@ public class PersonServiceImpl implements PersonService {
     public void addPerson(Person person) {
         personRepository.addPerson(person);
     }
+
+    @Override
+    public Integer getCurrentPersonId() {
+        return personRepository.getCurrentPersonId();
+    }
 }
