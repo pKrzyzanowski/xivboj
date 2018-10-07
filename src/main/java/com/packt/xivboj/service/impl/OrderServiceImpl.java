@@ -17,11 +17,10 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     CartService cartService;
 
-
     @Override
     public Long saveOrder(Order order) {
-
-
-        return  orderRepository.saveOrder(order);
+        Long orderId = orderRepository.saveOrder(order);
+        cartService.delete(order.getCart().getCartId());
+        return orderId;
     }
 }

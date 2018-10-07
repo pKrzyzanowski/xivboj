@@ -20,9 +20,6 @@ import java.util.concurrent.atomic.AtomicReference;
 @Repository
 public class InMemoryCartRepository extends InMemoryBaseRepository implements CartRepository {
 
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
-
     @Autowired
     CompetitionService competitionService;
 
@@ -54,6 +51,8 @@ public class InMemoryCartRepository extends InMemoryBaseRepository implements Ca
         });
         return CartById.get();
     }
+
+
 
     public void update(final Cart cart) {
         packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {

@@ -18,10 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class InMemoryOrderRepositoryImpl implements OrderRepository {
-
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
+public class InMemoryOrderRepositoryImpl extends InMemoryBaseRepository  implements OrderRepository {
 
     @Autowired
     CartService cartService;
@@ -29,33 +26,30 @@ public class InMemoryOrderRepositoryImpl implements OrderRepository {
     public InMemoryOrderRepositoryImpl() {
     }
 
-    public long saveOrder(Order order) {
+    public long saveOrder(final Order order) {
 
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
+                Query nativeQuery = entityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
+                Person person = (Person) nativeQuery.getSingleResult();
+                order.setPerson(person);
 
-        String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
-        Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM person where username =" + "\"" + currentPrincipalName + "\"", Person.class);
-        Person person = (Person) nativeQuery.getSingleResult();
-        order.setPerson(person);
+                List<Integer> competitionIdList = entityManager.createNativeQuery("SELECT allCartCompetition_competitionId " + "FROM" +
+                        " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
 
-        List<Integer> competitionIdList = myEntityManager.createNativeQuery("SELECT allCartCompetition_competitionId " + "FROM" +
-                " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
+                List<Competition> competitionList = new ArrayList<>();
 
-        List<Competition> competitionList = new ArrayList<>();
+                for (Integer competitionId : competitionIdList) {
+                    competitionList.add(entityManager.find(Competition.class, competitionId));
+                }
 
-        for (Integer competitionId : competitionIdList) {
-            competitionList.add(myEntityManager.find(Competition.class, competitionId));
-        }
-
-        person.setCompetitionList(competitionList);
-        myEntityManager.merge(person);
-        myEntityManager.persist(order);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-
-        cartService.delete(order.getCart().getCartId());
+                person.setCompetitionList(competitionList);
+                entityManager.merge(person);
+                entityManager.persist(order);
+            }
+        });
         return order.getOrderId();
     }
 
