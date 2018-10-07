@@ -1,6 +1,7 @@
 package com.packt.xivboj.domain.repository.impl;
 
 import com.packt.xivboj.domain.Cart;
+import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.PersonRepository;
 import com.packt.xivboj.service.CartService;
@@ -92,4 +93,20 @@ public class InMemoryPersonRepository extends InMemoryBaseRepository implements 
         myEntityManager.close();
         return userId;
     }
+
+    @Override
+    public String getPersonName() {
+        final AtomicReference<String> personName = new AtomicReference<>();
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                Query nativeQuery = entityManager.createNativeQuery("SELECT name FROM person where username = " + "\""
+                        + SecurityContextHolder.getContext().getAuthentication().getName() + "\"");
+                personName.set((String) nativeQuery.getSingleResult());
+            }
+        });
+        return personName.get();
+    }
+
+
 }

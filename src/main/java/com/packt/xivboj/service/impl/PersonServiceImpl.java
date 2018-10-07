@@ -40,4 +40,9 @@ public class PersonServiceImpl implements PersonService {
     public Integer getCurrentPersonId() {
         return personRepository.getCurrentPersonId();
     }
+
+    @Override
+    public String getPersonName() {
+        return personRepository.getPersonName();
+    }
 }

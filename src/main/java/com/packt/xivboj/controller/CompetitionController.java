@@ -3,6 +3,7 @@ package com.packt.xivboj.controller;
 
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.service.CompetitionService;
+import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,10 +29,8 @@ public class CompetitionController {
     @Autowired
     CompetitionService competitionService;
 
-
-
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    PersonService personService;
 
     @RequestMapping
     public String list(Model model) {
@@ -51,18 +50,7 @@ public class CompetitionController {
         if (result.hasErrors()) {
             return "addCompetition";
         }
-
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        Query nativeQuery = myEntityManager.createNativeQuery("SELECT name FROM person where username = " + "\""
-                + SecurityContextHolder.getContext().getAuthentication().getName() + "\"");
-        String personName = (String) nativeQuery.getSingleResult();
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-
-        competitionToBeAdded.setAutorsName(personName);
+        competitionToBeAdded.setAutorsName(personService.getPersonName());
         competitionService.addCompetition(competitionToBeAdded);
 
         MultipartFile competitionImage = competitionToBeAdded.getCompetitionImage();

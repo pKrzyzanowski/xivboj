@@ -16,4 +16,6 @@ public interface PersonRepository {
 
     Integer getCurrentPersonId();
 
+    String getPersonName();
+
 }
