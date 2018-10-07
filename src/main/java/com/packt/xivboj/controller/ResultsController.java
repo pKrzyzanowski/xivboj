@@ -4,6 +4,8 @@ package com.packt.xivboj.controller;
 import com.mysql.cj.xdevapi.Collection;
 import com.packt.xivboj.domain.Competition;
 import com.packt.xivboj.domain.Person;
+import com.packt.xivboj.service.CompetitionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,20 +22,14 @@ import java.util.List;
 @RequestMapping("/results")
 public class ResultsController {
 
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    CompetitionService competitionService;
 
     @RequestMapping
     public String results(Model model) {
 
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM competition", Competition.class);
-        List<Competition> competitionList = nativeQuery.getResultList();
+        List<Competition> competitionList = competitionService.getAllCompetitions();
         Collections.sort(competitionList);
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
 
         int treshHold = 0;
         if (competitionList.size() > 12) {
