@@ -9,6 +9,8 @@ import java.util.List;
 public interface PersonService {
     Person getPersonById(int personId);
 
+    Person getPersonByUserName(String userName);
+
     List<Person> getAllPersons();
 
     void addPerson(Person person);

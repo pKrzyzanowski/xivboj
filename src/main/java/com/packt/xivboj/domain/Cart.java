@@ -46,8 +46,8 @@ public class Cart implements Serializable {
         return allCartCompetition;
     }
 
-    public void setAllCartCompetition(List<Competition> allCartCompe) {
-        this.allCartCompetition = allCartCompe;
+    public void setAllCartCompetition(List<Competition> allCartCompetition) {
+        this.allCartCompetition = allCartCompetition;
     }
 
     public String getCartId() {

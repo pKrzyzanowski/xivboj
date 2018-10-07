@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.packt.xivboj.util.PrincipalUtil.getCurrentUserCartName;
+
 
 @Repository
 public class InMemoryCartRepository extends InMemoryBaseRepository implements CartRepository {
@@ -40,7 +42,7 @@ public class InMemoryCartRepository extends InMemoryBaseRepository implements Ca
     }
 
     public Cart read() {
-        final String cartId = SecurityContextHolder.getContext().getAuthentication().getName() + "sCart";
+        final String cartId = getCurrentUserCartName();
         final AtomicReference<Cart> CartById = new AtomicReference<>();
 
         packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {

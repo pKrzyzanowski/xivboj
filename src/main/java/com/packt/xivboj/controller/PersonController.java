@@ -1,7 +1,11 @@
 package com.packt.xivboj.controller;
 
 
+import com.packt.xivboj.domain.Cart;
 import com.packt.xivboj.domain.Person;
+import com.packt.xivboj.domain.repository.impl.BaseRepositoryTransaction;
+import com.packt.xivboj.domain.repository.impl.InMemoryBaseRepository;
+import com.packt.xivboj.service.CartService;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,15 +23,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 
+import static com.packt.xivboj.util.PrincipalUtil.getCurrentUserCartName;
+
 @Controller
 @RequestMapping("/people")
-public class PersonController {
-
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
+public class PersonController extends InMemoryBaseRepository {
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    CartService cartService;
 
     @RequestMapping
     public String list(Model model) {
@@ -53,23 +59,19 @@ public class PersonController {
     public String processAddNewPerson(@ModelAttribute("newPerson") @Valid Person personToBeAdded, BindingResult result, HttpServletRequest request) {
 
         Person existingPerson = null;
-        try {
-            EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-            myEntityManager.getTransaction().begin();
 
-            existingPerson = (Person) myEntityManager.createNativeQuery("SELECT * FROM" +
-                    " person where username =" + "\"" + personToBeAdded.getUsername() + "\"", Person.class).getSingleResult();
-
-            myEntityManager.getTransaction().commit();
-            myEntityManager.close();
-        } catch (NoResultException e) {
-        }
+        existingPerson = personService.getPersonByUserName(personToBeAdded.getUsername());
 
         if (result.hasErrors() || existingPerson != null) {
             return "registration";
         }
 
         personService.addPerson(personToBeAdded);
+        Cart cart = new Cart();
+        cart.setCartId(personToBeAdded.getUsername() + "sCart");
+        personToBeAdded.setCart(cart);
+        cart.setPerson(personToBeAdded);
+        cartService.create(cart);
 
         MultipartFile personImage = personToBeAdded.getPersonImage();
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");

@@ -7,15 +7,15 @@ import com.packt.xivboj.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static com.packt.xivboj.util.PrincipalUtil.getCurrentUserCartName;
 
 
 @Repository
-public class InMemoryPersonRepository implements PersonRepository {
+public class InMemoryPersonRepository extends InMemoryBaseRepository implements PersonRepository {
 
     @Autowired
     CartService cartService;
@@ -27,15 +27,33 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public Person getPersonById(int personId) {
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
+    public Person getPersonById(final int personId) {
+        final AtomicReference<Person> personById = new AtomicReference<>();
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                personById.set(entityManager.find(Person.class, personId));
+            }
+        });
+        return personById.get();
+    }
 
-        Person personById = myEntityManager.find(Person.class, personId);
+    @Override
+    public Person getPersonByUserName(final String userName) {
 
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-        return personById;
+        final AtomicReference<Person> personByUserName = new AtomicReference<>();
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                try {
+                    personByUserName.set((Person) entityManager.createNativeQuery("SELECT * FROM" +
+                            " person where username =" + "\"" + userName + "\"", Person.class).getSingleResult());
+                } catch (NoResultException e) {
+                }
+
+            }
+        });
+        return personByUserName.get();
     }
 
 
@@ -53,19 +71,12 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public void addPerson(Person person) {
-        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
-        myEntityManager.getTransaction().begin();
-
-        myEntityManager.persist(person);
-
-        myEntityManager.getTransaction().commit();
-        myEntityManager.close();
-
-        Cart cart = new Cart();
-        cart.setCartId(person.getUsername() + "sCart");
-        person.setCart(cart);
-        cart.setPerson(person);
-        cartService.create(cart);
+    public void addPerson(final Person person) {
+        packIntoEntityManagerTransaction(new BaseRepositoryTransaction() {
+            @Override
+            public void executeTransaction(EntityManager entityManager) {
+                entityManager.persist(person);
+            }
+        });
     }
 }

@@ -17,6 +17,8 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.packt.xivboj.util.PrincipalUtil.getCurrentUserCartName;
+
 @Repository
 public class InMemoryOrderRepositoryImpl extends InMemoryBaseRepository  implements OrderRepository {
 
@@ -37,7 +39,7 @@ public class InMemoryOrderRepositoryImpl extends InMemoryBaseRepository  impleme
                 order.setPerson(person);
 
                 List<Integer> competitionIdList = entityManager.createNativeQuery("SELECT allCartCompetition_competitionId " + "FROM" +
-                        " cartcompetition" + " where cart_cartId =" + "\"" + currentPrincipalName + "sCart" + "\"").getResultList();
+                        " cartcompetition" + " where cart_cartId =" + "\"" + getCurrentUserCartName() + "\"").getResultList();
 
                 List<Competition> competitionList = new ArrayList<>();
 

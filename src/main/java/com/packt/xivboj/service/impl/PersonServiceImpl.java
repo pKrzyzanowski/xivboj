@@ -22,6 +22,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person getPersonByUserName(String userName) {
+        return personRepository.getPersonByUserName(userName);
+    }
+
+    @Override
     public List<Person> getAllPersons() {
         return personRepository.getAllPersons();
     }

@@ -13,11 +13,12 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
+
     @Transient
     private Cart cart;
+
     @OneToOne
     private Person person;
-
 
     public Order() {
     }
