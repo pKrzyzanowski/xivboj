@@ -40,7 +40,6 @@ public class CompetitionController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String getAddNewCompetition(Model model) {
         Competition newCompetition = new Competition();
-
         model.addAttribute("newCompetition", newCompetition);
         return "addCompetition";
     }

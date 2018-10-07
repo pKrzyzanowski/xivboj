@@ -58,7 +58,7 @@ public class PersonController extends InMemoryBaseRepository {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddNewPerson(@ModelAttribute("newPerson") @Valid Person personToBeAdded, BindingResult result, HttpServletRequest request) {
 
-        Person existingPerson = null;
+        Person existingPerson;
 
         existingPerson = personService.getPersonByUserName(personToBeAdded.getUsername());
 
