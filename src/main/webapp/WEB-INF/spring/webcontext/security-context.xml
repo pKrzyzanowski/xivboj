@@ -17,7 +17,6 @@
     </security:http>
 
 
-
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -28,7 +27,6 @@
 
     <security:authentication-manager>
         <security:authentication-provider>
-
             <security:jdbc-user-service data-source-ref="dataSource"
                                         users-by-username-query=
                                                 "select username,password, enabled from person where username=?"
