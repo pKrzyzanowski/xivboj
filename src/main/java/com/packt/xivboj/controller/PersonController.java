@@ -2,10 +2,12 @@ package com.packt.xivboj.controller;
 
 
 import com.packt.xivboj.domain.Cart;
+import com.packt.xivboj.domain.Instructor;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.impl.BaseRepositoryTransaction;
 import com.packt.xivboj.domain.repository.impl.InMemoryBaseRepository;
 import com.packt.xivboj.service.CartService;
+import com.packt.xivboj.service.InstructorService;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,9 @@ public class PersonController extends InMemoryBaseRepository {
     PersonService personService;
 
     @Autowired
+    InstructorService instructorService;
+
+    @Autowired
     CartService cartService;
 
     @RequestMapping
@@ -54,6 +59,45 @@ public class PersonController extends InMemoryBaseRepository {
         model.addAttribute("newPerson", newPerson);
         return "registration";
     }
+
+    @RequestMapping(value = "/addInstructor", method = RequestMethod.GET)
+    public String getAddNewInstructor(Model model) {
+        Instructor newInstructor = new Instructor();
+        model.addAttribute("newInstructor", newInstructor);
+        return "registrationInstructor";
+    }
+
+    @RequestMapping(value = "/addInstructor", method = RequestMethod.POST)
+    public String processAddNewInstructor(@ModelAttribute("newInstructor") @Valid Instructor instructorToBeAdded, BindingResult result, HttpServletRequest request) {
+        Person existingPerson;
+//        existingPerson = personService.getPersonByUserName(InstructortoBeAdded.getUsername());
+
+//        if (result.hasErrors() || existingPerson != null) {
+//            return "registration";
+//        }
+
+        instructorService.addInstructor(instructorToBeAdded);
+//        Cart cart = new Cart();
+//        cart.setCartId(personToBeAdded.getUsername() + "sCart");
+//        personToBeAdded.setCart(cart);
+//        cart.setPerson(personToBeAdded);
+//        cartService.create(cart);
+
+//        MultipartFile personImage = personToBeAdded.getPersonImage();
+//        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+//        if (personImage != null && !personImage.isEmpty()) {
+//            try {
+//                personImage.transferTo(new File(rootDirectory + "resources\\images\\persons\\" + personToBeAdded.getNameId() + ".jpg"));
+//            } catch (Exception e) {
+//                throw new RuntimeException("niepowodzenie podczas proby zapisu obrazka", e);
+//            }
+//        }
+        return "redirect:/people";
+    }
+
+
+
+
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddNewPerson(@ModelAttribute("newPerson") @Valid Person personToBeAdded, BindingResult result, HttpServletRequest request) {
