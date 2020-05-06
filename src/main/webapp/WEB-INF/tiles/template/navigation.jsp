@@ -26,10 +26,10 @@
             <ul class="nav navbar-nav">
 
                 <li><a href="<spring:url value="/"/>">G³ówna</a></li>
-                <li><a href="<spring:url value="/competitions"/>">Konkurencje</a></li>
-                <li><a href="<spring:url value="/people"/> ">Uczestnicy</a></li>
-                <li><a href="<spring:url value="/results"/>">Wyniki g³osowania</a></li>
-                <li><a href="<spring:url value="/competitions/add"/> ">Dodaj konkurencjê</a></li>
+                <li><a href="<spring:url value="/rooms"/> ">Rooms</a></li>
+                <li><a href="<spring:url value="/courses"/> ">Courses</a></li>
+                <li><a href="<spring:url value="/meetingTimes"/> ">Meeting Times</a></li>
+                <li><a href="<spring:url value="/instructors"/> ">Instructors</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 

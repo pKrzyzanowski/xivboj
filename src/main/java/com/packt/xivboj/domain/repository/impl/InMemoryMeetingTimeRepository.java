@@ -8,8 +8,8 @@ import com.packt.xivboj.domain.repository.RoomRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-
-
+import javax.persistence.Query;
+import java.util.List;
 
 
 @Repository
@@ -22,5 +22,18 @@ public class InMemoryMeetingTimeRepository extends InMemoryBaseRepository implem
                 entityManager.persist(meetingTime);
             }
         });
+    }
+
+    @Override
+    public List<MeetingTime> getAllMeetingTimes() {
+        EntityManager myEntityManager = entityManagerFactory.createEntityManager();
+        myEntityManager.getTransaction().begin();
+
+        Query nativeQuery = myEntityManager.createNativeQuery("SELECT * FROM meetingTime", MeetingTime.class);
+        List<MeetingTime> resultList = nativeQuery.getResultList();
+
+        myEntityManager.getTransaction().commit();
+        myEntityManager.close();
+        return resultList;
     }
 }

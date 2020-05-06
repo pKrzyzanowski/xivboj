@@ -8,6 +8,9 @@ import com.packt.xivboj.service.CourseService;
 import com.packt.xivboj.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class CourseServiceImpl implements CourseService {
 
@@ -17,6 +20,21 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void addCourse(Course course) {
         courseRepository.addCourse(course);
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return courseRepository.getAllCourses();
+    }
+
+    @Override
+    public Course getCourseById(int id) {
+        return courseRepository.getCourseById(id);
+    }
+
+    @Override
+    public void delete(int courseId) {
+        courseRepository.delete(courseId);
     }
 }
 

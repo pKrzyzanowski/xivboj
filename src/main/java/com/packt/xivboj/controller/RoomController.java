@@ -1,10 +1,8 @@
 package com.packt.xivboj.controller;
 
 
-import com.packt.xivboj.domain.Instructor;
-import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.Room;
-import com.packt.xivboj.service.PersonService;
+import com.packt.xivboj.service.DataService;
 import com.packt.xivboj.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,12 +23,26 @@ public class RoomController {
     @Autowired
     RoomService roomService;
 
+    @Autowired
+    DataService dataService;
+
+    @RequestMapping
+    public String list(Model model) {
+        model.addAttribute("rooms", roomService.getAllRooms());
+        return "rooms";
+    }
+
+//    @RequestMapping
+//    public String list(Model model) {
+//        model.addAttribute("data", dataService.getAllData());
+//        return "data";
+//    }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String getAddNewRoom(Model model) {
         Room newRoom = new Room();
         model.addAttribute("newRoom", newRoom);
-        return "registrationRoom";
+        return "addRoom";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

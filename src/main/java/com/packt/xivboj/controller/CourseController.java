@@ -2,7 +2,6 @@ package com.packt.xivboj.controller;
 
 
 import com.packt.xivboj.domain.Course;
-import com.packt.xivboj.domain.Room;
 import com.packt.xivboj.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +21,17 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
+    @RequestMapping
+    public String list(Model model) {
+        model.addAttribute("courses", courseService.getAllCourses());
+        return "courses";
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String getAddNewCourse(Model model) {
         Course newCourse = new Course();
         model.addAttribute("newCourse", newCourse);
-        return "registrationCourse";
+        return "addCourse";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -34,6 +39,6 @@ public class CourseController {
 
         courseService.addCourse(courseToBeAdded);
 
-        return "redirect:/people";
+        return "redirect:/courses";
     }
 }

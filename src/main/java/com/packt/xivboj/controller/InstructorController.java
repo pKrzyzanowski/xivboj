@@ -1,8 +1,7 @@
 package com.packt.xivboj.controller;
 
-
-import com.packt.xivboj.domain.MeetingTime;
-import com.packt.xivboj.service.MeetingTimeService;
+import com.packt.xivboj.domain.Instructor;
+import com.packt.xivboj.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,31 +13,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+
+
 @Controller
-@RequestMapping("/meetingTimes")
-public class MeetingTimeController {
+@RequestMapping("/instructors")
+public class InstructorController {
 
     @Autowired
-    MeetingTimeService meetingTimeService;
+    InstructorService instructorService;
 
     @RequestMapping
     public String list(Model model) {
-        model.addAttribute("meetingTimes", meetingTimeService.getAllMeetingTimes());
-        return "meetingTimes";
+        model.addAttribute("instructors", instructorService.getAllInstructors());
+        return "instructors";
     }
 
+
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String getAddNewMeetingTime(Model model) {
-        MeetingTime newMeetingTime = new MeetingTime();
-        model.addAttribute("newMeetingTime", newMeetingTime);
-        return "registrationMeetingTime";
+    public String getAddNewInstructor(Model model) {
+        Instructor newInstructor = new Instructor();
+        model.addAttribute("newInstructor", newInstructor);
+        return "addInstructor";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewRoom(@ModelAttribute("newMeetingTime") @Valid MeetingTime meetingTimeToBeAdded, BindingResult result, HttpServletRequest request) {
-
-        meetingTimeService.addMeetingTime(meetingTimeToBeAdded);
+    public String processAddNewInstructor(@ModelAttribute("newInstructor") @Valid Instructor instructorToBeAdded, BindingResult result, HttpServletRequest request) {
+        instructorService.addInstructor(instructorToBeAdded);
 
         return "redirect:/people";
     }
+
+
 }

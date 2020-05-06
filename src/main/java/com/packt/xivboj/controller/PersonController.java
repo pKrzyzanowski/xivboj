@@ -60,41 +60,6 @@ public class PersonController extends InMemoryBaseRepository {
         return "registration";
     }
 
-    @RequestMapping(value = "/addInstructor", method = RequestMethod.GET)
-    public String getAddNewInstructor(Model model) {
-        Instructor newInstructor = new Instructor();
-        model.addAttribute("newInstructor", newInstructor);
-        return "registrationInstructor";
-    }
-
-    @RequestMapping(value = "/addInstructor", method = RequestMethod.POST)
-    public String processAddNewInstructor(@ModelAttribute("newInstructor") @Valid Instructor instructorToBeAdded, BindingResult result, HttpServletRequest request) {
-        Person existingPerson;
-//        existingPerson = personService.getPersonByUserName(InstructortoBeAdded.getUsername());
-
-//        if (result.hasErrors() || existingPerson != null) {
-//            return "registration";
-//        }
-
-        instructorService.addInstructor(instructorToBeAdded);
-//        Cart cart = new Cart();
-//        cart.setCartId(personToBeAdded.getUsername() + "sCart");
-//        personToBeAdded.setCart(cart);
-//        cart.setPerson(personToBeAdded);
-//        cartService.create(cart);
-
-//        MultipartFile personImage = personToBeAdded.getPersonImage();
-//        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-//        if (personImage != null && !personImage.isEmpty()) {
-//            try {
-//                personImage.transferTo(new File(rootDirectory + "resources\\images\\persons\\" + personToBeAdded.getNameId() + ".jpg"));
-//            } catch (Exception e) {
-//                throw new RuntimeException("niepowodzenie podczas proby zapisu obrazka", e);
-//            }
-//        }
-        return "redirect:/people";
-    }
-
 
 
 

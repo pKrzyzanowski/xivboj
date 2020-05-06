@@ -6,6 +6,8 @@
 <%@ page contentType="text/html; charset=ISO-8859-2" %>
 
 <!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+</script>
 <html lang="pl">
 <head>
 
@@ -20,7 +22,7 @@
     <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans" rel="stylesheet">
-
+        <script src="/resource/js/controllers.js"></script>
 
     <title><tiles:insertAttribute name="title"/></title>
     <style>
@@ -45,7 +47,7 @@
 
     </style>
 </head>
-<body>
+<body  data-ng-app="scheduleApp">
 <div class="jumbotron">
     <div class="container text-center">
         <h1>Czternastobój Klasyczny</h1>
