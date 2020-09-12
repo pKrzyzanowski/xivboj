@@ -17,18 +17,16 @@
     </security:http>
 
 
-
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/xivbojschema"/>
-        <property name="username" value="root"/>
-        <property name="password" value="password"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/xivbojschema?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="username" value="admin"/>
+        <property name="password" value="Password123!"/>
     </bean>
 
     <security:authentication-manager>
         <security:authentication-provider>
-
             <security:jdbc-user-service data-source-ref="dataSource"
                                         users-by-username-query=
                                                 "select username,password, enabled from person where username=?"

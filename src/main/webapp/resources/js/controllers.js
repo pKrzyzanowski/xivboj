@@ -1,36 +1,42 @@
-var cartApp = angular.module('cartApp', []);
+var scheduleApp = angular.module('scheduleApp', []);
+scheduleApp.controller('roomCtrl', function ($scope, $http) {
+    // $scope.refreshRooms = function() {
+    //
+    //     $http.get('/rest/room/getAll')
+    //         .success(function(data){
+    //             console.log(data);
+    //         });
+    // };
+    //
+    // $scope.initRooms = function() {
+    //     $scope.refreshRooms($scope.rooms);
+    // };
 
-cartApp.controller('cartCtrl',  function ($scope, $http) {
+    //tu gdzies trzeba dac promisa
+    $scope.clearRooms = function (roomId) {
 
-    $scope.refreshCart = function(cartId) {
-        $http.get('/rest/cart/'+$scope.cartId)
-            .success(function(data) {
-                $scope.cart = data;
-            });
+        $http.put('/rest/room/remove/' + roomId)
+            .success();
+
     };
 
-    $scope.clearCart = function() {
-        $http.delete('/rest/cart/'+$scope.cartId)
-            .success($scope.refreshCart($scope.cartId));
+})
+    .controller('courseCtrl', function ($scope, $http) {
+        console.log("e");
 
-    };
+        $scope.clearCourses = function (courseId) {
 
-    $scope.initCartId = function(cartId) {
-        $scope.cartId=cartId;
-        $scope.refreshCart($scope.cartId);
-    };
+            $http.put('/rest/course/remove/' + courseId)
+                .success();
 
-    $scope.addToCart = function(competitionId) {
-        $http.put('/rest/cart/add/'+competitionId)
-            .success(function(data) {
-                $scope.refreshCart($http.get('/rest/cart/get/cartId'));
-                alert("Oddano głos na konkurencję!");
-            });
-    };
-    $scope.removeFromCart = function(competitionId) {
-        $http.put('/rest/cart/remove/'+competitionId)
-            .success(function(data) {
-                $scope.refreshCart($http.get('/rest/cart/get/cartId'));
-            });
-    };
-});
+        };
+
+    })
+    .controller('instructorCtrl', function ($scope, $http) {
+        $scope.clearInstructors = function (instructorId) {
+
+            $http.put('/rest/instructor/remove/' + instructorId)
+                .success();
+
+        };
+    })

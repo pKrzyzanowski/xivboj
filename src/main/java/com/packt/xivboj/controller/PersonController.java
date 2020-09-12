@@ -2,10 +2,12 @@ package com.packt.xivboj.controller;
 
 
 import com.packt.xivboj.domain.Cart;
+import com.packt.xivboj.domain.Instructor;
 import com.packt.xivboj.domain.Person;
 import com.packt.xivboj.domain.repository.impl.BaseRepositoryTransaction;
 import com.packt.xivboj.domain.repository.impl.InMemoryBaseRepository;
 import com.packt.xivboj.service.CartService;
+import com.packt.xivboj.service.InstructorService;
 import com.packt.xivboj.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,9 @@ public class PersonController extends InMemoryBaseRepository {
     PersonService personService;
 
     @Autowired
+    InstructorService instructorService;
+
+    @Autowired
     CartService cartService;
 
     @RequestMapping
@@ -54,6 +59,10 @@ public class PersonController extends InMemoryBaseRepository {
         model.addAttribute("newPerson", newPerson);
         return "registration";
     }
+
+
+
+
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddNewPerson(@ModelAttribute("newPerson") @Valid Person personToBeAdded, BindingResult result, HttpServletRequest request) {
