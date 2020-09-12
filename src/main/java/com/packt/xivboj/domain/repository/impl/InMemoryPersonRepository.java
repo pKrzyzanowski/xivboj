@@ -17,6 +17,7 @@ import static com.packt.xivboj.util.PrincipalUtil.getCurrentUserCartName;
 
 
 @Repository
+
 public class InMemoryPersonRepository extends InMemoryBaseRepository implements PersonRepository {
 
     @Autowired
