@@ -36,6 +36,8 @@ public class InMemoryCompetitionRepository extends InMemoryBaseRepository implem
         myEntityManager.getTransaction().commit();
         myEntityManager.close();
 
+
+
         return resultList;
     }
 
