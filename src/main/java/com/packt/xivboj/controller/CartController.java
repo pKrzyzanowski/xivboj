@@ -34,5 +34,6 @@ public class CartController {
         Cart cart = cartService.read();
         model.addAttribute("cart", cart);
         return "cart";
+        // ta zamiana powinna isc pierwsza po rebase
     }
 }
