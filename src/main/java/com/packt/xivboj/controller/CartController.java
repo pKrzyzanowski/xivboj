@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 // jeszce jeden 
 // nastepny
-//to chce na masterze 
+//to chce na masterze zmodyfikowana bedzie konflikt
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
