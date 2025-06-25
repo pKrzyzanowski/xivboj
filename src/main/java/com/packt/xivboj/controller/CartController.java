@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
+// dodaje to teraz jeszcze raz i powinno byc jako pierwsze
 @Controller
 @RequestMapping(value = "/cart")
 public class CartController {
