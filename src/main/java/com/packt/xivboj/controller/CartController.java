@@ -32,6 +32,7 @@ public class CartController {
 // dodaje komentarz po wielu latach na tescie 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
     public String getCart(@PathVariable(value = "cartId") String cartId, Model model) {
+        //nowa zamiana
         model.addAttribute("cartId", cartId);
         Cart cart = cartService.read();
         model.addAttribute("cart", cart);
